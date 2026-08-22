@@ -30,7 +30,7 @@
       #geopoly-app{padding:14px}
       #geopoly-app h2{font-size:25px}
       #geopoly-app .question{font-size:20px}
-      .actions{flex-direction:column}
+      #geopoly-app .actions{flex-direction:column}
     }
   </style>
 
@@ -75,18 +75,11 @@
 
       <div class="actions">
 
-        <button
-          type="button"
-          class="skip"
-          id="skipBtn">
+        <button type="button" class="skip" id="skipBtn">
           Passer cette question
         </button>
 
-        <button
-          type="button"
-          class="primary"
-          id="nextBtn"
-          disabled>
+        <button type="button" class="primary" id="nextBtn" disabled>
           Continuer
         </button>
 
@@ -109,10 +102,7 @@
 
       <div class="actions">
 
-        <button
-          type="button"
-          class="primary"
-          id="restartBtn">
+        <button type="button" class="primary" id="restartBtn">
           Recommencer
         </button>
 
@@ -127,127 +117,176 @@
 
 (()=>{
 
-const root =
-document.getElementById('geopoly-app');
+const root = document.getElementById('geopoly-app');
 
-if(root.dataset.init)return;
+if(root.dataset.init) return;
 
-root.dataset.init='1';
-
+root.dataset.init = '1';
 
 
-/* =======================================================
-   QUESTIONS DU JEU
-   C'EST PRINCIPALEMENT ICI QUE TU MODIFIES TON JEU
-======================================================= */
+/* =====================================================
+   QUESTIONS
+===================================================== */
 
 const questions = [
 
 {
 place:'Grosse Cloche',
-
 q:'Combien de cadrans possède la Grosse Cloche ?',
-
-answers:[
-'1',
-'2',
-'4'
-],
-
+answers:['1','2','4'],
 correct:1,
-
 points:2
 },
 
-
 {
 place:'Grand Théâtre',
-
 q:'Combien de colonnes composent la façade principale ?',
-
-answers:[
-'10',
-'12',
-'14'
-],
-
+answers:['10','12','14'],
 correct:1,
-
 points:3
 },
-
 
 {
 place:'Porte Cailhau',
-
 q:'À quel siècle la Porte Cailhau a-t-elle été construite ?',
-
-answers:[
-'XIIIe',
-'XVe',
-'XVIIe'
-],
-
+answers:['XIIIe','XVe','XVIIe'],
 correct:1,
-
 points:3
 },
 
-
 {
 place:'Place de la Bourse',
-
 q:'Quel élément emblématique se trouve juste en face de la place ?',
-
 answers:[
 'Le miroir d’eau',
 'Le jardin public',
 'La flèche Saint-Michel'
 ],
-
 correct:0,
-
 points:2
 },
 
-
 {
 place:'Cité du Vin',
-
 q:'À quoi la forme du bâtiment fait-elle notamment référence ?',
-
 answers:[
 'Une vague et le vin en mouvement',
 'Une forteresse médiévale',
 'Une cathédrale gothique'
 ],
-
 correct:0,
-
 points:4
 }
 
 ];
 
 
+/* =====================================================
+   SAUVEGARDE
+===================================================== */
 
-/* =======================================================
-   VARIABLES DU JEU
-======================================================= */
+const STORAGE_KEY = 'geopoly-bordeaux-progress-v1';
+
 
 let index = 0;
-
 let score = 0;
-
 let answered = false;
 
 const results = [];
 
 
+/* Sauvegarde automatiquement */
 
-/* =======================================================
-   ELEMENTS DE LA PAGE
-======================================================= */
+function saveProgress(){
+
+  try{
+
+    localStorage.setItem(
+      STORAGE_KEY,
+      JSON.stringify({
+        index:index,
+        score:score,
+        results:results
+      })
+    );
+
+  }catch(e){
+
+    console.log("Sauvegarde impossible");
+
+  }
+
+}
+
+
+/* Recharge la partie */
+
+function loadProgress(){
+
+  try{
+
+    const saved =
+      JSON.parse(
+        localStorage.getItem(STORAGE_KEY) || 'null'
+      );
+
+    if(!saved) return;
+
+
+    if(
+      Number.isInteger(saved.index) &&
+      saved.index >= 0 &&
+      saved.index <= questions.length
+    ){
+      index = saved.index;
+    }
+
+
+    if(
+      Number.isFinite(saved.score) &&
+      saved.score >= 0
+    ){
+      score = saved.score;
+    }
+
+
+    if(Array.isArray(saved.results)){
+
+      results.length = 0;
+
+      saved.results
+      .slice(0,questions.length)
+      .forEach(result=>{
+        results.push(result);
+      });
+
+    }
+
+  }catch(e){
+
+    console.log("Chargement impossible");
+
+  }
+
+}
+
+
+/* Efface la partie */
+
+function clearProgress(){
+
+  try{
+
+    localStorage.removeItem(STORAGE_KEY);
+
+  }catch(e){}
+
+}
+
+
+/* =====================================================
+   ELEMENTS
+===================================================== */
 
 const scoreEl =
 root.querySelector('#score');
@@ -283,15 +322,13 @@ const finalCard =
 root.querySelector('#finalCard');
 
 
-
-/* =======================================================
-   AFFICHAGE D'UNE QUESTION
-======================================================= */
+/* =====================================================
+   AFFICHAGE QUESTION
+===================================================== */
 
 function render(){
 
-const item =
-questions[index];
+const item = questions[index];
 
 answered = false;
 
@@ -303,11 +340,14 @@ feedbackEl.style.display = 'none';
 
 feedbackEl.textContent = '';
 
+
 scoreEl.textContent =
 score;
 
+
 stepEl.textContent =
 index + 1;
+
 
 progressEl.style.width =
 ((index / questions.length) * 100) + '%';
@@ -327,38 +367,36 @@ item.q;
 answersEl.innerHTML = '';
 
 
-
 item.answers.forEach((answer,i)=>{
 
-const button =
-document.createElement('button');
+  const button =
+  document.createElement('button');
 
-button.type =
-'button';
+  button.type =
+  'button';
 
-button.textContent =
-answer;
+  button.textContent =
+  answer;
 
-button.addEventListener(
-'click',
-()=>choose(i)
-);
+  button.addEventListener(
+    'click',
+    ()=>choose(i)
+  );
 
-answersEl.appendChild(button);
+  answersEl.appendChild(button);
 
 });
 
 }
 
 
-
-/* =======================================================
-   REPONSE DU JOUEUR
-======================================================= */
+/* =====================================================
+   REPONSE
+===================================================== */
 
 function choose(i){
 
-if(answered)return;
+if(answered) return;
 
 answered = true;
 
@@ -367,78 +405,85 @@ skipBtn.disabled = true;
 const item =
 questions[index];
 
+
 const buttons =
 [...answersEl.querySelectorAll('button')];
 
-buttons.forEach(
-button =>
-button.disabled = true
-);
 
+buttons.forEach(button=>{
+  button.disabled = true;
+});
 
 
 if(i === item.correct){
 
-score += item.points;
+  score += item.points;
 
-feedbackEl.textContent =
-'Bonne réponse ! +' +
-item.points +
-' points';
+  feedbackEl.textContent =
+  'Bonne réponse ! +' +
+  item.points +
+  ' points';
 
-results.push({
 
-place:item.place,
+  results.push({
 
-status:'Bonne réponse',
+    place:item.place,
 
-points:item.points
+    status:'Bonne réponse',
 
-});
+    points:item.points
+
+  });
 
 }
 
 else{
 
-feedbackEl.textContent =
-'Réponse incorrecte. 0 point, mais tu peux continuer.';
+  feedbackEl.textContent =
+  'Réponse incorrecte. 0 point, mais tu peux continuer.';
 
-results.push({
 
-place:item.place,
+  results.push({
 
-status:'Incorrecte',
+    place:item.place,
 
-points:0
+    status:'Incorrecte',
 
-});
+    points:0
+
+  });
 
 }
-
 
 
 feedbackEl.style.display =
 'block';
 
+
 scoreEl.textContent =
 score;
+
 
 nextBtn.disabled =
 false;
 
+
+/* SAUVEGARDE */
+
+saveProgress();
+
 }
 
 
-
-/* =======================================================
-   PASSER UNE QUESTION
-======================================================= */
+/* =====================================================
+   PASSER
+===================================================== */
 
 skipBtn.addEventListener(
 'click',
 ()=>{
 
-if(answered)return;
+if(answered) return;
 
 answered = true;
 
@@ -467,10 +512,12 @@ feedbackEl.style.display =
 
 answersEl
 .querySelectorAll('button')
-.forEach(
-button =>
-button.disabled = true
-);
+.forEach(button=>{
+
+button.disabled =
+true;
+
+});
 
 
 skipBtn.disabled =
@@ -480,13 +527,17 @@ true;
 nextBtn.disabled =
 false;
 
+
+/* SAUVEGARDE */
+
+saveProgress();
+
 });
 
 
-
-/* =======================================================
+/* =====================================================
    QUESTION SUIVANTE
-======================================================= */
+===================================================== */
 
 nextBtn.addEventListener(
 'click',
@@ -494,11 +545,18 @@ nextBtn.addEventListener(
 
 index++;
 
+
+/* SAUVEGARDE */
+
+saveProgress();
+
+
 if(index < questions.length){
 
 render();
 
 }
+
 else{
 
 finish();
@@ -508,18 +566,19 @@ finish();
 });
 
 
-
-/* =======================================================
-   FIN DU JEU
-======================================================= */
+/* =====================================================
+   FIN
+===================================================== */
 
 function finish(){
 
 quizCard.style.display =
 'none';
 
+
 finalCard.style.display =
 'block';
+
 
 progressEl.style.width =
 '100%';
@@ -527,16 +586,17 @@ progressEl.style.width =
 
 const max =
 questions.reduce(
-(total,question) =>
-total + question.points,
-0
-);
 
+(total,question)=>
+total + question.points,
+
+0
+
+);
 
 
 let rank =
 'Explorateur de Bordeaux';
-
 
 
 if(score >= 12){
@@ -561,13 +621,14 @@ rank =
 }
 
 
-
-root.querySelector('#rank')
+root
+.querySelector('#rank')
 .textContent =
 rank;
 
 
-root.querySelector('#finalScore')
+root
+.querySelector('#finalScore')
 .textContent =
 'Score : ' +
 score +
@@ -576,13 +637,12 @@ max +
 ' points';
 
 
-
 const summary =
 root.querySelector('#summary');
 
+
 summary.innerHTML =
 '';
-
 
 
 results.forEach(result=>{
@@ -619,15 +679,20 @@ summary.appendChild(row);
 
 });
 
+
+/* SAUVEGARDE */
+
+saveProgress();
+
 }
 
 
-
-/* =======================================================
+/* =====================================================
    RECOMMENCER
-======================================================= */
+===================================================== */
 
-root.querySelector('#restartBtn')
+root
+.querySelector('#restartBtn')
 .addEventListener(
 'click',
 ()=>{
@@ -638,23 +703,50 @@ score = 0;
 
 results.length = 0;
 
+
+/* EFFACE LA SAUVEGARDE */
+
+clearProgress();
+
+
 quizCard.style.display =
 'block';
 
+
 finalCard.style.display =
 'none';
+
 
 render();
 
 });
 
 
-
-/* =======================================================
+/* =====================================================
    DEMARRAGE
-======================================================= */
+===================================================== */
+
+
+/* Recherche une partie sauvegardée */
+
+loadProgress();
+
+
+/* Si le joueur avait terminé */
+
+if(index >= questions.length){
+
+finish();
+
+}
+
+/* Sinon reprise à la question sauvegardée */
+
+else{
 
 render();
+
+}
 
 
 })();
