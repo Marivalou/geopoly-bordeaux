@@ -292,13 +292,27 @@ root.dataset.init='1';
 const questions = [
 
 {
-place:'Grosse Cloche',
+place:'Jardin Public',
 
-q:'Combien de cadrans possède la Grosse Cloche ?',
+q:'Quel est le prénom de cette artiste peintre née à Bordeaux et qui a sa statue au sud ouest du jardin public  ?',
 
 acceptedAnswers:[
-'2',
-'deux'
+'rosa',
+'ROSA'
+],
+
+points:1
+},
+
+
+{
+place:'Jardins de la mairie',
+
+q:'Combien de grilles d'entrée differentes ?',
+
+acceptedAnswers:[
+'3',
+'trois'
 ],
 
 points:2
@@ -306,38 +320,7 @@ points:2
 
 
 {
-place:'Grand Théâtre',
-
-q:'Combien de colonnes composent la façade principale ?',
-
-acceptedAnswers:[
-'12',
-'douze'
-],
-
-points:3
-},
-
-
-{
-place:'Porte Cailhau',
-
-q:'À quel siècle la Porte Cailhau a-t-elle été construite ?',
-
-acceptedAnswers:[
-'xve',
-'15',
-'15e',
-'quinzieme',
-'quinzième'
-],
-
-points:3
-},
-
-
-{
-place:'Place de la Bourse',
+place:'Place de la bourse',
 
 q:'Quel élément emblématique se trouve juste en face de la place ?',
 
@@ -345,7 +328,22 @@ acceptedAnswers:[
 'miroir d eau',
 'le miroir d eau',
 'miroir d’eau',
-'le miroir d’eau'
+'le miroir d’eau''
+],
+
+points:1
+},
+
+
+{
+place:'Place Stalingrad',
+
+q:'Quelle est la couleur de l'emblème de l'occupation anglaise ?',
+
+acceptedAnswers:[
+'bleu',
+'bLEU',
+'Bleu',
 ],
 
 points:2
@@ -353,14 +351,13 @@ points:2
 
 
 {
-place:'Cité du Vin',
+place:'Bonus LAB',
 
-q:'À quoi la forme du bâtiment fait-elle notamment référence ?',
+q:'Quel est l'élément donné par la réalisation de la lab GEOPOLY Bordeaux ?',
 
 acceptedAnswers:[
-'une vague et le vin en mouvement',
-'vague et vin en mouvement',
-'vin en mouvement'
+'24',
+'vingt quatre',
 ],
 
 points:4
@@ -368,12 +365,12 @@ points:4
 
 
 {
-place:'QUESTION FINALE',
+place:'QUESTION SUBSIDIAIRE',
 
-q:'À remplacer : écris ici ta question finale.',
+q:'Quel est le montant du cumul des points de la lab des portes de Bordeaux ?',
 
 acceptedAnswers:[
-'reponse finale',
+'2120',
 'réponse finale'
 ],
 
@@ -1243,17 +1240,17 @@ let rank =
 'Explorateur de Bordeaux';
 
 
-if(score >= 16){
+if(score >= 15){
 
 rank =
-'Grand Maître GEOPOLY';
+'Grand Maître GEOPOLY et vous trouvez les coordonnées de la cache bonus W12 E024....';
 
 }
 
-else if(score >= 11){
+else if(score >= 10){
 
 rank =
-'Expert bordelais';
+'Expert bordelais et vous trouvez les coordonnées de la cache bonus W12 E024....';
 
 }
 
