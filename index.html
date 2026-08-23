@@ -89,6 +89,23 @@ display:grid;
 gap:10px
 }
 
+#geopoly-app .open-answer{
+display:grid;
+gap:10px
+}
+
+#geopoly-app .open-answer input{
+font:inherit;
+min-height:48px;
+border-radius:12px;
+border:1px solid light-dark(#cfc7b8,#444);
+padding:12px 14px;
+background:light-dark(#faf8f3,#292929);
+color:inherit;
+width:100%;
+font-size:16px
+}
+
 #geopoly-app button{
 font:inherit;
 min-height:48px;
@@ -105,7 +122,8 @@ text-align:left
 background:light-dark(#f1eee7,#333)
 }
 
-#geopoly-app button:focus{
+#geopoly-app button:focus,
+#geopoly-app input:focus{
 outline:3px solid light-dark(#6f6f6f,#b8b8b8);
 outline-offset:2px
 }
@@ -220,9 +238,8 @@ Questions bonus
 </h2>
 
 <div>
-Chaque question est facultative.
-Une bonne réponse rapporte des points.
-Une mauvaise réponse ne bloque jamais le parcours.
+Les 5 premières questions sont libres et rapportent des points.
+La 6e question ne se débloque que si les 5 premières sont réussies.
 </div>
 
 <div class="scorebar">
@@ -232,8 +249,7 @@ Une mauvaise réponse ne bloque jamais le parcours.
 </div>
 
 <div class="pill">
-Question
-<span id="step">1</span>/<span id="totalQuestions">8</span>
+Question <span id="step">1</span>/<span id="totalQuestions">6</span>
 </div>
 
 </div>
@@ -245,7 +261,6 @@ Question
 </section>
 
 
-
 <section class="card" id="quizCard">
 
 <div class="place" id="place"></div>
@@ -255,8 +270,9 @@ Question
 <div class="question-logo">
 
 <img
-src="./logo-geopoly-bordeaux.png"
-alt="Logo GEOPOLY BORDEAUX">
+src="./logo-geopoly-bordeaux.png?v=2"
+alt="Logo GEOPOLY BORDEAUX"
+onerror="this.style.display='none';this.parentElement.insertAdjacentHTML('beforeend','<strong style=&quot;padding:12px;border:1px dashed currentColor;border-radius:10px&quot;>Logo introuvable : vérifie le nom logo-geopoly-bordeaux.png dans GitHub</strong>');">
 
 </div>
 
@@ -292,7 +308,6 @@ Continuer
 </div>
 
 </section>
-
 
 
 <section
@@ -333,7 +348,6 @@ Recommencer
 </div>
 
 
-
 <script>
 
 (()=>{
@@ -347,9 +361,9 @@ root.dataset.init='1';
 
 
 
-/* ===================================================
+/* ==================================================
    QUESTIONS
-=================================================== */
+================================================== */
 
 const questions = [
 
@@ -358,17 +372,13 @@ place:'Grosse Cloche',
 
 q:'Combien de cadrans possède la Grosse Cloche ?',
 
-answers:[
-'1',
+acceptedAnswers:[
 '2',
-'4'
+'deux'
 ],
-
-correct:1,
 
 points:2
 },
-
 
 
 {
@@ -376,17 +386,13 @@ place:'Grand Théâtre',
 
 q:'Combien de colonnes composent la façade principale ?',
 
-answers:[
-'10',
+acceptedAnswers:[
 '12',
-'14'
+'douze'
 ],
-
-correct:1,
 
 points:3
 },
-
 
 
 {
@@ -394,17 +400,16 @@ place:'Porte Cailhau',
 
 q:'À quel siècle la Porte Cailhau a-t-elle été construite ?',
 
-answers:[
-'XIIIe',
-'XVe',
-'XVIIe'
+acceptedAnswers:[
+'xve',
+'15',
+'15e',
+'quinzieme',
+'quinzième'
 ],
-
-correct:1,
 
 points:3
 },
-
 
 
 {
@@ -412,17 +417,15 @@ place:'Place de la Bourse',
 
 q:'Quel élément emblématique se trouve juste en face de la place ?',
 
-answers:[
-'Le miroir d’eau',
-'Le jardin public',
-'La flèche Saint-Michel'
+acceptedAnswers:[
+'miroir d eau',
+'le miroir d eau',
+'miroir d’eau',
+'le miroir d’eau'
 ],
-
-correct:0,
 
 points:2
 },
-
 
 
 {
@@ -430,82 +433,41 @@ place:'Cité du Vin',
 
 q:'À quoi la forme du bâtiment fait-elle notamment référence ?',
 
-answers:[
-'Une vague et le vin en mouvement',
-'Une forteresse médiévale',
-'Une cathédrale gothique'
+acceptedAnswers:[
+'une vague et le vin en mouvement',
+'vague et vin en mouvement',
+'vin en mouvement'
 ],
-
-correct:0,
 
 points:4
 },
 
 
-
 {
-place:'Question bonus 6',
+place:'Question finale',
 
 q:'À remplacer : écris ici ta sixième question.',
 
-answers:[
-'Réponse A',
-'Réponse B',
-'Réponse C'
+acceptedAnswers:[
+'reponse finale',
+'réponse finale'
 ],
 
-correct:0,
+points:5,
 
-points:2
-},
-
-
-
-{
-place:'Question bonus 7',
-
-q:'À remplacer : écris ici ta septième question.',
-
-answers:[
-'Réponse A',
-'Réponse B',
-'Réponse C'
-],
-
-correct:0,
-
-points:3
-},
-
-
-
-{
-place:'Question bonus 8',
-
-q:'À remplacer : écris ici ta huitième question.',
-
-answers:[
-'Réponse A',
-'Réponse B',
-'Réponse C'
-],
-
-correct:0,
-
-points:4
+final:true
 }
 
 ];
 
 
 
-/* ===================================================
-   SAUVEGARDE
-=================================================== */
+/* ==================================================
+   SAUVEGARDE AUTOMATIQUE
+================================================== */
 
 const STORAGE_KEY =
-'geopoly-bordeaux-progress-v2';
-
+'geopoly-bordeaux-progress-v3';
 
 
 let index = 0;
@@ -592,6 +554,7 @@ Array.isArray(saved.results)
 
 results.length = 0;
 
+
 saved.results
 
 .slice(
@@ -631,42 +594,53 @@ catch(e){}
 
 
 
-/* ===================================================
-   ELEMENTS
-=================================================== */
+/* ==================================================
+   ELEMENTS DE LA PAGE
+================================================== */
 
 const scoreEl =
 root.querySelector('#score');
 
+
 const stepEl =
 root.querySelector('#step');
+
 
 const progressEl =
 root.querySelector('#progress');
 
+
 const totalQuestionsEl =
 root.querySelector('#totalQuestions');
+
 
 const placeEl =
 root.querySelector('#place');
 
-const qEl =
+
+const questionEl =
 root.querySelector('#question');
+
 
 const answersEl =
 root.querySelector('#answers');
 
+
 const feedbackEl =
 root.querySelector('#feedback');
+
 
 const skipBtn =
 root.querySelector('#skipBtn');
 
+
 const nextBtn =
 root.querySelector('#nextBtn');
 
+
 const quizCard =
 root.querySelector('#quizCard');
+
 
 const finalCard =
 root.querySelector('#finalCard');
@@ -677,14 +651,82 @@ questions.length;
 
 
 
-/* ===================================================
-   AFFICHER QUESTION
-=================================================== */
+/* ==================================================
+   NORMALISATION DES REPONSES
+================================================== */
+
+function normalizeAnswer(value){
+
+return value
+
+.toLowerCase()
+
+.normalize('NFD')
+
+.replace(
+/[\u0300-\u036f]/g,
+''
+)
+
+.replace(
+/[^a-z0-9]+/g,
+' '
+)
+
+.trim();
+
+}
+
+
+
+/* ==================================================
+   VERIFIE SI LES 5 PREMIERES SONT REUSSIES
+================================================== */
+
+function firstFiveSucceeded(){
+
+return
+
+results.slice(0,5).length === 5
+
+&&
+
+results
+.slice(0,5)
+.every(
+result =>
+result.status === 'Bonne réponse'
+);
+
+}
+
+
+
+/* ==================================================
+   AFFICHAGE D'UNE QUESTION
+================================================== */
 
 function render(){
 
 const item =
 questions[index];
+
+
+
+/* La question finale est verrouillée */
+
+if(
+item.final
+&&
+!firstFiveSucceeded()
+){
+
+finishLocked();
+
+return;
+
+}
+
 
 
 answered =
@@ -695,8 +737,16 @@ nextBtn.disabled =
 true;
 
 
+/* La question finale ne peut pas être passée */
+
 skipBtn.disabled =
-false;
+!!item.final;
+
+
+skipBtn.style.display =
+item.final
+? 'none'
+: 'block';
 
 
 feedbackEl.style.display =
@@ -720,7 +770,8 @@ progressEl.style.width =
 (index / questions.length)
 * 100
 )
-+ '%';
++
+'%';
 
 
 placeEl.textContent =
@@ -734,7 +785,7 @@ item.points
 ' points';
 
 
-qEl.textContent =
+questionEl.textContent =
 item.q;
 
 
@@ -743,47 +794,118 @@ answersEl.innerHTML =
 
 
 
-item.answers.forEach(
-(answer,i)=>{
+/* Création du champ de réponse */
 
-const button =
+const form =
+document.createElement('form');
+
+
+form.className =
+'open-answer';
+
+
+
+const input =
+document.createElement('input');
+
+
+input.type =
+'text';
+
+
+input.autocomplete =
+'off';
+
+
+input.placeholder =
+'Saisissez votre réponse';
+
+
+input.setAttribute(
+'aria-label',
+'Votre réponse'
+);
+
+
+
+const submit =
 document.createElement('button');
 
 
-button.type =
-'button';
+submit.type =
+'submit';
 
 
-button.textContent =
-answer;
+submit.className =
+'primary';
 
 
-button.addEventListener(
+submit.textContent =
+'Valider ma réponse';
 
-'click',
 
-()=>choose(i)
+
+form.appendChild(input);
+
+form.appendChild(submit);
+
+answersEl.appendChild(form);
+
+
+
+form.addEventListener(
+
+'submit',
+
+event=>{
+
+event.preventDefault();
+
+checkOpenAnswer(
+input.value,
+input,
+submit
+);
+
+}
 
 );
 
 
-answersEl.appendChild(
-button
-);
-
-});
+input.focus();
 
 }
 
 
 
-/* ===================================================
-   REPONSE
-=================================================== */
+/* ==================================================
+   VERIFICATION DE LA REPONSE
+================================================== */
 
-function choose(i){
+function checkOpenAnswer(
+value,
+input,
+submit
+){
 
 if(answered)return;
+
+
+
+if(!value.trim()){
+
+feedbackEl.textContent =
+'Saisis une réponse avant de valider.';
+
+
+feedbackEl.style.display =
+'block';
+
+
+return;
+
+}
+
 
 
 answered =
@@ -794,29 +916,42 @@ skipBtn.disabled =
 true;
 
 
+input.disabled =
+true;
+
+
+submit.disabled =
+true;
+
+
+
 const item =
 questions[index];
 
 
-const buttons =
-[
-...answersEl
-.querySelectorAll('button')
-];
+const normalized =
+normalizeAnswer(value);
 
 
-buttons.forEach(button=>{
+const correct =
 
-button.disabled =
-true;
+item.acceptedAnswers.some(
 
-});
+acceptedAnswer =>
+
+normalizeAnswer(
+acceptedAnswer
+)
+
+===
+
+normalized
+
+);
 
 
 
-if(
-i === item.correct
-){
+if(correct){
 
 score +=
 item.points;
@@ -850,6 +985,14 @@ else{
 
 feedbackEl.textContent =
 
+item.final
+
+?
+
+'Réponse incorrecte.'
+
+:
+
 'Réponse incorrecte. 0 point, mais tu peux continuer.';
 
 
@@ -882,17 +1025,15 @@ nextBtn.disabled =
 false;
 
 
-/* sauvegarde */
-
 saveProgress();
 
 }
 
 
 
-/* ===================================================
-   PASSER
-=================================================== */
+/* ==================================================
+   PASSER UNE QUESTION
+================================================== */
 
 skipBtn.addEventListener(
 
@@ -900,7 +1041,12 @@ skipBtn.addEventListener(
 
 ()=>{
 
-if(answered)return;
+if(
+answered
+||
+questions[index].final
+)
+return;
 
 
 answered =
@@ -923,7 +1069,7 @@ points:
 
 feedbackEl.textContent =
 
-'Question passée. Aucun point perdu et le parcours continue.';
+'Question passée. Aucun point gagné et le parcours continue.';
 
 
 feedbackEl.style.display =
@@ -931,10 +1077,12 @@ feedbackEl.style.display =
 
 
 answersEl
-.querySelectorAll('button')
-.forEach(button=>{
+.querySelectorAll(
+'input,button'
+)
+.forEach(element=>{
 
-button.disabled =
+element.disabled =
 true;
 
 });
@@ -956,9 +1104,9 @@ saveProgress();
 
 
 
-/* ===================================================
+/* ==================================================
    QUESTION SUIVANTE
-=================================================== */
+================================================== */
 
 nextBtn.addEventListener(
 
@@ -992,9 +1140,102 @@ finish();
 
 
 
-/* ===================================================
-   RESULTAT FINAL
-=================================================== */
+/* ==================================================
+   QUESTION FINALE VERROUILLEE
+================================================== */
+
+function finishLocked(){
+
+quizCard.style.display =
+'none';
+
+
+finalCard.style.display =
+'block';
+
+
+progressEl.style.width =
+(
+(5 / questions.length)
+* 100
+)
++
+'%';
+
+
+root
+.querySelector('#rank')
+.textContent =
+
+'Question finale verrouillée';
+
+
+root
+.querySelector('#finalScore')
+.textContent =
+
+'La 6e question n’est accessible que si les 5 premières ont toutes été réussies.';
+
+
+
+const summary =
+root.querySelector('#summary');
+
+
+summary.innerHTML =
+'';
+
+
+
+results
+.slice(0,5)
+.forEach(result=>{
+
+const row =
+document.createElement('div');
+
+
+row.className =
+'row';
+
+
+row.innerHTML =
+
+'<span>'
++
+result.place
++
+'<div class="small">'
++
+result.status
++
+'</div>'
++
+'</span>'
++
+'<strong>+'
++
+result.points
++
+'</strong>';
+
+
+summary.appendChild(
+row
+);
+
+});
+
+
+saveProgress();
+
+}
+
+
+
+/* ==================================================
+   FIN DU JEU
+================================================== */
 
 function finish(){
 
@@ -1032,7 +1273,7 @@ let rank =
 
 
 if(
-score >= 12
+score >= 16
 ){
 
 rank =
@@ -1041,7 +1282,7 @@ rank =
 }
 
 else if(
-score >= 9
+score >= 11
 ){
 
 rank =
@@ -1050,7 +1291,7 @@ rank =
 }
 
 else if(
-score >= 5
+score >= 6
 ){
 
 rank =
@@ -1136,9 +1377,9 @@ saveProgress();
 
 
 
-/* ===================================================
+/* ==================================================
    RECOMMENCER
-=================================================== */
+================================================== */
 
 root
 .querySelector('#restartBtn')
@@ -1171,6 +1412,10 @@ finalCard.style.display =
 'none';
 
 
+skipBtn.style.display =
+'block';
+
+
 render();
 
 }
@@ -1179,9 +1424,9 @@ render();
 
 
 
-/* ===================================================
+/* ==================================================
    DEMARRAGE
-=================================================== */
+================================================== */
 
 loadProgress();
 
