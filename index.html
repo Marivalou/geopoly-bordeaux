@@ -1,73 +1,16 @@
 <div id="geopoly-app" style="background-color:light-dark(#f7f4ed,#151515);color:light-dark(#1e1e1e,#f3f3f3);padding:24px;min-height:100%;border-radius:0;font-family:Arial,Helvetica,sans-serif;">
 
 <style>
-
-#geopoly-app *{
-box-sizing:border-box
-}
-
-#geopoly-app .wrap{
-max-width:760px;
-margin:0 auto
-}
-
-#geopoly-app .hero{
-background:light-dark(#ffffff,#222);
-border:1px solid light-dark(#ded8ca,#333);
-border-radius:18px;
-padding:22px;
-margin-bottom:18px
-}
-
-#geopoly-app .eyebrow{
-font-size:13px;
-font-weight:700;
-letter-spacing:.08em;
-text-transform:uppercase;
-opacity:.68
-}
-
-#geopoly-app h2{
-margin:6px 0 10px;
-font-size:30px;
-line-height:1.05
-}
-
-#geopoly-app .scorebar{
-display:flex;
-gap:12px;
-flex-wrap:wrap;
-margin-top:16px
-}
-
-#geopoly-app .pill{
-background:light-dark(#f0ede5,#2d2d2d);
-border-radius:999px;
-padding:10px 14px;
-font-weight:700
-}
-
-#geopoly-app .card{
-background:light-dark(#ffffff,#222);
-border:1px solid light-dark(#ded8ca,#333);
-border-radius:18px;
-padding:22px
-}
-
-#geopoly-app .place{
-font-size:13px;
-font-weight:700;
-text-transform:uppercase;
-letter-spacing:.06em;
-opacity:.65
-}
-
-#geopoly-app .question{
-font-size:22px;
-font-weight:700;
-line-height:1.25;
-margin:10px 0 18px
-}
+#geopoly-app *{box-sizing:border-box}
+#geopoly-app .wrap{max-width:760px;margin:0 auto}
+#geopoly-app .hero{background:light-dark(#ffffff,#222);border:1px solid light-dark(#ded8ca,#333);border-radius:18px;padding:22px;margin-bottom:18px}
+#geopoly-app .eyebrow{font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;opacity:.68}
+#geopoly-app h2{margin:6px 0 10px;font-size:30px;line-height:1.05}
+#geopoly-app .scorebar{display:flex;gap:12px;flex-wrap:wrap;margin-top:16px}
+#geopoly-app .pill{background:light-dark(#f0ede5,#2d2d2d);border-radius:999px;padding:10px 14px;font-weight:700}
+#geopoly-app .card{background:light-dark(#ffffff,#222);border:1px solid light-dark(#ded8ca,#333);border-radius:18px;padding:22px}
+#geopoly-app .place{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;opacity:.65}
+#geopoly-app .question{font-size:22px;font-weight:700;line-height:1.25;margin:10px 0 18px}
 
 #geopoly-app .question-logo{
 display:flex;
@@ -84,26 +27,19 @@ height:auto;
 object-fit:contain
 }
 
-#geopoly-app .answers{
-display:grid;
-gap:10px
-}
-
-#geopoly-app .open-answer{
-display:grid;
-gap:10px
-}
+#geopoly-app .answers{display:grid;gap:10px}
+#geopoly-app .open-answer{display:grid;gap:10px}
 
 #geopoly-app .open-answer input{
 font:inherit;
+font-size:16px;
 min-height:48px;
 border-radius:12px;
 border:1px solid light-dark(#cfc7b8,#444);
 padding:12px 14px;
 background:light-dark(#faf8f3,#292929);
 color:inherit;
-width:100%;
-font-size:16px
+width:100%
 }
 
 #geopoly-app button{
@@ -166,16 +102,14 @@ overflow:hidden;
 margin:14px 0 0
 }
 
-#geopoly-app .progress > div{
+#geopoly-app .progress>div{
 height:100%;
 background:light-dark(#333,#ddd);
 width:0%;
 transition:width .25s ease
 }
 
-#geopoly-app .final{
-display:none
-}
+#geopoly-app .final{display:none}
 
 #geopoly-app .rank{
 font-size:28px;
@@ -204,24 +138,15 @@ opacity:.72
 
 @media(max-width:480px){
 
-#geopoly-app{
-padding:14px
-}
+#geopoly-app{padding:14px}
 
-#geopoly-app h2{
-font-size:25px
-}
+#geopoly-app h2{font-size:25px}
 
-#geopoly-app .question{
-font-size:20px
-}
+#geopoly-app .question{font-size:20px}
 
-#geopoly-app .actions{
-flex-direction:column
-}
+#geopoly-app .actions{flex-direction:column}
 
 }
-
 </style>
 
 
@@ -238,8 +163,8 @@ Questions bonus
 </h2>
 
 <div>
-Les 5 premières questions sont libres et rapportent des points.
-La 6e question ne se débloque que si les 5 premières sont réussies.
+Les 5 premières questions rapportent des points.
+La question finale se débloque uniquement si les 5 premières sont réussies.
 </div>
 
 <div class="scorebar">
@@ -270,9 +195,8 @@ Question <span id="step">1</span>/<span id="totalQuestions">6</span>
 <div class="question-logo">
 
 <img
-src="./logo-geopoly-bordeaux.png?v=2"
-alt="Logo GEOPOLY BORDEAUX"
-onerror="this.style.display='none';this.parentElement.insertAdjacentHTML('beforeend','<strong style=&quot;padding:12px;border:1px dashed currentColor;border-radius:10px&quot;>Logo introuvable : vérifie le nom logo-geopoly-bordeaux.png dans GitHub</strong>');">
+src="./logo-geopoly-bordeaux.png?v=3"
+alt="Logo GEOPOLY BORDEAUX">
 
 </div>
 
@@ -315,7 +239,7 @@ class="card final"
 id="finalCard">
 
 <div class="eyebrow">
-Résultat final
+Résultat
 </div>
 
 <div
@@ -361,9 +285,9 @@ root.dataset.init='1';
 
 
 
-/* ==================================================
-   QUESTIONS
-================================================== */
+/* ===================================================
+   LES 6 QUESTIONS
+=================================================== */
 
 const questions = [
 
@@ -444,9 +368,9 @@ points:4
 
 
 {
-place:'Question finale',
+place:'QUESTION FINALE',
 
-q:'À remplacer : écris ici ta sixième question.',
+q:'À remplacer : écris ici ta question finale.',
 
 acceptedAnswers:[
 'reponse finale',
@@ -462,12 +386,12 @@ final:true
 
 
 
-/* ==================================================
-   SAUVEGARDE AUTOMATIQUE
-================================================== */
+/* ===================================================
+   SAUVEGARDE
+=================================================== */
 
 const STORAGE_KEY =
-'geopoly-bordeaux-progress-v3';
+'geopoly-bordeaux-progress-v4';
 
 
 let index = 0;
@@ -548,20 +472,13 @@ saved.score;
 }
 
 
-if(
-Array.isArray(saved.results)
-){
+if(Array.isArray(saved.results)){
 
 results.length = 0;
 
 
 saved.results
-
-.slice(
-0,
-questions.length
-)
-
+.slice(0,questions.length)
 .forEach(result=>{
 
 results.push(result);
@@ -594,9 +511,9 @@ catch(e){}
 
 
 
-/* ==================================================
-   ELEMENTS DE LA PAGE
-================================================== */
+/* ===================================================
+   ELEMENTS
+=================================================== */
 
 const scoreEl =
 root.querySelector('#score');
@@ -610,15 +527,11 @@ const progressEl =
 root.querySelector('#progress');
 
 
-const totalQuestionsEl =
-root.querySelector('#totalQuestions');
-
-
 const placeEl =
 root.querySelector('#place');
 
 
-const questionEl =
+const qEl =
 root.querySelector('#question');
 
 
@@ -646,14 +559,16 @@ const finalCard =
 root.querySelector('#finalCard');
 
 
-totalQuestionsEl.textContent =
+root
+.querySelector('#totalQuestions')
+.textContent =
 questions.length;
 
 
 
-/* ==================================================
+/* ===================================================
    NORMALISATION DES REPONSES
-================================================== */
+=================================================== */
 
 function normalizeAnswer(value){
 
@@ -679,32 +594,49 @@ return value
 
 
 
-/* ==================================================
-   VERIFIE SI LES 5 PREMIERES SONT REUSSIES
-================================================== */
+/* ===================================================
+   VERIFICATION DES 5 PREMIERES QUESTIONS
+=================================================== */
 
 function firstFiveSucceeded(){
 
-return
+for(
+let questionNumber = 0;
+questionNumber < 5;
+questionNumber++
+){
 
-results.slice(0,5).length === 5
+const result =
+results.find(
 
-&&
+r =>
+r.questionIndex === questionNumber
 
-results
-.slice(0,5)
-.every(
-result =>
-result.status === 'Bonne réponse'
 );
+
+
+if(
+!result
+||
+result.status !== 'Bonne réponse'
+){
+
+return false;
+
+}
+
+}
+
+
+return true;
 
 }
 
 
 
-/* ==================================================
-   AFFICHAGE D'UNE QUESTION
-================================================== */
+/* ===================================================
+   AFFICHAGE QUESTION
+=================================================== */
 
 function render(){
 
@@ -713,10 +645,10 @@ questions[index];
 
 
 
-/* La question finale est verrouillée */
+/* Vérification avant d'afficher la question 6 */
 
 if(
-item.final
+index === 5
 &&
 !firstFiveSucceeded()
 ){
@@ -737,24 +669,34 @@ nextBtn.disabled =
 true;
 
 
-/* La question finale ne peut pas être passée */
-
-skipBtn.disabled =
-!!item.final;
-
-
-skipBtn.style.display =
-item.final
-? 'none'
-: 'block';
-
-
 feedbackEl.style.display =
 'none';
 
 
 feedbackEl.textContent =
 '';
+
+
+
+/* La question finale ne peut pas être passée */
+
+if(index === 5){
+
+skipBtn.style.display =
+'none';
+
+}
+
+else{
+
+skipBtn.style.display =
+'block';
+
+skipBtn.disabled =
+false;
+
+}
+
 
 
 scoreEl.textContent =
@@ -766,6 +708,7 @@ index + 1;
 
 
 progressEl.style.width =
+
 (
 (index / questions.length)
 * 100
@@ -785,7 +728,7 @@ item.points
 ' points';
 
 
-questionEl.textContent =
+qEl.textContent =
 item.q;
 
 
@@ -794,7 +737,7 @@ answersEl.innerHTML =
 
 
 
-/* Création du champ de réponse */
+/* Champ de réponse */
 
 const form =
 document.createElement('form');
@@ -845,11 +788,19 @@ submit.textContent =
 
 
 
-form.appendChild(input);
+form.appendChild(
+input
+);
 
-form.appendChild(submit);
 
-answersEl.appendChild(form);
+form.appendChild(
+submit
+);
+
+
+answersEl.appendChild(
+form
+);
 
 
 
@@ -861,10 +812,15 @@ event=>{
 
 event.preventDefault();
 
+
 checkOpenAnswer(
+
 input.value,
+
 input,
+
 submit
+
 );
 
 }
@@ -878,9 +834,9 @@ input.focus();
 
 
 
-/* ==================================================
+/* ===================================================
    VERIFICATION DE LA REPONSE
-================================================== */
+=================================================== */
 
 function checkOpenAnswer(
 value,
@@ -933,6 +889,7 @@ const normalized =
 normalizeAnswer(value);
 
 
+
 const correct =
 
 item.acceptedAnswers.some(
@@ -966,7 +923,14 @@ item.points
 ' points';
 
 
+
+/* IMPORTANT :
+   mémorise le numéro de la question */
+
 results.push({
+
+questionIndex:
+index,
 
 place:
 item.place,
@@ -985,7 +949,7 @@ else{
 
 feedbackEl.textContent =
 
-item.final
+index === 5
 
 ?
 
@@ -996,7 +960,11 @@ item.final
 'Réponse incorrecte. 0 point, mais tu peux continuer.';
 
 
+
 results.push({
+
+questionIndex:
+index,
 
 place:
 item.place,
@@ -1031,9 +999,9 @@ saveProgress();
 
 
 
-/* ==================================================
+/* ===================================================
    PASSER UNE QUESTION
-================================================== */
+=================================================== */
 
 skipBtn.addEventListener(
 
@@ -1044,7 +1012,7 @@ skipBtn.addEventListener(
 if(
 answered
 ||
-questions[index].final
+index === 5
 )
 return;
 
@@ -1053,7 +1021,11 @@ answered =
 true;
 
 
+
 results.push({
+
+questionIndex:
+index,
 
 place:
 questions[index].place,
@@ -1067,6 +1039,7 @@ points:
 });
 
 
+
 feedbackEl.textContent =
 
 'Question passée. Aucun point gagné et le parcours continue.';
@@ -1074,6 +1047,7 @@ feedbackEl.textContent =
 
 feedbackEl.style.display =
 'block';
+
 
 
 answersEl
@@ -1104,9 +1078,9 @@ saveProgress();
 
 
 
-/* ==================================================
-   QUESTION SUIVANTE
-================================================== */
+/* ===================================================
+   CONTINUER
+=================================================== */
 
 nextBtn.addEventListener(
 
@@ -1140,9 +1114,9 @@ finish();
 
 
 
-/* ==================================================
-   QUESTION FINALE VERROUILLEE
-================================================== */
+/* ===================================================
+   QUESTION 6 VERROUILLEE
+=================================================== */
 
 function finishLocked(){
 
@@ -1155,12 +1129,7 @@ finalCard.style.display =
 
 
 progressEl.style.width =
-(
-(5 / questions.length)
-* 100
-)
-+
-'%';
+'83.33%';
 
 
 root
@@ -1170,11 +1139,12 @@ root
 'Question finale verrouillée';
 
 
+
 root
 .querySelector('#finalScore')
 .textContent =
 
-'La 6e question n’est accessible que si les 5 premières ont toutes été réussies.';
+'La question 6 est accessible uniquement si les 5 premières réponses sont correctes.';
 
 
 
@@ -1188,7 +1158,9 @@ summary.innerHTML =
 
 
 results
-.slice(0,5)
+.filter(result =>
+result.questionIndex < 5
+)
 .forEach(result=>{
 
 const row =
@@ -1233,9 +1205,9 @@ saveProgress();
 
 
 
-/* ==================================================
-   FIN DU JEU
-================================================== */
+/* ===================================================
+   RESULTAT FINAL
+=================================================== */
 
 function finish(){
 
@@ -1255,7 +1227,7 @@ progressEl.style.width =
 const max =
 questions.reduce(
 
-(total,question)=>
+(total,question) =>
 
 total
 +
@@ -1271,28 +1243,21 @@ let rank =
 'Explorateur de Bordeaux';
 
 
-
-if(
-score >= 16
-){
+if(score >= 16){
 
 rank =
 'Grand Maître GEOPOLY';
 
 }
 
-else if(
-score >= 11
-){
+else if(score >= 11){
 
 rank =
 'Expert bordelais';
 
 }
 
-else if(
-score >= 6
-){
+else if(score >= 6){
 
 rank =
 'Aventurier bordelais';
@@ -1377,9 +1342,9 @@ saveProgress();
 
 
 
-/* ==================================================
+/* ===================================================
    RECOMMENCER
-================================================== */
+=================================================== */
 
 root
 .querySelector('#restartBtn')
@@ -1424,9 +1389,9 @@ render();
 
 
 
-/* ==================================================
+/* ===================================================
    DEMARRAGE
-================================================== */
+=================================================== */
 
 loadProgress();
 
@@ -1442,12 +1407,3 @@ finish();
 else{
 
 render();
-
-}
-
-
-})();
-
-</script>
-
-</div>
