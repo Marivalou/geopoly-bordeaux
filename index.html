@@ -163,12 +163,11 @@ Questions bonus
 </h2>
 
 <div>
-Bienvenus dans le questionnaire supplémentaire le la lab Geopoly de Bordeaux
-Vous allez devoir répondre à 4 questions au fil du jeu dans la locatlisation est renseignée par la position des ? sur le plateau
-et l'intitulé de chaque question
-La réponse à la cinquième question vous sera bonné à la fin de la lab Geopoly Bordeaux
-La réponse à ces 5 question vous ouvrira l'accès à une surprise
-La question subsidiaire se débloque uniquement si les 5 premières sont réussie, cela cloturera votre périple
+Bienvenue dans le questionnaire supplémentaire de la Lab GEOPOLY Bordeaux.
+Vous allez répondre à 4 questions au fil du jeu, repérées par les ? sur le plateau.
+La réponse à la cinquième question vous sera donnée à la fin de la Lab GEOPOLY Bordeaux.
+La réussite des 5 premières questions vous ouvrira l'accès à une surprise.
+La question subsidiaire se débloque uniquement si les 5 premières sont réussies.
 </div>
 
 <div class="scorebar">
@@ -199,7 +198,7 @@ Question <span id="step">1</span>/<span id="totalQuestions">6</span>
 <div class="question-logo">
 
 <img
-src="./logo-geopoly-bordeaux.png?v=3"
+src="./logo-geopoly-bordeaux.png?v=5"
 alt="Logo GEOPOLY BORDEAUX">
 
 </div>
@@ -243,7 +242,7 @@ class="card final"
 id="finalCard">
 
 <div class="eyebrow">
-Résultat
+Résultat final
 </div>
 
 <div
@@ -289,20 +288,19 @@ root.dataset.init='1';
 
 
 
-/* ===================================================
-   LES 6 QUESTIONS
-=================================================== */
+/* ==================================================
+   QUESTIONS
+================================================== */
 
 const questions = [
 
 {
 place:'Jardin Public',
 
-q:'Quel est le prénom de cette artiste peintre née à Bordeaux et qui a sa statue au sud ouest du jardin public  ?',
+q:'Quel est le prénom de cette artiste peintre née à Bordeaux et qui a sa statue au sud-ouest du Jardin Public ?',
 
 acceptedAnswers:[
-'rosa',
-'ROSA'
+'rosa'
 ],
 
 points:1
@@ -312,7 +310,7 @@ points:1
 {
 place:'Jardins de la mairie',
 
-q:'Combien de grilles d'entrée differentes ?',
+q:"Combien de grilles d'entrée différentes ?",
 
 acceptedAnswers:[
 '3',
@@ -324,7 +322,7 @@ points:2
 
 
 {
-place:'Place de la bourse',
+place:'Place de la Bourse',
 
 q:'Quel élément emblématique se trouve juste en face de la place ?',
 
@@ -332,7 +330,7 @@ acceptedAnswers:[
 'miroir d eau',
 'le miroir d eau',
 'miroir d’eau',
-'le miroir d’eau''
+'le miroir d’eau'
 ],
 
 points:1
@@ -342,12 +340,10 @@ points:1
 {
 place:'Place Stalingrad',
 
-q:'Quelle est la couleur de l'emblème de l'occupation anglaise ?',
+q:"Quelle est la couleur de l'emblème de l'occupation anglaise ?",
 
 acceptedAnswers:[
-'bleu',
-'bLEU',
-'Bleu',
+'bleu'
 ],
 
 points:2
@@ -357,11 +353,11 @@ points:2
 {
 place:'Bonus LAB',
 
-q:'Quel est l'élément donné par la réalisation de la lab GEOPOLY Bordeaux ?',
+q:"Quel est l'élément donné par la réalisation de la Lab GEOPOLY Bordeaux ?",
 
 acceptedAnswers:[
 '24',
-'vingt quatre',
+'vingt quatre'
 ],
 
 points:4
@@ -371,11 +367,10 @@ points:4
 {
 place:'QUESTION SUBSIDIAIRE',
 
-q:'Quel est le montant du cumul des points de la lab des portes de Bordeaux ?',
+q:'Quel est le montant du cumul des points de la Lab des portes de Bordeaux ?',
 
 acceptedAnswers:[
-'2120',
-'réponse finale'
+'2120'
 ],
 
 points:5,
@@ -387,12 +382,12 @@ final:true
 
 
 
-/* ===================================================
+/* ==================================================
    SAUVEGARDE
-=================================================== */
+================================================== */
 
 const STORAGE_KEY =
-'geopoly-bordeaux-progress-v4';
+'geopoly-bordeaux-progress-v5';
 
 
 let index = 0;
@@ -473,7 +468,9 @@ saved.score;
 }
 
 
-if(Array.isArray(saved.results)){
+if(
+Array.isArray(saved.results)
+){
 
 results.length = 0;
 
@@ -512,49 +509,39 @@ catch(e){}
 
 
 
-/* ===================================================
+/* ==================================================
    ELEMENTS
-=================================================== */
+================================================== */
 
 const scoreEl =
 root.querySelector('#score');
 
-
 const stepEl =
 root.querySelector('#step');
-
 
 const progressEl =
 root.querySelector('#progress');
 
-
 const placeEl =
 root.querySelector('#place');
-
 
 const qEl =
 root.querySelector('#question');
 
-
 const answersEl =
 root.querySelector('#answers');
-
 
 const feedbackEl =
 root.querySelector('#feedback');
 
-
 const skipBtn =
 root.querySelector('#skipBtn');
-
 
 const nextBtn =
 root.querySelector('#nextBtn');
 
-
 const quizCard =
 root.querySelector('#quizCard');
-
 
 const finalCard =
 root.querySelector('#finalCard');
@@ -567,9 +554,9 @@ questions.length;
 
 
 
-/* ===================================================
+/* ==================================================
    NORMALISATION DES REPONSES
-=================================================== */
+================================================== */
 
 function normalizeAnswer(value){
 
@@ -595,9 +582,9 @@ return value
 
 
 
-/* ===================================================
-   VERIFICATION DES 5 PREMIERES QUESTIONS
-=================================================== */
+/* ==================================================
+   VERIFICATION DES 5 PREMIERES
+================================================== */
 
 function firstFiveSucceeded(){
 
@@ -635,9 +622,9 @@ return true;
 
 
 
-/* ===================================================
+/* ==================================================
    AFFICHAGE QUESTION
-=================================================== */
+================================================== */
 
 function render(){
 
@@ -645,8 +632,6 @@ const item =
 questions[index];
 
 
-
-/* Vérification avant d'afficher la question 6 */
 
 if(
 index === 5
@@ -678,8 +663,6 @@ feedbackEl.textContent =
 '';
 
 
-
-/* La question finale ne peut pas être passée */
 
 if(index === 5){
 
@@ -738,8 +721,6 @@ answersEl.innerHTML =
 
 
 
-/* Champ de réponse */
-
 const form =
 document.createElement('form');
 
@@ -789,19 +770,11 @@ submit.textContent =
 
 
 
-form.appendChild(
-input
-);
+form.appendChild(input);
 
+form.appendChild(submit);
 
-form.appendChild(
-submit
-);
-
-
-answersEl.appendChild(
-form
-);
+answersEl.appendChild(form);
 
 
 
@@ -835,9 +808,9 @@ input.focus();
 
 
 
-/* ===================================================
-   VERIFICATION DE LA REPONSE
-=================================================== */
+/* ==================================================
+   VERIFICATION REPONSE
+================================================== */
 
 function checkOpenAnswer(
 value,
@@ -862,23 +835,6 @@ feedbackEl.style.display =
 return;
 
 }
-
-
-
-answered =
-true;
-
-
-skipBtn.disabled =
-true;
-
-
-input.disabled =
-true;
-
-
-submit.disabled =
-true;
 
 
 
@@ -909,10 +865,31 @@ normalized
 
 
 
+/* ==================================================
+   BONNE REPONSE
+================================================== */
+
 if(correct){
+
+answered =
+true;
+
+
+skipBtn.disabled =
+true;
+
+
+input.disabled =
+true;
+
+
+submit.disabled =
+true;
+
 
 score +=
 item.points;
+
 
 
 feedbackEl.textContent =
@@ -924,9 +901,6 @@ item.points
 ' points';
 
 
-
-/* IMPORTANT :
-   mémorise le numéro de la question */
 
 results.push({
 
@@ -943,42 +917,6 @@ points:
 item.points
 
 });
-
-}
-
-else{
-
-feedbackEl.textContent =
-
-index === 5
-
-?
-
-'Réponse incorrecte.'
-
-:
-
-'Réponse incorrecte. 0 point, mais tu peux continuer.';
-
-
-
-results.push({
-
-questionIndex:
-index,
-
-place:
-item.place,
-
-status:
-'Incorrecte',
-
-points:
-0
-
-});
-
-}
 
 
 
@@ -1000,9 +938,48 @@ saveProgress();
 
 
 
-/* ===================================================
-   PASSER UNE QUESTION
-=================================================== */
+/* ==================================================
+   MAUVAISE REPONSE = NOUVEL ESSAI
+================================================== */
+
+else{
+
+feedbackEl.textContent =
+
+'Réponse incorrecte. Essaie encore.';
+
+
+feedbackEl.style.display =
+'block';
+
+
+/* On vide le champ */
+
+input.value =
+'';
+
+
+/* Le joueur peut immédiatement réessayer */
+
+input.disabled =
+false;
+
+
+submit.disabled =
+false;
+
+
+input.focus();
+
+}
+
+}
+
+
+
+/* ==================================================
+   PASSER
+================================================== */
 
 skipBtn.addEventListener(
 
@@ -1079,9 +1056,9 @@ saveProgress();
 
 
 
-/* ===================================================
+/* ==================================================
    CONTINUER
-=================================================== */
+================================================== */
 
 nextBtn.addEventListener(
 
@@ -1115,9 +1092,9 @@ finish();
 
 
 
-/* ===================================================
-   QUESTION 6 VERROUILLEE
-=================================================== */
+/* ==================================================
+   QUESTION FINALE VERROUILLEE
+================================================== */
 
 function finishLocked(){
 
@@ -1131,6 +1108,7 @@ finalCard.style.display =
 
 progressEl.style.width =
 '83.33%';
+
 
 
 root
@@ -1206,9 +1184,9 @@ saveProgress();
 
 
 
-/* ===================================================
+/* ==================================================
    RESULTAT FINAL
-=================================================== */
+================================================== */
 
 function finish(){
 
@@ -1242,6 +1220,7 @@ question.points,
 
 let rank =
 'Explorateur de Bordeaux';
+
 
 
 if(score >= 15){
@@ -1343,9 +1322,9 @@ saveProgress();
 
 
 
-/* ===================================================
+/* ==================================================
    RECOMMENCER
-=================================================== */
+================================================== */
 
 root
 .querySelector('#restartBtn')
@@ -1390,9 +1369,9 @@ render();
 
 
 
-/* ===================================================
+/* ==================================================
    DEMARRAGE
-=================================================== */
+================================================== */
 
 loadProgress();
 
