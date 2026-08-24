@@ -1,272 +1,367 @@
 <div id="geopoly-app" style="background-color:light-dark(#f7f4ed,#151515);color:light-dark(#1e1e1e,#f3f3f3);padding:24px;min-height:100%;border-radius:0;font-family:Arial,Helvetica,sans-serif;">
-  <style>
-    #geopoly-app *{box-sizing:border-box}
-    #geopoly-app .wrap{max-width:760px;margin:0 auto}
-    #geopoly-app .hero{background:light-dark(#ffffff,#222);border:1px solid light-dark(#ded8ca,#333);border-radius:18px;padding:22px;margin-bottom:18px}
-    #geopoly-app .eyebrow{font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;opacity:.68}
-    #geopoly-app h2{margin:6px 0 10px;font-size:30px;line-height:1.05}
-    #geopoly-app .scorebar{display:flex;gap:12px;flex-wrap:wrap;margin-top:16px}
-    #geopoly-app .pill{background:light-dark(#f0ede5,#2d2d2d);border-radius:999px;padding:10px 14px;font-weight:700}
-    #geopoly-app .card{background:light-dark(#ffffff,#222);border:1px solid light-dark(#ded8ca,#333);border-radius:18px;padding:22px}
-    #geopoly-app .place{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;opacity:.65}
-    #geopoly-app .question{font-size:22px;font-weight:700;line-height:1.25;margin:10px 0 18px}
 
-    #geopoly-app .question-logo{
-      display:flex;
-      justify-content:center;
-      align-items:center;
-      margin:0 0 18px
-    }
+<style>
 
-    #geopoly-app .question-logo img{
-      display:block;
-      max-width:240px;
-      width:70%;
-      height:auto;
-      object-fit:contain
-    }
+#geopoly-app *{
+box-sizing:border-box
+}
 
-    #geopoly-app .answers{display:grid;gap:10px}
-    #geopoly-app .open-answer{display:grid;gap:10px}
+#geopoly-app .wrap{
+max-width:760px;
+margin:0 auto
+}
 
-    #geopoly-app .open-answer input{
-      font:inherit;
-      min-height:48px;
-      border-radius:12px;
-      border:1px solid light-dark(#cfc7b8,#444);
-      padding:12px 14px;
-      background:light-dark(#faf8f3,#292929);
-      color:inherit;
-      width:100%
-    }
+#geopoly-app .hero{
+background:light-dark(#ffffff,#222);
+border:1px solid light-dark(#ded8ca,#333);
+border-radius:18px;
+padding:22px;
+margin-bottom:18px
+}
 
-    #geopoly-app button{
-      font:inherit;
-      min-height:48px;
-      border-radius:12px;
-      border:1px solid light-dark(#cfc7b8,#444);
-      padding:12px 14px;
-      cursor:pointer;
-      background:light-dark(#faf8f3,#292929);
-      color:inherit;
-      text-align:left
-    }
+#geopoly-app .eyebrow{
+font-size:13px;
+font-weight:700;
+letter-spacing:.08em;
+text-transform:uppercase;
+opacity:.68
+}
 
-    #geopoly-app button:hover{
-      background:light-dark(#f1eee7,#333)
-    }
+#geopoly-app h2{
+margin:6px 0 10px;
+font-size:30px;
+line-height:1.05
+}
 
-    #geopoly-app button:focus{
-      outline:3px solid light-dark(#6f6f6f,#b8b8b8);
-      outline-offset:2px
-    }
+#geopoly-app .scorebar{
+display:flex;
+gap:12px;
+flex-wrap:wrap;
+margin-top:16px
+}
 
-    #geopoly-app .actions{
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-      margin-top:16px
-    }
+#geopoly-app .pill{
+background:light-dark(#f0ede5,#2d2d2d);
+border-radius:999px;
+padding:10px 14px;
+font-weight:700
+}
 
-    #geopoly-app .primary{
-      background:light-dark(#202020,#f2f2f2);
-      color:light-dark(#fff,#111);
-      border-color:transparent;
-      text-align:center;
-      font-weight:700;
-      flex:1
-    }
+#geopoly-app .card{
+background:light-dark(#ffffff,#222);
+border:1px solid light-dark(#ded8ca,#333);
+border-radius:18px;
+padding:22px
+}
 
-    #geopoly-app .skip{
-      text-align:center;
-      flex:1
-    }
+#geopoly-app .place{
+font-size:13px;
+font-weight:700;
+text-transform:uppercase;
+letter-spacing:.06em;
+opacity:.65
+}
 
-    #geopoly-app .feedback{
-      margin-top:16px;
-      padding:14px;
-      border-radius:12px;
-      background:light-dark(#f2efe8,#2b2b2b);
-      font-weight:700;
-      display:none
-    }
+#geopoly-app .question{
+font-size:22px;
+font-weight:700;
+line-height:1.25;
+margin:10px 0 18px
+}
 
-    #geopoly-app .progress{
-      height:8px;
-      background:light-dark(#e7e0d3,#303030);
-      border-radius:999px;
-      overflow:hidden;
-      margin:14px 0 0
-    }
+#geopoly-app .question-logo{
+display:flex;
+justify-content:center;
+align-items:center;
+margin:0 0 18px
+}
 
-    #geopoly-app .progress>div{
-      height:100%;
-      background:light-dark(#333,#ddd);
-      width:0%;
-      transition:width .25s ease
-    }
+#geopoly-app .question-logo img{
+display:block;
+max-width:240px;
+width:70%;
+height:auto;
+object-fit:contain
+}
 
-    #geopoly-app .final{display:none}
+#geopoly-app .answers{
+display:grid;
+gap:10px
+}
 
-    #geopoly-app .rank{
-      font-size:28px;
-      font-weight:800;
-      margin:12px 0
-    }
+#geopoly-app .open-answer{
+display:grid;
+gap:10px
+}
 
-    #geopoly-app .summary{
-      display:grid;
-      gap:8px;
-      margin-top:16px
-    }
+#geopoly-app .open-answer input{
+font:inherit;
+font-size:16px;
+min-height:48px;
+border-radius:12px;
+border:1px solid light-dark(#cfc7b8,#444);
+padding:12px 14px;
+background:light-dark(#faf8f3,#292929);
+color:inherit;
+width:100%
+}
 
-    #geopoly-app .row{
-      display:flex;
-      justify-content:space-between;
-      gap:16px;
-      border-bottom:1px solid light-dark(#e5dfd5,#333);
-      padding:10px 0
-    }
+#geopoly-app button{
+font:inherit;
+min-height:48px;
+border-radius:12px;
+border:1px solid light-dark(#cfc7b8,#444);
+padding:12px 14px;
+cursor:pointer;
+background:light-dark(#faf8f3,#292929);
+color:inherit;
+text-align:left
+}
 
-    #geopoly-app .small{
-      font-size:14px;
-      opacity:.72
-    }
+#geopoly-app button:hover{
+background:light-dark(#f1eee7,#333)
+}
 
-    @media(max-width:480px){
-      #geopoly-app{padding:14px}
-      #geopoly-app h2{font-size:25px}
-      #geopoly-app .question{font-size:20px}
-      #geopoly-app .actions{flex-direction:column}
-    }
-  </style>
+#geopoly-app button:focus,
+#geopoly-app input:focus{
+outline:3px solid light-dark(#6f6f6f,#b8b8b8);
+outline-offset:2px
+}
 
+#geopoly-app .actions{
+display:flex;
+gap:10px;
+flex-wrap:wrap;
+margin-top:16px
+}
 
-  <div class="wrap">
+#geopoly-app .primary{
+background:light-dark(#202020,#f2f2f2);
+color:light-dark(#fff,#111);
+border-color:transparent;
+text-align:center;
+font-weight:700;
+flex:1
+}
 
-    <section class="hero">
+#geopoly-app .skip{
+text-align:center;
+flex:1
+}
 
-      <div class="eyebrow">
-        GEOPOLY BORDEAUX
-      </div>
+#geopoly-app .feedback{
+margin-top:16px;
+padding:14px;
+border-radius:12px;
+background:light-dark(#f2efe8,#2b2b2b);
+font-weight:700;
+display:none
+}
 
-      <h2>
-        Questions bonus
-      </h2>
+#geopoly-app .progress{
+height:8px;
+background:light-dark(#e7e0d3,#303030);
+border-radius:999px;
+overflow:hidden;
+margin:14px 0 0
+}
 
-      <div>
-        Bienvenue dans le questionnaire supplémentaire de la Lab GEOPOLY Bordeaux.
-        Vous allez répondre à 4 questions au fil du jeu, repérées par les ? sur le plateau.
-        La réponse à la cinquième question vous sera donnée à la fin de la Lab GEOPOLY Bordeaux.
-        La réussite des 5 premières questions vous ouvrira l'accès à une surprise.
-        La question subsidiaire se débloque uniquement si les 5 premières sont réussies.
-      </div>
+#geopoly-app .progress > div{
+height:100%;
+background:light-dark(#333,#ddd);
+width:0%;
+transition:width .25s ease
+}
 
-      <div class="scorebar">
+#geopoly-app .final{
+display:none
+}
 
-        <div class="pill">
-          ⭐ Score : <span id="score">0</span>
-        </div>
+#geopoly-app .rank{
+font-size:28px;
+font-weight:800;
+margin:12px 0
+}
 
-        <div class="pill">
-          Question <span id="step">1</span>/<span id="totalQuestions">6</span>
-        </div>
+#geopoly-app .summary{
+display:grid;
+gap:8px;
+margin-top:16px
+}
 
-      </div>
+#geopoly-app .row{
+display:flex;
+justify-content:space-between;
+gap:16px;
+border-bottom:1px solid light-dark(#e5dfd5,#333);
+padding:10px 0
+}
 
-      <div class="progress">
-        <div id="progress"></div>
-      </div>
+#geopoly-app .small{
+font-size:14px;
+opacity:.72
+}
 
-      <div class="actions">
-        <button
-          type="button"
-          class="primary"
-          id="startBtn">
-          Commencer le jeu
-        </button>
-      </div>
+@media(max-width:480px){
 
-    </section>
+#geopoly-app{
+padding:14px
+}
 
+#geopoly-app h2{
+font-size:25px
+}
 
-    <section class="card" id="quizCard">
+#geopoly-app .question{
+font-size:20px
+}
 
-      <div class="place" id="place"></div>
+#geopoly-app .actions{
+flex-direction:column
+}
 
-      <div class="question" id="question"></div>
+}
 
-      <div class="question-logo">
-
-        <img
-          src="./logo-geopoly-bordeaux.png?v=2"
-          alt="Logo GEOPOLY BORDEAUX"
-          onerror="this.style.display='none';this.parentElement.insertAdjacentHTML('beforeend','<strong style=&quot;padding:12px;border:1px dashed currentColor;border-radius:10px&quot;>Logo introuvable : vérifie le nom logo-geopoly-bordeaux.png dans GitHub</strong>');">
-
-      </div>
-
-      <div class="answers" id="answers"></div>
-
-      <div
-        class="feedback"
-        id="feedback"
-        aria-live="polite">
-      </div>
-
-      <div class="actions">
-
-        <button
-          type="button"
-          class="skip"
-          id="skipBtn">
-          Passer cette question
-        </button>
-
-        <button
-          type="button"
-          class="primary"
-          id="nextBtn"
-          disabled>
-          Continuer
-        </button>
-
-      </div>
-
-    </section>
+</style>
 
 
-    <section class="card final" id="finalCard">
+<div class="wrap">
 
-      <div class="eyebrow">
-        Résultat final
-      </div>
+<section class="hero">
 
-      <div
-        class="rank"
-        id="rank">
-      </div>
+<div class="eyebrow">
+GEOPOLY BORDEAUX
+</div>
 
-      <div id="finalScore"></div>
+<h2>
+Questions bonus
+</h2>
 
-      <div
-        class="summary"
-        id="summary">
-      </div>
+<div>
+Bienvenue dans le questionnaire supplémentaire de la Lab GEOPOLY Bordeaux.
+Vous allez répondre à 4 questions au fil du jeu, repérées par les ? sur le plateau.
+La réponse à la cinquième question vous sera donnée à la fin de la Lab GEOPOLY Bordeaux.
+La réussite des 5 premières questions vous ouvrira l'accès à une surprise.
+La question subsidiaire se débloque uniquement si les 5 premières sont réussies.
+</div>
 
-      <div class="actions">
+<div class="scorebar">
 
-        <button
-          type="button"
-          class="primary"
-          id="restartBtn">
-          Recommencer
-        </button>
+<div class="pill">
+⭐ Score : <span id="score">0</span> EV
+</div>
 
-      </div>
+<div class="pill">
+Question <span id="step">1</span>/<span id="totalQuestions">6</span>
+</div>
 
-    </section>
+</div>
 
-  </div>
+<div class="progress">
+<div id="progress"></div>
+</div>
+
+<div class="actions">
+
+<button
+type="button"
+class="primary"
+id="startBtn">
+
+Commencer le jeu
+
+</button>
+
+</div>
+
+</section>
+
+
+<section class="card" id="quizCard">
+
+<div class="place" id="place"></div>
+
+<div class="question" id="question"></div>
+
+<div class="question-logo">
+
+<img
+src="./logo-geopoly-bordeaux.png?v=2"
+alt="Logo GEOPOLY BORDEAUX"
+onerror="this.style.display='none';this.parentElement.insertAdjacentHTML('beforeend','<strong style=&quot;padding:12px;border:1px dashed currentColor;border-radius:10px&quot;>Logo introuvable : vérifie le nom logo-geopoly-bordeaux.png dans GitHub</strong>');">
+
+</div>
+
+<div class="answers" id="answers"></div>
+
+<div
+class="feedback"
+id="feedback"
+aria-live="polite">
+</div>
+
+<div class="actions">
+
+<button
+type="button"
+class="skip"
+id="skipBtn">
+
+Passer cette question
+
+</button>
+
+<button
+type="button"
+class="primary"
+id="nextBtn"
+disabled>
+
+Continuer
+
+</button>
+
+</div>
+
+</section>
+
+
+<section
+class="card final"
+id="finalCard">
+
+<div class="eyebrow">
+Résultat final
+</div>
+
+<div
+class="rank"
+id="rank">
+</div>
+
+<div id="finalScore"></div>
+
+<div
+class="summary"
+id="summary">
+</div>
+
+<div class="actions">
+
+<button
+type="button"
+class="primary"
+id="restartBtn">
+
+Recommencer
+
+</button>
+
+</div>
+
+</section>
+
+</div>
 
 
 <script>
@@ -295,8 +390,6 @@ q:'Quel est le prénom de cette artiste peintre née à Bordeaux et qui a sa sta
 
 acceptedAnswers:[
 'rosa'
-  'ROSA'
-  'Rosa'
 ],
 
 points:250
@@ -313,7 +406,7 @@ acceptedAnswers:[
 'trois'
 ],
 
-points:250,
+points:250
 },
 
 
@@ -325,11 +418,10 @@ q:'Quel est le nom de cet auteur né au 86 rue du Pas St Georges ?',
 acceptedAnswers:[
 'mauriac',
 'françois mauriac',
-'François Mauriac',
-'Mauriac'
+'francois mauriac'
 ],
 
-points:500,
+points:500
 },
 
 
@@ -383,14 +475,16 @@ final:true
 ================================================== */
 
 const STORAGE_KEY =
-'geopoly-bordeaux-progress-v6';
+'geopoly-bordeaux-progress-v7';
 
 
 let index =
 0;
 
+
 let score =
 0;
+
 
 let answered =
 false;
@@ -577,7 +671,7 @@ questions.length;
 
 
 /* ==================================================
-   NORMALISATION
+   NORMALISATION DES REPONSES
 ================================================== */
 
 function normalizeAnswer(value){
@@ -605,7 +699,7 @@ return value
 
 
 /* ==================================================
-   VERIFICATION DES 5 PREMIERES
+   VERIFICATION DES 5 PREMIERES QUESTIONS
 ================================================== */
 
 function firstFiveSucceeded(){
@@ -674,6 +768,9 @@ finalCard.style.display =
 
 
 
+/* Question 6 accessible uniquement
+   si les 5 premières sont réussies */
+
 if(
 item.final
 &&
@@ -705,22 +802,14 @@ feedbackEl.textContent =
 
 
 
-if(item.final){
-
-skipBtn.style.display =
-'none';
-
-}
-
-else{
+/* Le bouton Passer reste disponible,
+   y compris pour la question 6 */
 
 skipBtn.style.display =
 'block';
 
 skipBtn.disabled =
 false;
-
-}
 
 
 
@@ -730,6 +819,7 @@ score;
 
 stepEl.textContent =
 index + 1;
+
 
 
 progressEl.style.width =
@@ -752,7 +842,7 @@ item.place
 +
 item.points
 +
-' points';
+' EV';
 
 
 
@@ -765,7 +855,9 @@ answersEl.innerHTML =
 
 
 
-/* Champ réponse */
+/* ==================================================
+   CHAMP DE REPONSE
+================================================== */
 
 const form =
 document.createElement('form');
@@ -863,7 +955,7 @@ input.focus();
 
 
 /* ==================================================
-   VERIFICATION REPONSE
+   VERIFICATION DE LA REPONSE
 ================================================== */
 
 function checkOpenAnswer(
@@ -923,7 +1015,9 @@ normalized
 
 
 
-/* BONNE REPONSE */
+/* ==================================================
+   BONNE REPONSE
+================================================== */
 
 if(correct){
 
@@ -958,8 +1052,6 @@ item.points
 ' EV';
 
 
-
-/* Supprime un éventuel ancien résultat */
 
 const oldResultIndex =
 results.findIndex(
@@ -1009,8 +1101,6 @@ scoreEl.textContent =
 score;
 
 
-/* ACTIVE CONTINUER */
-
 nextBtn.disabled =
 false;
 
@@ -1024,7 +1114,9 @@ return;
 
 
 
-/* MAUVAISE REPONSE */
+/* ==================================================
+   MAUVAISE REPONSE
+================================================== */
 
 feedbackEl.textContent =
 'Réponse incorrecte. Essaie encore.';
@@ -1045,7 +1137,7 @@ input.focus();
 
 
 /* ==================================================
-   PASSER
+   PASSER UNE QUESTION
 ================================================== */
 
 skipBtn.addEventListener(
@@ -1054,11 +1146,7 @@ skipBtn.addEventListener(
 
 ()=>{
 
-if(
-answered
-||
-questions[index].final
-)
+if(answered)
 return;
 
 
@@ -1110,7 +1198,7 @@ points:
 
 feedbackEl.textContent =
 
-'Question passée. Aucun point gagné et le parcours continue.';
+'Question passée. Aucun EV gagné et le parcours continue.';
 
 
 feedbackEl.style.display =
@@ -1133,8 +1221,6 @@ true;
 skipBtn.disabled =
 true;
 
-
-/* ACTIVE CONTINUER */
 
 nextBtn.disabled =
 false;
@@ -1200,6 +1286,7 @@ finalCard.style.display =
 'block';
 
 
+
 progressEl.style.width =
 
 (
@@ -1216,7 +1303,7 @@ root
 .querySelector('#rank')
 .textContent =
 
-'Question finale verrouillée';
+'Question subsidiaire verrouillée';
 
 
 
@@ -1224,7 +1311,7 @@ root
 .querySelector('#finalScore')
 .textContent =
 
-'La 6e question n’est accessible que si les 5 premières ont toutes été réussies.';
+'La question 6 n’est accessible que si les 5 premières ont toutes été réussies.';
 
 
 
@@ -1267,7 +1354,7 @@ result.status
 +
 result.points
 +
-'</strong>';
+' EV</strong>';
 
 
 summary.appendChild(
@@ -1284,7 +1371,7 @@ saveProgress();
 
 
 /* ==================================================
-   FIN
+   RESULTAT FINAL
 ================================================== */
 
 function finish(){
@@ -1317,35 +1404,37 @@ question.points,
 
 
 
+/* ==================================================
+   CLASSEMENT
+================================================== */
+
 let rank =
 'Explorateur de Bordeaux';
 
 
 
 if(
-score >= 15
+score >= 5000
 ){
 
 rank =
-'Grand Maître GEOPOLY et vous trouvez les coordonnées de la cache bonus W12 E024....';
+'Expert du geocaching';
 
 }
 
 else if(
-score >= 10
+score >= 4000
 ){
 
 rank =
-'Expert bordelais et vous trouvez les coordonnées de la cache bonus W12 E024....';
+'Géocacheur confirmé';
 
 }
 
-else if(
-score >= 6
-){
+else{
 
 rank =
-'Aventurier bordelais';
+'Explorateur de Bordeaux';
 
 }
 
@@ -1370,7 +1459,7 @@ score
 +
 max
 +
-' points';
+' EV';
 
 
 
@@ -1411,7 +1500,7 @@ result.status
 +
 result.points
 +
-'</strong>';
+' EV</strong>';
 
 
 summary.appendChild(
@@ -1479,7 +1568,7 @@ render();
 
 
 /* ==================================================
-   CHARGEMENT
+   CHARGEMENT DE LA SAUVEGARDE
 ================================================== */
 
 loadProgress();
