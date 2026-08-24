@@ -1,231 +1,270 @@
-<div id="geopoly-app" style="background-color:light-dark(#f7f4ed,#151515);color:light-dark(#1e1e1e,#f3f3f3);padding:24px;min-height:100%;border-radius:0;font-family:Arial,Helvetica,sans-serif;">
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>GEOPOLY BORDEAUX</title>
 
 <style>
 
-#geopoly-app *{
-box-sizing:border-box
+*{
+box-sizing:border-box;
 }
 
-#geopoly-app .wrap{
+body{
+margin:0;
+background:#f7f4ed;
+color:#1e1e1e;
+font-family:Arial,Helvetica,sans-serif;
+}
+
+#geopoly-app{
+padding:24px;
+min-height:100vh;
+}
+
+.wrap{
 max-width:760px;
-margin:0 auto
+margin:0 auto;
 }
 
-#geopoly-app .hero{
-background:light-dark(#ffffff,#222);
-border:1px solid light-dark(#ded8ca,#333);
+.hero,
+.card{
+background:#ffffff;
+border:1px solid #ded8ca;
 border-radius:18px;
 padding:22px;
-margin-bottom:18px
 }
 
-#geopoly-app .eyebrow{
+.hero{
+margin-bottom:18px;
+}
+
+.eyebrow{
 font-size:13px;
 font-weight:700;
 letter-spacing:.08em;
 text-transform:uppercase;
-opacity:.68
+opacity:.68;
 }
 
-#geopoly-app h2{
+h2{
 margin:6px 0 10px;
 font-size:30px;
-line-height:1.05
+line-height:1.05;
 }
 
-#geopoly-app .scorebar{
+.intro{
+line-height:1.5;
+}
+
+.scorebar{
 display:flex;
 gap:12px;
 flex-wrap:wrap;
-margin-top:16px
+margin-top:16px;
 }
 
-#geopoly-app .pill{
-background:light-dark(#f0ede5,#2d2d2d);
+.pill{
+background:#f0ede5;
 border-radius:999px;
 padding:10px 14px;
-font-weight:700
+font-weight:700;
 }
 
-#geopoly-app .card{
-background:light-dark(#ffffff,#222);
-border:1px solid light-dark(#ded8ca,#333);
-border-radius:18px;
-padding:22px
+.progress{
+height:8px;
+background:#e7e0d3;
+border-radius:999px;
+overflow:hidden;
+margin:14px 0 0;
 }
 
-#geopoly-app .place{
+.progress > div{
+height:100%;
+background:#333;
+width:0%;
+transition:width .25s ease;
+}
+
+.place{
 font-size:13px;
 font-weight:700;
 text-transform:uppercase;
 letter-spacing:.06em;
-opacity:.65
+opacity:.65;
 }
 
-#geopoly-app .question{
+.question{
 font-size:22px;
 font-weight:700;
 line-height:1.25;
-margin:10px 0 18px
+margin:10px 0 18px;
 }
 
-#geopoly-app .question-logo{
+.question-logo{
 display:flex;
 justify-content:center;
 align-items:center;
-margin:0 0 18px
+margin:0 0 18px;
 }
 
-#geopoly-app .question-logo img{
+.question-logo img{
 display:block;
 max-width:240px;
 width:70%;
 height:auto;
-object-fit:contain
+object-fit:contain;
 }
 
-#geopoly-app .answers{
+.answers{
 display:grid;
-gap:10px
+gap:10px;
 }
 
-#geopoly-app .open-answer{
+.open-answer{
 display:grid;
-gap:10px
+gap:10px;
 }
 
-#geopoly-app .open-answer input{
+.open-answer input{
 font:inherit;
 font-size:16px;
 min-height:48px;
 border-radius:12px;
-border:1px solid light-dark(#cfc7b8,#444);
+border:1px solid #cfc7b8;
 padding:12px 14px;
-background:light-dark(#faf8f3,#292929);
-color:inherit;
-width:100%
+background:#faf8f3;
+color:#1e1e1e;
+width:100%;
 }
 
-#geopoly-app button{
+button{
 font:inherit;
 min-height:48px;
 border-radius:12px;
-border:1px solid light-dark(#cfc7b8,#444);
+border:1px solid #cfc7b8;
 padding:12px 14px;
 cursor:pointer;
-background:light-dark(#faf8f3,#292929);
-color:inherit;
-text-align:left
+background:#faf8f3;
+color:#1e1e1e;
 }
 
-#geopoly-app button:hover{
-background:light-dark(#f1eee7,#333)
+button:hover{
+background:#f1eee7;
 }
 
-#geopoly-app button:focus,
-#geopoly-app input:focus{
-outline:3px solid light-dark(#6f6f6f,#b8b8b8);
-outline-offset:2px
+button:disabled{
+opacity:.45;
+cursor:not-allowed;
 }
 
-#geopoly-app .actions{
+button:focus,
+input:focus{
+outline:3px solid #6f6f6f;
+outline-offset:2px;
+}
+
+.actions{
 display:flex;
 gap:10px;
 flex-wrap:wrap;
-margin-top:16px
+margin-top:16px;
 }
 
-#geopoly-app .primary{
-background:light-dark(#202020,#f2f2f2);
-color:light-dark(#fff,#111);
+.primary{
+background:#202020;
+color:#ffffff;
 border-color:transparent;
 text-align:center;
 font-weight:700;
-flex:1
+flex:1;
 }
 
-#geopoly-app .skip{
+.skip{
 text-align:center;
-flex:1
+flex:1;
 }
 
-#geopoly-app .feedback{
+.feedback{
 margin-top:16px;
 padding:14px;
 border-radius:12px;
-background:light-dark(#f2efe8,#2b2b2b);
+background:#f2efe8;
 font-weight:700;
-display:none
+display:none;
 }
 
-#geopoly-app .progress{
-height:8px;
-background:light-dark(#e7e0d3,#303030);
-border-radius:999px;
-overflow:hidden;
-margin:14px 0 0
+.final{
+display:none;
 }
 
-#geopoly-app .progress > div{
-height:100%;
-background:light-dark(#333,#ddd);
-width:0%;
-transition:width .25s ease
-}
-
-#geopoly-app .final{
-display:none
-}
-
-#geopoly-app .rank{
+.rank{
 font-size:28px;
 font-weight:800;
-margin:12px 0
+margin:12px 0;
 }
 
-#geopoly-app .summary{
+.summary{
 display:grid;
 gap:8px;
-margin-top:16px
+margin-top:16px;
 }
 
-#geopoly-app .row{
+.row{
 display:flex;
 justify-content:space-between;
 gap:16px;
-border-bottom:1px solid light-dark(#e5dfd5,#333);
-padding:10px 0
+border-bottom:1px solid #e5dfd5;
+padding:10px 0;
 }
 
-#geopoly-app .small{
+.small{
 font-size:14px;
-opacity:.72
+opacity:.72;
 }
 
 @media(max-width:480px){
 
 #geopoly-app{
-padding:14px
+padding:14px;
 }
 
-#geopoly-app h2{
-font-size:25px
+h2{
+font-size:25px;
 }
 
-#geopoly-app .question{
-font-size:20px
+.question{
+font-size:20px;
 }
 
-#geopoly-app .actions{
-flex-direction:column
+.actions{
+flex-direction:column;
 }
 
 }
 
 </style>
 
+</head>
+
+
+<body>
+
+<div id="geopoly-app">
 
 <div class="wrap">
+
+
+<!-- =========================================
+     PRESENTATION
+========================================= -->
 
 <section class="hero">
 
@@ -237,29 +276,58 @@ GEOPOLY BORDEAUX
 Questions bonus
 </h2>
 
-<div>
+<div class="intro">
+
 Bienvenue dans le questionnaire supplémentaire de la Lab GEOPOLY Bordeaux.
+
+<br><br>
+
 Vous allez répondre à 4 questions au fil du jeu, repérées par les ? sur le plateau.
+
+<br><br>
+
 La réponse à la cinquième question vous sera donnée à la fin de la Lab GEOPOLY Bordeaux.
+
+<br><br>
+
 La réussite des 5 premières questions vous ouvrira l'accès à une surprise.
+
+<br><br>
+
 La question subsidiaire se débloque uniquement si les 5 premières sont réussies.
+
 </div>
+
 
 <div class="scorebar">
 
 <div class="pill">
-⭐ Score : <span id="score">0</span> EV
+
+⭐ Score :
+<span id="score">0</span>
+EV
+
 </div>
+
 
 <div class="pill">
-Question <span id="step">1</span>/<span id="totalQuestions">6</span>
+
+Question
+<span id="step">1</span>
+/
+<span id="totalQuestions">6</span>
+
 </div>
 
 </div>
+
 
 <div class="progress">
+
 <div id="progress"></div>
+
 </div>
+
 
 <div class="actions">
 
@@ -277,28 +345,49 @@ Commencer le jeu
 </section>
 
 
-<section class="card" id="quizCard">
 
-<div class="place" id="place"></div>
+<!-- =========================================
+     QUESTIONS
+========================================= -->
 
-<div class="question" id="question"></div>
+<section
+class="card"
+id="quizCard"
+style="display:none;">
+
+<div
+class="place"
+id="place">
+</div>
+
+
+<div
+class="question"
+id="question">
+</div>
+
 
 <div class="question-logo">
 
 <img
-src="./logo-geopoly-bordeaux.png?v=2"
-alt="Logo GEOPOLY BORDEAUX"
-onerror="this.style.display='none';this.parentElement.insertAdjacentHTML('beforeend','<strong style=&quot;padding:12px;border:1px dashed currentColor;border-radius:10px&quot;>Logo introuvable : vérifie le nom logo-geopoly-bordeaux.png dans GitHub</strong>');">
+src="./logo-geopoly-bordeaux.png?v=8"
+alt="Logo GEOPOLY BORDEAUX">
 
 </div>
 
-<div class="answers" id="answers"></div>
+
+<div
+class="answers"
+id="answers">
+</div>
+
 
 <div
 class="feedback"
 id="feedback"
 aria-live="polite">
 </div>
+
 
 <div class="actions">
 
@@ -310,6 +399,7 @@ id="skipBtn">
 Passer cette question
 
 </button>
+
 
 <button
 type="button"
@@ -326,25 +416,38 @@ Continuer
 </section>
 
 
+
+<!-- =========================================
+     RESULTAT
+========================================= -->
+
 <section
 class="card final"
 id="finalCard">
 
 <div class="eyebrow">
+
 Résultat final
+
 </div>
+
 
 <div
 class="rank"
 id="rank">
 </div>
 
-<div id="finalScore"></div>
+
+<div
+id="finalScore">
+</div>
+
 
 <div
 class="summary"
 id="summary">
 </div>
+
 
 <div class="actions">
 
@@ -361,27 +464,26 @@ Recommencer
 
 </section>
 
+
 </div>
+
+</div>
+
 
 
 <script>
 
-(()=>{
-
-const root =
-document.getElementById('geopoly-app');
-
-if(root.dataset.init)return;
-
-root.dataset.init='1';
+document.addEventListener(
+'DOMContentLoaded',
+function(){
 
 
-
-/* ==================================================
+/* =========================================
    QUESTIONS
-================================================== */
+========================================= */
 
 const questions = [
+
 
 {
 place:'Jardin Public',
@@ -396,6 +498,7 @@ points:250
 },
 
 
+
 {
 place:'Jardins de la mairie',
 
@@ -408,6 +511,7 @@ acceptedAnswers:[
 
 points:250
 },
+
 
 
 {
@@ -425,6 +529,7 @@ points:500
 },
 
 
+
 {
 place:'Place Stalingrad',
 
@@ -436,6 +541,7 @@ acceptedAnswers:[
 
 points:500
 },
+
 
 
 {
@@ -452,6 +558,7 @@ points:2500
 },
 
 
+
 {
 place:'QUESTION SUBSIDIAIRE',
 
@@ -466,16 +573,17 @@ points:1000,
 final:true
 }
 
+
 ];
 
 
 
-/* ==================================================
-   SAUVEGARDE
-================================================== */
+/* =========================================
+   VARIABLES
+========================================= */
 
 const STORAGE_KEY =
-'geopoly-bordeaux-progress-v7';
+'geopoly-bordeaux-progress-v9';
 
 
 let index =
@@ -494,6 +602,87 @@ const results =
 [];
 
 
+
+/* =========================================
+   ELEMENTS
+========================================= */
+
+const scoreEl =
+document.getElementById('score');
+
+
+const stepEl =
+document.getElementById('step');
+
+
+const totalQuestionsEl =
+document.getElementById('totalQuestions');
+
+
+const progressEl =
+document.getElementById('progress');
+
+
+const placeEl =
+document.getElementById('place');
+
+
+const questionEl =
+document.getElementById('question');
+
+
+const answersEl =
+document.getElementById('answers');
+
+
+const feedbackEl =
+document.getElementById('feedback');
+
+
+const skipBtn =
+document.getElementById('skipBtn');
+
+
+const nextBtn =
+document.getElementById('nextBtn');
+
+
+const startBtn =
+document.getElementById('startBtn');
+
+
+const quizCard =
+document.getElementById('quizCard');
+
+
+const finalCard =
+document.getElementById('finalCard');
+
+
+const restartBtn =
+document.getElementById('restartBtn');
+
+
+const rankEl =
+document.getElementById('rank');
+
+
+const finalScoreEl =
+document.getElementById('finalScore');
+
+
+const summaryEl =
+document.getElementById('summary');
+
+
+totalQuestionsEl.textContent =
+questions.length;
+
+
+
+/* =========================================
+   SAUVEGARDE
+========================================= */
 
 function saveProgress(){
 
@@ -517,7 +706,14 @@ results:results
 
 }
 
-catch(e){}
+catch(error){
+
+console.log(
+'Sauvegarde impossible',
+error
+);
+
+}
 
 }
 
@@ -527,15 +723,23 @@ function loadProgress(){
 
 try{
 
-const saved =
-JSON.parse(
-localStorage.getItem(STORAGE_KEY)
-||
-'null'
+const savedText =
+localStorage.getItem(
+STORAGE_KEY
 );
 
 
-if(!saved)return;
+if(!savedText){
+
+return;
+
+}
+
+
+const saved =
+JSON.parse(
+savedText
+);
 
 
 if(
@@ -572,24 +776,28 @@ results.length =
 0;
 
 
-saved.results
-.slice(
-0,
-questions.length
-)
-.forEach(result=>{
+saved.results.forEach(
+function(result){
 
 results.push(
 result
 );
 
-});
+}
+);
 
 }
 
 }
 
-catch(e){}
+catch(error){
+
+console.log(
+'Chargement impossible',
+error
+);
+
+}
 
 }
 
@@ -605,78 +813,26 @@ STORAGE_KEY
 
 }
 
-catch(e){}
+catch(error){
+
+console.log(
+'Suppression impossible',
+error
+);
+
+}
 
 }
 
 
 
-/* ==================================================
-   ELEMENTS
-================================================== */
-
-const scoreEl =
-root.querySelector('#score');
-
-
-const stepEl =
-root.querySelector('#step');
-
-
-const progressEl =
-root.querySelector('#progress');
-
-
-const placeEl =
-root.querySelector('#place');
-
-
-const qEl =
-root.querySelector('#question');
-
-
-const answersEl =
-root.querySelector('#answers');
-
-
-const feedbackEl =
-root.querySelector('#feedback');
-
-
-const skipBtn =
-root.querySelector('#skipBtn');
-
-
-const nextBtn =
-root.querySelector('#nextBtn');
-
-
-const quizCard =
-root.querySelector('#quizCard');
-
-
-const finalCard =
-root.querySelector('#finalCard');
-
-
-const startBtn =
-root.querySelector('#startBtn');
-
-
-root
-.querySelector('#totalQuestions')
-.textContent =
-questions.length;
-
-
-
-/* ==================================================
+/* =========================================
    NORMALISATION DES REPONSES
-================================================== */
+========================================= */
 
 function normalizeAnswer(value){
 
-return value
+return String(value)
 
 .toLowerCase()
 
@@ -698,24 +854,25 @@ return value
 
 
 
-/* ==================================================
-   VERIFICATION DES 5 PREMIERES QUESTIONS
-================================================== */
+/* =========================================
+   VERIFICATION DES 5 PREMIERES
+========================================= */
 
 function firstFiveSucceeded(){
 
 for(
-let i=0;
-i<5;
+let i = 0;
+i < 5;
 i++
 ){
 
 const result =
 results.find(
+function(item){
 
-r =>
-r.questionIndex === i
+return item.questionIndex === i;
 
+}
 );
 
 
@@ -738,17 +895,18 @@ return true;
 
 
 
-/* ==================================================
-   AFFICHAGE QUESTION
-================================================== */
+/* =========================================
+   AFFICHER UNE QUESTION
+========================================= */
 
-function render(){
+function renderQuestion(){
+
 
 if(
 index >= questions.length
 ){
 
-finish();
+showFinalResult();
 
 return;
 
@@ -759,30 +917,30 @@ const item =
 questions[index];
 
 
+
+/* La question 6 n'est accessible que si
+   les cinq premières sont réussies */
+
+if(
+index === 5
+&&
+!firstFiveSucceeded()
+){
+
+showLocked();
+
+return;
+
+}
+
+
+
 quizCard.style.display =
 'block';
 
 
 finalCard.style.display =
 'none';
-
-
-
-/* Question 6 accessible uniquement
-   si les 5 premières sont réussies */
-
-if(
-item.final
-&&
-!firstFiveSucceeded()
-){
-
-finishLocked();
-
-return;
-
-}
-
 
 
 answered =
@@ -793,24 +951,22 @@ nextBtn.disabled =
 true;
 
 
+/* PASSER reste disponible même question 6 */
+
+skipBtn.style.display =
+'block';
+
+
+skipBtn.disabled =
+false;
+
+
 feedbackEl.style.display =
 'none';
 
 
 feedbackEl.textContent =
 '';
-
-
-
-/* Le bouton Passer reste disponible,
-   y compris pour la question 6 */
-
-skipBtn.style.display =
-'block';
-
-skipBtn.disabled =
-false;
-
 
 
 scoreEl.textContent =
@@ -821,17 +977,17 @@ stepEl.textContent =
 index + 1;
 
 
-
 progressEl.style.width =
 
 (
-(index / questions.length)
+index
+/
+questions.length
 *
 100
 )
 +
 '%';
-
 
 
 placeEl.textContent =
@@ -845,8 +1001,7 @@ item.points
 ' EV';
 
 
-
-qEl.textContent =
+questionEl.textContent =
 item.q;
 
 
@@ -855,9 +1010,9 @@ answersEl.innerHTML =
 
 
 
-/* ==================================================
+/* =========================================
    CHAMP DE REPONSE
-================================================== */
+========================================= */
 
 const form =
 document.createElement('form');
@@ -876,12 +1031,12 @@ input.type =
 'text';
 
 
-input.autocomplete =
-'off';
-
-
 input.placeholder =
 'Saisissez votre réponse';
+
+
+input.autocomplete =
+'off';
 
 
 input.setAttribute(
@@ -928,49 +1083,55 @@ form.addEventListener(
 
 'submit',
 
-event=>{
+function(event){
 
 event.preventDefault();
 
 
-checkOpenAnswer(
-
-input.value,
-
+checkAnswer(
 input,
-
 submit
-
 );
 
 }
 
 );
 
+
+setTimeout(
+function(){
 
 input.focus();
 
+},
+100
+);
+
 }
 
 
 
-/* ==================================================
-   VERIFICATION DE LA REPONSE
-================================================== */
+/* =========================================
+   VERIFIER REPONSE
+========================================= */
 
-function checkOpenAnswer(
-value,
+function checkAnswer(
 input,
 submit
 ){
 
-if(answered)return;
+if(answered){
+
+return;
+
+}
 
 
+const value =
+input.value.trim();
 
-if(
-!value.trim()
-){
+
+if(!value){
 
 feedbackEl.textContent =
 'Saisis une réponse avant de valider.';
@@ -985,7 +1146,6 @@ return;
 }
 
 
-
 const item =
 questions[index];
 
@@ -996,36 +1156,29 @@ value
 );
 
 
-
 const correct =
 
 item.acceptedAnswers.some(
 
-acceptedAnswer =>
+function(answer){
 
-normalizeAnswer(
-acceptedAnswer
-)
-
+return normalizeAnswer(answer)
 ===
+normalized;
 
-normalized
+}
 
 );
 
 
 
-/* ==================================================
+/* =========================================
    BONNE REPONSE
-================================================== */
+========================================= */
 
 if(correct){
 
 answered =
-true;
-
-
-skipBtn.disabled =
 true;
 
 
@@ -1037,9 +1190,56 @@ submit.disabled =
 true;
 
 
+skipBtn.disabled =
+true;
+
+
+
+/* Evite de compter deux fois */
+
+const previous =
+results.findIndex(
+
+function(result){
+
+return result.questionIndex === index;
+
+}
+
+);
+
+
+if(previous !== -1){
+
+score -=
+results[previous].points;
+
+
+results.splice(
+previous,
+1
+);
+
+}
+
+
 
 score +=
 item.points;
+
+
+
+results.push({
+
+questionIndex:index,
+
+place:item.place,
+
+status:'Bonne réponse',
+
+points:item.points
+
+});
 
 
 
@@ -1050,47 +1250,6 @@ feedbackEl.textContent =
 item.points
 +
 ' EV';
-
-
-
-const oldResultIndex =
-results.findIndex(
-
-r =>
-r.questionIndex === index
-
-);
-
-
-if(
-oldResultIndex !== -1
-){
-
-results.splice(
-oldResultIndex,
-1
-);
-
-}
-
-
-
-results.push({
-
-questionIndex:
-index,
-
-place:
-item.place,
-
-status:
-'Bonne réponse',
-
-points:
-item.points
-
-});
-
 
 
 feedbackEl.style.display =
@@ -1114,11 +1273,12 @@ return;
 
 
 
-/* ==================================================
+/* =========================================
    MAUVAISE REPONSE
-================================================== */
+========================================= */
 
 feedbackEl.textContent =
+
 'Réponse incorrecte. Essaie encore.';
 
 
@@ -1136,19 +1296,22 @@ input.focus();
 
 
 
-/* ==================================================
+/* =========================================
    PASSER UNE QUESTION
-================================================== */
+========================================= */
 
 skipBtn.addEventListener(
 
 'click',
 
-()=>{
+function(){
 
-if(answered)
+
+if(answered){
+
 return;
 
+}
 
 
 answered =
@@ -1156,21 +1319,26 @@ true;
 
 
 
-const oldResultIndex =
+const previous =
 results.findIndex(
 
-r =>
-r.questionIndex === index
+function(result){
+
+return result.questionIndex === index;
+
+}
 
 );
 
 
-if(
-oldResultIndex !== -1
-){
+if(previous !== -1){
+
+score -=
+results[previous].points;
+
 
 results.splice(
-oldResultIndex,
+previous,
 1
 );
 
@@ -1180,17 +1348,13 @@ oldResultIndex,
 
 results.push({
 
-questionIndex:
-index,
+questionIndex:index,
 
-place:
-questions[index].place,
+place:questions[index].place,
 
-status:
-'Passée',
+status:'Passée',
 
-points:
-0
+points:0
 
 });
 
@@ -1198,7 +1362,7 @@ points:
 
 feedbackEl.textContent =
 
-'Question passée. Aucun EV gagné et le parcours continue.';
+'Question passée. Aucun EV gagné.';
 
 
 feedbackEl.style.display =
@@ -1206,16 +1370,22 @@ feedbackEl.style.display =
 
 
 
-answersEl
-.querySelectorAll(
+const controls =
+answersEl.querySelectorAll(
 'input,button'
-)
-.forEach(element=>{
+);
+
+
+controls.forEach(
+
+function(element){
 
 element.disabled =
 true;
 
-});
+}
+
+);
 
 
 skipBtn.disabled =
@@ -1226,6 +1396,10 @@ nextBtn.disabled =
 false;
 
 
+scoreEl.textContent =
+score;
+
+
 saveProgress();
 
 }
@@ -1234,16 +1408,22 @@ saveProgress();
 
 
 
-/* ==================================================
+/* =========================================
    CONTINUER
-================================================== */
+========================================= */
 
-function goToNextQuestion(){
+nextBtn.addEventListener(
 
-if(
-nextBtn.disabled
-)
+'click',
+
+function(){
+
+
+if(nextBtn.disabled){
+
 return;
+
+}
 
 
 index++;
@@ -1256,27 +1436,20 @@ false;
 saveProgress();
 
 
-render();
+renderQuestion();
 
 }
-
-
-
-nextBtn.addEventListener(
-
-'click',
-
-goToNextQuestion
 
 );
 
 
 
-/* ==================================================
+/* =========================================
    QUESTION 6 VERROUILLEE
-================================================== */
+========================================= */
 
-function finishLocked(){
+function showLocked(){
+
 
 quizCard.style.display =
 'none';
@@ -1286,82 +1459,21 @@ finalCard.style.display =
 'block';
 
 
-
 progressEl.style.width =
-
-(
-(5 / questions.length)
-*
-100
-)
-+
-'%';
+'83.33%';
 
 
-
-root
-.querySelector('#rank')
-.textContent =
+rankEl.textContent =
 
 'Question subsidiaire verrouillée';
 
 
+finalScoreEl.textContent =
 
-root
-.querySelector('#finalScore')
-.textContent =
-
-'La question 6 n’est accessible que si les 5 premières ont toutes été réussies.';
+'La question subsidiaire est accessible uniquement si les cinq premières questions ont été réussies.';
 
 
-
-const summary =
-root.querySelector('#summary');
-
-
-summary.innerHTML =
-'';
-
-
-
-results
-.slice(0,5)
-.forEach(result=>{
-
-const row =
-document.createElement('div');
-
-
-row.className =
-'row';
-
-
-row.innerHTML =
-
-'<span>'
-+
-result.place
-+
-'<div class="small">'
-+
-result.status
-+
-'</div>'
-+
-'</span>'
-+
-'<strong>+'
-+
-result.points
-+
-' EV</strong>';
-
-
-summary.appendChild(
-row
-);
-
-});
+displaySummary();
 
 
 saveProgress();
@@ -1370,11 +1482,12 @@ saveProgress();
 
 
 
-/* ==================================================
+/* =========================================
    RESULTAT FINAL
-================================================== */
+========================================= */
 
-function finish(){
+function showFinalResult(){
+
 
 quizCard.style.display =
 'none';
@@ -1392,11 +1505,13 @@ progressEl.style.width =
 const max =
 questions.reduce(
 
-(total,question) =>
+function(total,question){
 
-total
+return total
 +
-question.points,
+question.points;
+
+},
 
 0
 
@@ -1404,14 +1519,12 @@ question.points,
 
 
 
-/* ==================================================
-   CLASSEMENT
-================================================== */
-
 let rank =
 'Explorateur de Bordeaux';
 
 
+
+/* 5000 EV ET PLUS */
 
 if(
 score >= 5000
@@ -1422,6 +1535,9 @@ rank =
 
 }
 
+
+/* 4000 A 4999 EV */
+
 else if(
 score >= 4000
 ){
@@ -1430,6 +1546,9 @@ rank =
 'Géocacheur confirmé';
 
 }
+
+
+/* 0 A 3999 EV */
 
 else{
 
@@ -1440,16 +1559,12 @@ rank =
 
 
 
-root
-.querySelector('#rank')
-.textContent =
+rankEl.textContent =
 rank;
 
 
 
-root
-.querySelector('#finalScore')
-.textContent =
+finalScoreEl.textContent =
 
 'Score : '
 +
@@ -1463,16 +1578,31 @@ max
 
 
 
-const summary =
-root.querySelector('#summary');
+displaySummary();
 
 
-summary.innerHTML =
+saveProgress();
+
+}
+
+
+
+/* =========================================
+   RECAPITULATIF
+========================================= */
+
+function displaySummary(){
+
+
+summaryEl.innerHTML =
 '';
 
 
 
-results.forEach(result=>{
+results.forEach(
+
+function(result){
+
 
 const row =
 document.createElement('div');
@@ -1482,51 +1612,69 @@ row.className =
 'row';
 
 
-row.innerHTML =
 
-'<span>'
-+
+const left =
+document.createElement('span');
+
+
+left.innerHTML =
+
 result.place
 +
 '<div class="small">'
 +
 result.status
 +
-'</div>'
-+
-'</span>'
-+
-'<strong>+'
+'</div>';
+
+
+
+const right =
+document.createElement('strong');
+
+
+right.textContent =
+
+'+'
 +
 result.points
 +
-' EV</strong>';
+' EV';
 
 
-summary.appendChild(
+
+row.appendChild(
+left
+);
+
+
+row.appendChild(
+right
+);
+
+
+summaryEl.appendChild(
 row
 );
 
-});
+}
 
-
-saveProgress();
+);
 
 }
 
 
 
-/* ==================================================
+/* =========================================
    RECOMMENCER
-================================================== */
+========================================= */
 
-root
-.querySelector('#restartBtn')
-.addEventListener(
+restartBtn.addEventListener(
 
 'click',
 
-()=>{
+function(){
+
 
 index =
 0;
@@ -1547,19 +1695,27 @@ results.length =
 clearProgress();
 
 
-startBtn.style.display =
-'none';
+scoreEl.textContent =
+'0';
 
 
-quizCard.style.display =
-'block';
+stepEl.textContent =
+'1';
+
+
+progressEl.style.width =
+'0%';
 
 
 finalCard.style.display =
 'none';
 
 
-render();
+startBtn.style.display =
+'none';
+
+
+renderQuestion();
 
 }
 
@@ -1567,9 +1723,9 @@ render();
 
 
 
-/* ==================================================
-   CHARGEMENT DE LA SAUVEGARDE
-================================================== */
+/* =========================================
+   CHARGEMENT INITIAL
+========================================= */
 
 loadProgress();
 
@@ -1598,6 +1754,7 @@ startBtn.textContent =
 
 }
 
+
 else if(
 index >= questions.length
 ){
@@ -1606,6 +1763,7 @@ startBtn.textContent =
 'Voir mon résultat';
 
 }
+
 
 else{
 
@@ -1616,44 +1774,47 @@ startBtn.textContent =
 
 
 
-/* ==================================================
-   DEMARRAGE
-================================================== */
+/* =========================================
+   COMMENCER / REPRENDRE
+========================================= */
 
 startBtn.addEventListener(
 
 'click',
 
-()=>{
+function(){
+
 
 startBtn.style.display =
 'none';
+
 
 
 if(
 index >= questions.length
 ){
 
-finish();
+showFinalResult();
 
 return;
 
 }
 
 
-quizCard.style.display =
-'block';
-
-
-render();
+renderQuestion();
 
 }
 
 );
 
 
-})();
+}
+
+);
 
 </script>
 
-</div>
+
+</body>
+
+</html>
