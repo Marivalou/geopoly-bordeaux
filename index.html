@@ -70,6 +70,7 @@ margin:0 0 18px;
 padding:14px;
 border-radius:12px;
 background:#f2efe8;
+white-space:pre-line;
 }
 
 .scorebar{
@@ -217,6 +218,7 @@ display:none;
 font-size:28px;
 font-weight:800;
 margin:12px 0;
+white-space:pre-line;
 }
 
 .summary{
@@ -268,9 +270,6 @@ flex-direction:column;
 <div id="geopoly-app">
 
 <div class="wrap">
-
-
-<!-- PAGE D'ACCUEIL -->
 
 <section class="hero">
 
@@ -358,8 +357,6 @@ Commencer le jeu
 </section>
 
 
-<!-- QUESTIONS -->
-
 <section
 class="card"
 id="quizCard"
@@ -383,7 +380,7 @@ id="question">
 <div class="question-logo">
 
 <img
-src="./logo-geopoly-bordeaux.png?v=11"
+src="./logo-geopoly-bordeaux.png?v=12"
 alt="Logo GEOPOLY BORDEAUX">
 
 </div>
@@ -424,8 +421,6 @@ Continuer
 
 </section>
 
-
-<!-- RESULTAT -->
 
 <section
 class="card final"
@@ -474,17 +469,20 @@ Recommencer
 (function(){
 
 
-/* QUESTIONS */
-
 const questions = [
 
 {
 place:'Jardin Public',
 
-intro:"🎲 Case Chance ! La banque vous propose de gagner 650 EV pour financer votre première maison.Le Jardin Public, Créé en 1746, le Jardin public est un espace vert de 10,8 hectares, situé en plein centre de la ville. Conçu par l'architecte paysagiste Ange-Jacques Gabriel, c'est le premier jardin de France pensé dès sa création pour être ouvert au public. Son premier visage est celui d’un jardin « à la française » façon Le Nôtre, l'illustre jardinier versaillais. 
-Au XVIIIe siècle, des bâtiments apparaissent le long de la rue d'Aviau. Cet ensemble homogène de façades contribue à donner au Jardin public son cadre exceptionnel. A sa première réhabilitation, en 1858, le Jardin public prend son style anglais actuel sous l'impulsion du paysagiste bordelais Louis-Bernard Fischer. Il devient tel que nous le connaissons aujourd'hui : un lieu de balade où la nature prime, agrémenté de découvertes botaniques et d'attractions pour les enfants (théâtre de marionnettes, aires de jeux, manège à l'ancienne). 
-1858 c’est aussi l'année où le vieux jardin botanique de la ville s'installe au Jardin public. Sa création a une visée pédagogique pour la formation des futurs apothicaires et médecins. Il héberge certains spécimens végétaux exceptionnels : Erythrina falcata, Manihot palmata, Allocasuarina torulosa…
-Une réhabilitation du parc a permis la plantation de plusieurs centaines d'arbres (150 essences différentes) et d'arbustes, en conservant l'esprit d'arboretum initial et en reconstituant les vues et perspectives qui s'étaient dégradées avec le temps et les tempêtes.",
+intro:`🎲 Case Chance ! La banque vous propose de gagner 650 EV pour financer votre première maison.
+
+Le Jardin Public, créé en 1746, est un espace vert de 10,8 hectares, situé en plein centre de la ville. Conçu par l'architecte paysagiste Ange-Jacques Gabriel, c'est le premier jardin de France pensé dès sa création pour être ouvert au public. Son premier visage est celui d’un jardin « à la française » façon Le Nôtre, l'illustre jardinier versaillais.
+
+Au XVIIIe siècle, des bâtiments apparaissent le long de la rue d'Aviau. Cet ensemble homogène de façades contribue à donner au Jardin public son cadre exceptionnel. À sa première réhabilitation, en 1858, le Jardin public prend son style anglais actuel sous l'impulsion du paysagiste bordelais Louis-Bernard Fischer. Il devient tel que nous le connaissons aujourd'hui : un lieu de balade où la nature prime, agrémenté de découvertes botaniques et d'attractions pour les enfants.
+
+1858, c’est aussi l'année où le vieux jardin botanique de la ville s'installe au Jardin public. Sa création a une visée pédagogique pour la formation des futurs apothicaires et médecins. Il héberge certains spécimens végétaux exceptionnels.
+
+Une réhabilitation du parc a permis la plantation de plusieurs centaines d'arbres et d'arbustes, en conservant l'esprit d'arboretum initial.`,
 
 q:'Quel est le prénom de cette artiste peintre née à Bordeaux et qui a sa statue au sud-ouest du Jardin Public ?',
 
@@ -499,14 +497,16 @@ points:650
 {
 place:'Jardins de la mairie',
 
-intro:"🎲 Nouvelle case Chance ! Une deuxième maison est à votre portée. 600 EV sont en jeu. Le jardin de la mairie, créé au XIXe siècle, s’étend sur un hectare et offre un écrin de verdure en plein cœur de la ville.Une vaste pelouse centrale, bordée de plantations, forme le cœur du jardin, sublimé par un majestueux gingko biloba et une collection de plantes de terre de bruyère qui lui confèrent une atmosphère unique. Pour un embellissement durable et dans une démarche de résilience alimentaire, de nombreuses plantes vivaces côtoient des carrés de plans de légumes.
+intro:`🎲 Nouvelle case Chance ! Une deuxième maison est à votre portée. 600 EV sont en jeu.
 
-Plusieurs statues et œuvres d’art donnent au jardin un caractère particulier, faisant dialoguer nature et culture. ",
+Le jardin de la mairie, créé au XIXe siècle, s’étend sur un hectare et offre un écrin de verdure en plein cœur de la ville. Une vaste pelouse centrale, bordée de plantations, forme le cœur du jardin, sublimé par un majestueux ginkgo biloba et une collection de plantes de terre de bruyère.
 
-q:"Que trouve t on de part et d'autres des jardins de la mairie (aile sud et aile nord, à l'arrière du palais rohan) ?Vous devez saisir le nom du sigle tel qu'affiché",
+Plusieurs statues et œuvres d’art donnent au jardin un caractère particulier, faisant dialoguer nature et culture.`,
+
+q:"Que trouve-t-on de part et d'autre des jardins de la mairie, aile sud et aile nord, à l'arrière du Palais Rohan ? Vous devez saisir le nom du sigle tel qu'affiché.",
 
 acceptedAnswers:[
-'MusBA',
+'musba'
 ],
 
 points:600
@@ -516,22 +516,26 @@ points:600
 {
 place:'Rue du Pas Saint Georges',
 
-intro:"🎲 Votre patrimoine commence à prendre forme. Cette case Chance peut vous rapporter 400 EV supplémentaires. 
-Vous allez devoir me découvrir, Je suis né à Bordeaux, dans cette ville de pierre blonde où la lumière, certains jours, semble hésiter entre la Garonne et les façades.
+intro:`🎲 Votre patrimoine commence à prendre forme. Cette case Chance peut vous rapporter 400 EV supplémentaires.
+
+Vous allez devoir me découvrir.
+
+Je suis né à Bordeaux, dans cette ville de pierre blonde où la lumière, certains jours, semble hésiter entre la Garonne et les façades.
+
 Mon enfance demeure attachée à ces rues que je parcourais sans savoir encore qu’elles resteraient en moi toute ma vie. Je revois la maison de la rue du Pas-Saint-Georges, les pavés humides après la pluie, les portes sombres des hôtels anciens et, plus loin, le fleuve dont la présence semblait donner à la ville un parfum de voyage.
-Bordeaux était alors pour moi un monde immense et mystérieux. Je marchais sous l’ombre des clochers, entre les vieilles pierres noircies par le temps. J'entendais le roulement des voitures, les voix des marchands et les cloches des églises qui rythmaient nos journées.
-Mais mes souvenirs les plus profonds ne sont peut-être pas ceux des monuments. Ce sont des sensations : une cour silencieuse derrière une lourde porte, l'odeur de la pierre après l'orage, un rayon de soleil traversant une fenêtre, le bruit de mes pas résonnant dans une rue étroite.
-Je ne savais pas encore que je deviendrais écrivain. Pourtant, sans doute, tout commençait déjà là. J'observais les visages, les maisons, les silences. Je pressentais que derrière les façades tranquilles se cachaient des histoires, des secrets, des joies et des blessures.
+
+Je ne savais pas encore que je deviendrais écrivain. Pourtant, sans doute, tout commençait déjà là.
+
 Bien des années plus tard, lorsque j'écrivis mes romans loin de ces rues, je compris que je n'avais jamais vraiment quitté Bordeaux.
-Car on peut s'éloigner de la ville de son enfance.
-Mais la ville de son enfance, elle, ne vous quitte jamais.",
+
+Car on peut s'éloigner de la ville de son enfance. Mais la ville de son enfance, elle, ne vous quitte jamais.`,
 
 q:'Quel est le nom de cet auteur né au 86 rue du Pas St Georges ?',
 
 acceptedAnswers:[
 'mauriac',
 'françois mauriac',
-'Francois Mauriac'
+'francois mauriac'
 ],
 
 points:400
@@ -541,17 +545,19 @@ points:400
 {
 place:'Place Stalingrad',
 
-intro:"🎲 Encore une opportunité d'investissement ! Répondez correctement et ajoutez 300 EV à votre capital.
-Du haut de ses 6 mètres, le lion bleu domine la place. L’animal est représenté dans une posture fière, la patte avant droite posée sur un rocher, 
-la tête levée et tournée vers la rive gauche, invitant le spectateur à faire de même. Il symbolise le renouveau du quartier. Il est fabriqué en polystyrène expansé recouvert de résine polyester armée de fibre de verre, reposant sur une structure en acier. Son aspect géométrique et monochrome bleu ciel résulte d’un travail assisté par ordinateur, lui donnant une allure à la fois contemporaine, ludique et décalée.  ",
+intro:`🎲 Encore une opportunité d'investissement ! Répondez correctement et ajoutez 300 EV à votre capital.
+
+Du haut de ses 6 mètres, le lion bleu domine la place. L’animal est représenté dans une posture fière, la patte avant droite posée sur un rocher, la tête levée et tournée vers la rive gauche.
+
+Il symbolise le renouveau du quartier. Il est fabriqué en polystyrène expansé recouvert de résine polyester armée de fibre de verre, reposant sur une structure en acier.
+
+Son aspect géométrique et monochrome lui donne une allure contemporaine, ludique et décalée.`,
 
 q:"Quelle est la couleur du roi des animaux bordelais ?",
 
 acceptedAnswers:[
-'bleue',
 'bleu',
-'Bleu',
-'Bleue'
+'bleue'
 ],
 
 points:300
@@ -561,13 +567,13 @@ points:300
 {
 place:'Bonus LAB',
 
-intro:"🏦 Vous avez terminé la Lab GEOPOLY Bordeaux. La banque peut désormais vous aider à financer une nouvelle maison, qui complétera votre patrimoine.",
+intro:`🏦 Vous avez terminé la Lab GEOPOLY Bordeaux. La banque peut désormais vous aider à financer une nouvelle maison, qui complétera votre patrimoine.`,
 
-q:"Combien d'EV avez vous obtenus en réalisant la Lab GEOPOLY Bordeaux ?",
+q:"Combien d'EV avez-vous obtenus en réalisant la Lab GEOPOLY Bordeaux ?",
 
 acceptedAnswers:[
-'2050',
-
+'2050'
+],
 
 points:2050
 },
@@ -576,9 +582,9 @@ points:2050
 {
 place:'QUESTION SUBSIDIAIRE',
 
-intro:"🏨 Vous avez réussi les cinq premières étapes. Une dernière opération immobilière peut encore vous permettre de renforcer votre patrimoine avec un hôtel supplémentaire.",
+intro:`🏨 Vous avez réussi les cinq premières étapes. Une dernière opération immobilière peut encore vous permettre de renforcer votre patrimoine avec un hôtel supplémentaire.`,
 
-q:'Quel est le montant du cumul des points de quatre des portes de  la Lab "Aux portes de Bordeaux" (somme de A+C+D+E) ?',
+q:'Quel est le montant du cumul des points de quatre des portes de la Lab "Aux portes de Bordeaux" (somme de A + C + D + E) ?',
 
 acceptedAnswers:[
 '5021'
@@ -592,25 +598,15 @@ final:true
 ];
 
 
-/* VARIABLES */
-
 const STORAGE_KEY =
-'geopoly-bordeaux-progress-v11';
+'geopoly-bordeaux-progress-v12';
 
-let index =
-0;
+let index = 0;
+let score = 0;
+let answered = false;
 
-let score =
-0;
+const results = [];
 
-let answered =
-false;
-
-const results =
-[];
-
-
-/* ELEMENTS */
 
 const scoreEl =
 document.getElementById('score');
@@ -680,8 +676,6 @@ totalQuestionsEl.textContent =
 questions.length;
 
 
-/* SAUVEGARDE */
-
 function saveProgress(){
 
 try{
@@ -721,9 +715,7 @@ return;
 }
 
 const saved =
-JSON.parse(
-savedText
-);
+JSON.parse(savedText);
 
 if(
 Number.isInteger(saved.index)
@@ -790,8 +782,6 @@ catch(error){}
 }
 
 
-/* NORMALISATION */
-
 function normalizeAnswer(value){
 
 return String(value)
@@ -814,8 +804,6 @@ return String(value)
 
 }
 
-
-/* VERIFICATION DES 5 PREMIERES */
 
 function firstFiveSucceeded(){
 
@@ -852,8 +840,6 @@ return true;
 
 }
 
-
-/* AFFICHER QUESTION */
 
 function renderQuestion(){
 
@@ -1027,8 +1013,6 @@ submit
 }
 
 
-/* VERIFIER REPONSE */
-
 function checkAnswer(
 input,
 submit
@@ -1080,8 +1064,6 @@ normalized;
 
 );
 
-
-/* BONNE REPONSE */
 
 if(correct){
 
@@ -1146,7 +1128,7 @@ feedbackEl.textContent =
 +
 item.points
 +
-' EV pour l'achat d'une maison';
+" EV pour l'achat d'une maison";
 
 
 feedbackEl.style.display =
@@ -1168,8 +1150,6 @@ return;
 }
 
 
-/* MAUVAISE REPONSE */
-
 feedbackEl.textContent =
 'Réponse incorrecte. Essaie encore.';
 
@@ -1183,8 +1163,6 @@ input.focus();
 
 }
 
-
-/* PASSER */
 
 skipBtn.addEventListener(
 
@@ -1281,8 +1259,6 @@ saveProgress();
 );
 
 
-/* CONTINUER */
-
 nextBtn.addEventListener(
 
 'click',
@@ -1306,8 +1282,6 @@ renderQuestion();
 
 );
 
-
-/* QUESTION SUBSIDIAIRE VERROUILLEE */
 
 function showLocked(){
 
@@ -1341,8 +1315,6 @@ saveProgress();
 
 }
 
-
-/* RESULTAT FINAL */
 
 function showFinalResult(){
 
@@ -1389,9 +1361,9 @@ score >= 5000
 ){
 
 rank =
-"Bravo, vous avez atteint l'objetif de 4000 EV,  l'équivalent  de 5 maisons soit un hôtel.
-"En récompense de vos bonnes réponses, voici le mot de passe à entrer dans certitude pour obtenir le positionnement de cette mystery
-";
+`Bravo, vous avez atteint l'objectif de 5000 EV, soit l'équivalent de deux hôtels.
+
+En récompense de vos bonnes réponses, voici le mot de passe à entrer dans Certitude pour obtenir le positionnement de cette mystery.`;
 
 }
 
@@ -1400,17 +1372,18 @@ score >= 4000
 ){
 
 rank =
-"Bravo, vous avez atteint l'objetif de 5000 EV soit l'équivalent de deux hotels
-"En récompense de vos bonnes réponses, voici le mot de passe à entrer dans certitude pour obtenir le positionnement de cette mystery
-";
+`Bravo, vous avez atteint l'objectif de 4000 EV, l'équivalent de 5 maisons soit un hôtel.
+
+En récompense de vos bonnes réponses, voici le mot de passe à entrer dans Certitude pour obtenir le positionnement de cette mystery.`;
 
 }
 
 else{
 
 rank =
-'Merci de votre participation, mais malheureusement vous n'avez pas obtenu le nombre de points suffisants pour obtenir un Hotel
-Je ne suis pas en mesure de vous donner le mot code de cette mystery';
+`Merci de votre participation, mais malheureusement vous n'avez pas obtenu le nombre d'EV suffisant pour obtenir un hôtel.
+
+Je ne suis pas en mesure de vous donner le mot code de cette mystery.`;
 
 }
 
@@ -1438,8 +1411,6 @@ saveProgress();
 
 }
 
-
-/* RECAPITULATIF */
 
 function displaySummary(){
 
@@ -1503,8 +1474,6 @@ row
 }
 
 
-/* RECOMMENCER */
-
 restartBtn.addEventListener(
 
 'click',
@@ -1546,8 +1515,6 @@ renderQuestion();
 
 );
 
-
-/* CHARGEMENT */
 
 loadProgress();
 
@@ -1597,8 +1564,6 @@ startBtn.textContent =
 
 }
 
-
-/* COMMENCER */
 
 startBtn.addEventListener(
 
