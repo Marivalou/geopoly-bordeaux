@@ -64,6 +64,14 @@ line-height:1.05;
 line-height:1.5;
 }
 
+.question-intro{
+line-height:1.5;
+margin:0 0 18px;
+padding:14px;
+border-radius:12px;
+background:#f2efe8;
+}
+
 .scorebar{
 display:flex;
 gap:12px;
@@ -262,9 +270,7 @@ flex-direction:column;
 <div class="wrap">
 
 
-<!-- ==========================================
-     PAGE DE GARDE
-========================================== -->
+<!-- PAGE D'ACCUEIL -->
 
 <section class="hero">
 
@@ -276,7 +282,9 @@ GEOPOLY BORDEAUX
 Cases "Chance"
 </h2>
 
-<div class="intro">
+<div
+class="intro"
+id="introText">
 
 Bienvenue à l'agence bancaire du Geopoly de Bordeaux.
 
@@ -286,28 +294,18 @@ Je vous poserai 4 questions au fil de la partie lorsque vous tomberez sur les ca
 
 <br><br>
 
-Chaque bonne réponse à une de ces 4 questions vous permettra d'obtenir des EV pour l'achat d'une maison.
+Chaque bonne réponse vous permettra d'obtenir des EV pour financer votre patrimoine immobilier.
 
 <br><br>
 
-Je vous poserai la cinquième question lorsque vous aurez terminé la Lab GEOPOLY Bordeaux.
+La cinquième question vous sera proposée à la fin de la Lab GEOPOLY Bordeaux.
 
 <br><br>
 
-Selon le montant de vos gains obtenus au cours de la Lab GEOPOLY Bordeaux, je vous donnerai les fonds nécessaires pour l'achat d'une cinquième maison, automatiquement transformée en hôtel.
-
-<br><br>
-
-Avec ce patrimoine immobilier (un hôtel), je vous laisserai le mot de passe pour accéder aux registres de propriétés et donc aux coordonnées de cette cache.
-
-<br><br>
-
-La question subsidiaire se débloque uniquement si les 5 premières sont réussies. Elle est en lien avec les quatre portes de la Lab "Aux portes de Bordeaux" et peut vous permettre d'obtenir un hôtel supplémentaire.
+Si les 5 premières questions sont réussies, la question subsidiaire se débloquera.
 
 </div>
 
-
-<!-- SCORE MASQUÉ SUR LA PAGE DE GARDE -->
 
 <div
 class="scorebar"
@@ -333,8 +331,6 @@ Question
 
 </div>
 
-
-<!-- PROGRESSION MASQUÉE SUR LA PAGE DE GARDE -->
 
 <div
 class="progress"
@@ -362,10 +358,7 @@ Commencer le jeu
 </section>
 
 
-
-<!-- ==========================================
-     QUESTIONS
-========================================== -->
+<!-- QUESTIONS -->
 
 <section
 class="card"
@@ -378,32 +371,33 @@ id="place">
 </div>
 
 <div
+class="question-intro"
+id="questionIntro">
+</div>
+
+<div
 class="question"
 id="question">
 </div>
 
-
 <div class="question-logo">
 
 <img
-src="./logo-geopoly-bordeaux.png?v=10"
+src="./logo-geopoly-bordeaux.png?v=11"
 alt="Logo GEOPOLY BORDEAUX">
 
 </div>
-
 
 <div
 class="answers"
 id="answers">
 </div>
 
-
 <div
 class="feedback"
 id="feedback"
 aria-live="polite">
 </div>
-
 
 <div class="actions">
 
@@ -415,7 +409,6 @@ id="skipBtn">
 Passer cette question
 
 </button>
-
 
 <button
 type="button"
@@ -432,10 +425,7 @@ Continuer
 </section>
 
 
-
-<!-- ==========================================
-     RESULTAT
-========================================== -->
+<!-- RESULTAT -->
 
 <section
 class="card final"
@@ -474,25 +464,24 @@ Recommencer
 
 </section>
 
-
 </div>
 
 </div>
-
 
 
 <script>
 
 (function(){
 
-/* ==========================================
-   QUESTIONS
-========================================== */
+
+/* QUESTIONS */
 
 const questions = [
 
 {
 place:'Jardin Public',
+
+intro:"🎲 Case Chance ! La banque vous propose de gagner 250 EV pour financer votre première maison.",
 
 q:'Quel est le prénom de cette artiste peintre née à Bordeaux et qui a sa statue au sud-ouest du Jardin Public ?',
 
@@ -507,6 +496,8 @@ points:250
 {
 place:'Jardins de la mairie',
 
+intro:"🎲 Nouvelle case Chance ! Une deuxième maison est à votre portée. 250 EV sont en jeu.",
+
 q:"Combien de grilles d'entrée différentes ?",
 
 acceptedAnswers:[
@@ -520,6 +511,8 @@ points:250
 
 {
 place:'Rue du Pas Saint Georges',
+
+intro:"🎲 Votre patrimoine commence à prendre forme. Cette case Chance peut vous rapporter 500 EV supplémentaires.",
 
 q:'Quel est le nom de cet auteur né au 86 rue du Pas St Georges ?',
 
@@ -536,6 +529,8 @@ points:500
 {
 place:'Place Stalingrad',
 
+intro:"🎲 Encore une opportunité d'investissement ! Répondez correctement et ajoutez 500 EV à votre capital.",
+
 q:"Quelle est la couleur de l'emblème de l'occupation anglaise ?",
 
 acceptedAnswers:[
@@ -548,6 +543,8 @@ points:500
 
 {
 place:'Bonus LAB',
+
+intro:"🏦 Vous avez terminé la Lab GEOPOLY Bordeaux. La banque peut désormais vous aider à financer une nouvelle maison, qui complétera votre patrimoine.",
 
 q:"Quel est l'élément donné par la réalisation de la Lab GEOPOLY Bordeaux ?",
 
@@ -563,6 +560,8 @@ points:2500
 {
 place:'QUESTION SUBSIDIAIRE',
 
+intro:"🏨 Vous avez réussi les cinq premières étapes. Une dernière opération immobilière peut encore vous permettre de renforcer votre patrimoine avec un hôtel supplémentaire.",
+
 q:'Quel est le montant du cumul des points de la Lab des portes de Bordeaux ?',
 
 acceptedAnswers:[
@@ -577,25 +576,25 @@ final:true
 ];
 
 
-/* ==========================================
-   VARIABLES
-========================================== */
+/* VARIABLES */
 
 const STORAGE_KEY =
-'geopoly-bordeaux-progress-v10';
+'geopoly-bordeaux-progress-v11';
 
-let index = 0;
+let index =
+0;
 
-let score = 0;
+let score =
+0;
 
-let answered = false;
+let answered =
+false;
 
-const results = [];
+const results =
+[];
 
 
-/* ==========================================
-   ELEMENTS
-========================================== */
+/* ELEMENTS */
 
 const scoreEl =
 document.getElementById('score');
@@ -611,6 +610,9 @@ document.getElementById('progress');
 
 const placeEl =
 document.getElementById('place');
+
+const questionIntroEl =
+document.getElementById('questionIntro');
 
 const questionEl =
 document.getElementById('question');
@@ -654,14 +656,15 @@ document.getElementById('gameStatus');
 const gameProgress =
 document.getElementById('gameProgress');
 
+const introText =
+document.getElementById('introText');
+
 
 totalQuestionsEl.textContent =
 questions.length;
 
 
-/* ==========================================
-   SAUVEGARDE
-========================================== */
+/* SAUVEGARDE */
 
 function saveProgress(){
 
@@ -674,9 +677,7 @@ STORAGE_KEY,
 JSON.stringify({
 
 index:index,
-
 score:score,
-
 results:results
 
 })
@@ -685,14 +686,7 @@ results:results
 
 }
 
-catch(error){
-
-console.log(
-'Sauvegarde impossible',
-error
-);
-
-}
+catch(error){}
 
 }
 
@@ -706,19 +700,14 @@ localStorage.getItem(
 STORAGE_KEY
 );
 
-
 if(!savedText){
-
 return;
-
 }
-
 
 const saved =
 JSON.parse(
 savedText
 );
-
 
 if(
 Number.isInteger(saved.index)
@@ -733,7 +722,6 @@ saved.index;
 
 }
 
-
 if(
 Number.isFinite(saved.score)
 &&
@@ -745,14 +733,12 @@ saved.score;
 
 }
 
-
 if(
 Array.isArray(saved.results)
 ){
 
 results.length =
 0;
-
 
 saved.results.forEach(
 function(result){
@@ -768,14 +754,7 @@ result
 
 }
 
-catch(error){
-
-console.log(
-'Chargement impossible',
-error
-);
-
-}
+catch(error){}
 
 }
 
@@ -790,21 +769,12 @@ STORAGE_KEY
 
 }
 
-catch(error){
-
-console.log(
-'Suppression impossible',
-error
-);
-
-}
+catch(error){}
 
 }
 
 
-/* ==========================================
-   NORMALISATION REPONSE
-========================================== */
+/* NORMALISATION */
 
 function normalizeAnswer(value){
 
@@ -829,9 +799,7 @@ return String(value)
 }
 
 
-/* ==========================================
-   VERIFICATION DES 5 PREMIERES
-========================================== */
+/* VERIFICATION DES 5 PREMIERES */
 
 function firstFiveSucceeded(){
 
@@ -852,7 +820,6 @@ return item.questionIndex === i;
 
 );
 
-
 if(
 !result
 ||
@@ -865,26 +832,23 @@ return false;
 
 }
 
-
 return true;
 
 }
 
 
-/* ==========================================
-   AFFICHER QUESTION
-========================================== */
+/* AFFICHER QUESTION */
 
 function renderQuestion(){
-
-
-/* Affiche score et progression */
 
 gameStatus.style.display =
 'flex';
 
 gameProgress.style.display =
 'block';
+
+introText.style.display =
+'none';
 
 
 if(
@@ -897,8 +861,6 @@ return;
 
 }
 
-
-/* QUESTION 6 VERROUILLEE */
 
 if(
 index === 5
@@ -920,42 +882,32 @@ questions[index];
 quizCard.style.display =
 'block';
 
-
 finalCard.style.display =
 'none';
-
 
 answered =
 false;
 
-
 nextBtn.disabled =
 true;
-
 
 skipBtn.style.display =
 'block';
 
-
 skipBtn.disabled =
 false;
-
 
 feedbackEl.style.display =
 'none';
 
-
 feedbackEl.textContent =
 '';
-
 
 scoreEl.textContent =
 score;
 
-
 stepEl.textContent =
 index + 1;
-
 
 progressEl.style.width =
 
@@ -981,6 +933,10 @@ item.points
 ' EV';
 
 
+questionIntroEl.textContent =
+item.intro;
+
+
 questionEl.textContent =
 item.q;
 
@@ -989,13 +945,8 @@ answersEl.innerHTML =
 '';
 
 
-/* ==========================================
-   CHAMP DE REPONSE
-========================================== */
-
 const form =
 document.createElement('form');
-
 
 form.className =
 'open-answer';
@@ -1004,36 +955,24 @@ form.className =
 const input =
 document.createElement('input');
 
-
 input.type =
 'text';
 
-
 input.placeholder =
 'Saisissez votre réponse';
-
 
 input.autocomplete =
 'off';
 
 
-input.setAttribute(
-'aria-label',
-'Votre réponse'
-);
-
-
 const submit =
 document.createElement('button');
-
 
 submit.type =
 'submit';
 
-
 submit.className =
 'primary';
-
 
 submit.textContent =
 'Valider ma réponse';
@@ -1043,11 +982,9 @@ form.appendChild(
 input
 );
 
-
 form.appendChild(
 submit
 );
-
 
 answersEl.appendChild(
 form
@@ -1074,9 +1011,7 @@ submit
 }
 
 
-/* ==========================================
-   VERIFIER REPONSE
-========================================== */
+/* VERIFIER REPONSE */
 
 function checkAnswer(
 input,
@@ -1084,9 +1019,7 @@ submit
 ){
 
 if(answered){
-
 return;
-
 }
 
 
@@ -1099,10 +1032,8 @@ if(!value){
 feedbackEl.textContent =
 'Saisis une réponse avant de valider.';
 
-
 feedbackEl.style.display =
 'block';
-
 
 return;
 
@@ -1134,29 +1065,22 @@ normalized;
 );
 
 
-/* ==========================================
-   BONNE REPONSE
-========================================== */
+/* BONNE REPONSE */
 
 if(correct){
 
 answered =
 true;
 
-
 input.disabled =
 true;
-
 
 submit.disabled =
 true;
 
-
 skipBtn.disabled =
 true;
 
-
-/* Evite un éventuel doublon */
 
 const previous =
 results.findIndex(
@@ -1174,7 +1098,6 @@ if(previous !== -1){
 
 score -=
 results[previous].points;
-
 
 results.splice(
 previous,
@@ -1224,36 +1147,28 @@ false;
 
 saveProgress();
 
-
 return;
 
 }
 
 
-/* ==========================================
-   MAUVAISE REPONSE
-========================================== */
+/* MAUVAISE REPONSE */
 
 feedbackEl.textContent =
 'Réponse incorrecte. Essaie encore.';
 
-
 feedbackEl.style.display =
 'block';
 
-
 input.value =
 '';
-
 
 input.focus();
 
 }
 
 
-/* ==========================================
-   PASSER
-========================================== */
+/* PASSER */
 
 skipBtn.addEventListener(
 
@@ -1261,11 +1176,8 @@ skipBtn.addEventListener(
 
 function(){
 
-
 if(answered){
-
 return;
-
 }
 
 
@@ -1290,7 +1202,6 @@ if(previous !== -1){
 score -=
 results[previous].points;
 
-
 results.splice(
 previous,
 1
@@ -1314,7 +1225,6 @@ points:0
 
 feedbackEl.textContent =
 'Question passée. Aucun EV gagné.';
-
 
 feedbackEl.style.display =
 'block';
@@ -1355,9 +1265,7 @@ saveProgress();
 );
 
 
-/* ==========================================
-   CONTINUER
-========================================== */
+/* CONTINUER */
 
 nextBtn.addEventListener(
 
@@ -1365,25 +1273,16 @@ nextBtn.addEventListener(
 
 function(){
 
-
-if(
-nextBtn.disabled
-){
-
+if(nextBtn.disabled){
 return;
-
 }
 
-
 index++;
-
 
 answered =
 false;
 
-
 saveProgress();
-
 
 renderQuestion();
 
@@ -1392,71 +1291,59 @@ renderQuestion();
 );
 
 
-/* ==========================================
-   QUESTION SUBSIDIAIRE VERROUILLEE
-========================================== */
+/* QUESTION SUBSIDIAIRE VERROUILLEE */
 
 function showLocked(){
-
 
 gameStatus.style.display =
 'flex';
 
-
 gameProgress.style.display =
 'block';
 
+introText.style.display =
+'none';
 
 quizCard.style.display =
 'none';
 
-
 finalCard.style.display =
 'block';
-
 
 progressEl.style.width =
 '83.33%';
 
-
 rankEl.textContent =
 'Question subsidiaire verrouillée';
-
 
 finalScoreEl.textContent =
 'La question subsidiaire est accessible uniquement si les cinq premières questions ont été réussies.';
 
-
 displaySummary();
-
 
 saveProgress();
 
 }
 
 
-/* ==========================================
-   RESULTAT FINAL
-========================================== */
+/* RESULTAT FINAL */
 
 function showFinalResult(){
-
 
 gameStatus.style.display =
 'flex';
 
-
 gameProgress.style.display =
 'block';
 
+introText.style.display =
+'none';
 
 quizCard.style.display =
 'none';
 
-
 finalCard.style.display =
 'block';
-
 
 progressEl.style.width =
 '100%';
@@ -1481,8 +1368,6 @@ question.points;
 let rank;
 
 
-/* 5000 EV */
-
 if(
 score >= 5000
 ){
@@ -1492,9 +1377,6 @@ rank =
 
 }
 
-
-/* 4000 à 4999 */
-
 else if(
 score >= 4000
 ){
@@ -1503,9 +1385,6 @@ rank =
 "Géocacheur confirmé et l'accès à la mystery est BLABLABLABLA";
 
 }
-
-
-/* 0 à 3999 */
 
 else{
 
@@ -1534,18 +1413,14 @@ max
 
 displaySummary();
 
-
 saveProgress();
 
 }
 
 
-/* ==========================================
-   RECAPITULATIF
-========================================== */
+/* RECAPITULATIF */
 
 function displaySummary(){
-
 
 summaryEl.innerHTML =
 '';
@@ -1555,10 +1430,8 @@ results.forEach(
 
 function(result){
 
-
 const row =
 document.createElement('div');
-
 
 row.className =
 'row';
@@ -1566,7 +1439,6 @@ row.className =
 
 const left =
 document.createElement('span');
-
 
 left.innerHTML =
 
@@ -1582,7 +1454,6 @@ result.status
 const right =
 document.createElement('strong');
 
-
 right.textContent =
 
 '+'
@@ -1596,11 +1467,9 @@ row.appendChild(
 left
 );
 
-
 row.appendChild(
 right
 );
-
 
 summaryEl.appendChild(
 row
@@ -1613,9 +1482,7 @@ row
 }
 
 
-/* ==========================================
-   RECOMMENCER
-========================================== */
+/* RECOMMENCER */
 
 restartBtn.addEventListener(
 
@@ -1623,45 +1490,34 @@ restartBtn.addEventListener(
 
 function(){
 
-
 index =
 0;
-
 
 score =
 0;
 
-
 answered =
 false;
-
 
 results.length =
 0;
 
-
 clearProgress();
-
 
 scoreEl.textContent =
 '0';
 
-
 stepEl.textContent =
 '1';
-
 
 progressEl.style.width =
 '0%';
 
-
 finalCard.style.display =
 'none';
 
-
 startBtn.style.display =
 'none';
-
 
 renderQuestion();
 
@@ -1670,36 +1526,28 @@ renderQuestion();
 );
 
 
-/* ==========================================
-   CHARGEMENT
-========================================== */
+/* CHARGEMENT */
 
 loadProgress();
-
 
 scoreEl.textContent =
 score;
 
-
 quizCard.style.display =
 'none';
-
 
 finalCard.style.display =
 'none';
 
-
 gameStatus.style.display =
 'none';
-
 
 gameProgress.style.display =
 'none';
 
+introText.style.display =
+'block';
 
-/* ==========================================
-   TEXTE DU BOUTON
-========================================== */
 
 if(
 index > 0
@@ -1729,9 +1577,7 @@ startBtn.textContent =
 }
 
 
-/* ==========================================
-   COMMENCER
-========================================== */
+/* COMMENCER */
 
 startBtn.addEventListener(
 
@@ -1739,14 +1585,14 @@ startBtn.addEventListener(
 
 function(){
 
-
 startBtn.style.display =
 'none';
 
+introText.style.display =
+'none';
 
 gameStatus.style.display =
 'flex';
-
 
 gameProgress.style.display =
 'block';
@@ -1773,7 +1619,6 @@ renderQuestion();
 })();
 
 </script>
-
 
 </body>
 
