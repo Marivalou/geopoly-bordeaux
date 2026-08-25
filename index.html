@@ -2,7 +2,6 @@
 <html lang="fr">
 
 <head>
-
 <meta charset="UTF-8">
 
 <meta
@@ -65,7 +64,7 @@ line-height:1.5;
 }
 
 .question-intro{
-line-height:1.5;
+line-height:1.55;
 margin:0 0 18px;
 padding:14px;
 border-radius:12px;
@@ -215,10 +214,11 @@ display:none;
 }
 
 .rank{
-font-size:28px;
+font-size:25px;
 font-weight:800;
 margin:12px 0;
 white-space:pre-line;
+line-height:1.35;
 }
 
 .summary{
@@ -238,6 +238,17 @@ padding:10px 0;
 .small{
 font-size:14px;
 opacity:.72;
+}
+
+#errorBox{
+display:none;
+margin-top:15px;
+padding:12px;
+border:2px solid #b00020;
+border-radius:10px;
+background:#fff0f0;
+color:#8b0000;
+font-weight:700;
 }
 
 @media(max-width:480px){
@@ -261,7 +272,6 @@ flex-direction:column;
 }
 
 </style>
-
 </head>
 
 
@@ -270,6 +280,11 @@ flex-direction:column;
 <div id="geopoly-app">
 
 <div class="wrap">
+
+
+<!-- =========================
+PAGE D'ACCUEIL
+========================= -->
 
 <section class="hero">
 
@@ -285,7 +300,7 @@ Cases "Chance"
 class="intro"
 id="introText">
 
-Bienvenue à l'agence bancaire du Geopoly de Bordeaux.
+Bienvenue à l'agence bancaire du GEOPOLY de Bordeaux.
 
 <br><br>
 
@@ -312,20 +327,16 @@ id="gameStatus"
 style="display:none;">
 
 <div class="pill">
-
 ⭐ Score :
 <span id="score">0</span>
 EV
-
 </div>
 
 <div class="pill">
-
 Question
 <span id="step">1</span>
 /
 <span id="totalQuestions">6</span>
-
 </div>
 
 </div>
@@ -354,8 +365,15 @@ Commencer le jeu
 
 </div>
 
+<div id="errorBox"></div>
+
 </section>
 
+
+
+<!-- =========================
+QUESTIONS
+========================= -->
 
 <section
 class="card"
@@ -380,7 +398,7 @@ id="question">
 <div class="question-logo">
 
 <img
-src="./logo-geopoly-bordeaux.png?v=12"
+src="logo-geopoly-bordeaux.png?v=13"
 alt="Logo GEOPOLY BORDEAUX">
 
 </div>
@@ -422,6 +440,11 @@ Continuer
 </section>
 
 
+
+<!-- =========================
+RESULTAT FINAL
+========================= -->
+
 <section
 class="card final"
 id="finalCard">
@@ -459,32 +482,76 @@ Recommencer
 
 </section>
 
-</div>
 
 </div>
+</div>
+
 
 
 <script>
 
 (function(){
 
+"use strict";
+
+
+/* ==============================
+AFFICHAGE DES ERREURS
+============================== */
+
+window.addEventListener(
+'error',
+function(event){
+
+const box =
+document.getElementById('errorBox');
+
+if(box){
+
+box.style.display =
+'block';
+
+box.textContent =
+'Erreur technique : ' + event.message;
+
+}
+
+}
+);
+
+
+
+/* ==============================
+QUESTIONS
+============================== */
 
 const questions = [
+
+
+/* QUESTION 1 */
 
 {
 place:'Jardin Public',
 
-intro:`🎲 Case Chance ! La banque vous propose de gagner 650 EV pour financer votre première maison.
+intro:`🎲 Case Chance !
 
-Le Jardin Public, créé en 1746, est un espace vert de 10,8 hectares, situé en plein centre de la ville. Conçu par l'architecte paysagiste Ange-Jacques Gabriel, c'est le premier jardin de France pensé dès sa création pour être ouvert au public. Son premier visage est celui d’un jardin « à la française » façon Le Nôtre, l'illustre jardinier versaillais.
+La banque vous propose de gagner 650 EV pour financer votre première maison.
 
-Au XVIIIe siècle, des bâtiments apparaissent le long de la rue d'Aviau. Cet ensemble homogène de façades contribue à donner au Jardin public son cadre exceptionnel. À sa première réhabilitation, en 1858, le Jardin public prend son style anglais actuel sous l'impulsion du paysagiste bordelais Louis-Bernard Fischer. Il devient tel que nous le connaissons aujourd'hui : un lieu de balade où la nature prime, agrémenté de découvertes botaniques et d'attractions pour les enfants.
+Le Jardin Public, créé en 1746, est un espace vert de 10,8 hectares situé en plein centre de la ville.
 
-1858, c’est aussi l'année où le vieux jardin botanique de la ville s'installe au Jardin public. Sa création a une visée pédagogique pour la formation des futurs apothicaires et médecins. Il héberge certains spécimens végétaux exceptionnels.
+Conçu par l'architecte paysagiste Ange-Jacques Gabriel, c'est le premier jardin de France pensé dès sa création pour être ouvert au public.
+
+Son premier visage est celui d'un jardin « à la française » façon Le Nôtre, l'illustre jardinier versaillais.
+
+Au XVIIIe siècle, des bâtiments apparaissent le long de la rue d'Aviau. Cet ensemble homogène de façades contribue à donner au Jardin Public son cadre exceptionnel.
+
+À sa première réhabilitation, en 1858, le Jardin Public prend son style anglais actuel sous l'impulsion du paysagiste bordelais Louis-Bernard Fischer.
+
+1858, c'est aussi l'année où le vieux jardin botanique de la ville s'installe au Jardin Public.
 
 Une réhabilitation du parc a permis la plantation de plusieurs centaines d'arbres et d'arbustes, en conservant l'esprit d'arboretum initial.`,
 
-q:'Quel est le prénom de cette artiste peintre née à Bordeaux et qui a sa statue au sud-ouest du Jardin Public ?',
+q:`Quel est le prénom de cette artiste peintre née à Bordeaux et qui a sa statue au sud-ouest du Jardin Public ?`,
 
 acceptedAnswers:[
 'rosa'
@@ -494,16 +561,25 @@ points:650
 },
 
 
+
+/* QUESTION 2 */
+
 {
 place:'Jardins de la mairie',
 
-intro:`🎲 Nouvelle case Chance ! Une deuxième maison est à votre portée. 600 EV sont en jeu.
+intro:`🎲 Nouvelle case Chance !
 
-Le jardin de la mairie, créé au XIXe siècle, s’étend sur un hectare et offre un écrin de verdure en plein cœur de la ville. Une vaste pelouse centrale, bordée de plantations, forme le cœur du jardin, sublimé par un majestueux ginkgo biloba et une collection de plantes de terre de bruyère.
+Une deuxième maison est à votre portée. 600 EV sont en jeu.
 
-Plusieurs statues et œuvres d’art donnent au jardin un caractère particulier, faisant dialoguer nature et culture.`,
+Le jardin de la mairie, créé au XIXe siècle, s'étend sur un hectare et offre un écrin de verdure en plein cœur de la ville.
 
-q:"Que trouve-t-on de part et d'autre des jardins de la mairie, aile sud et aile nord, à l'arrière du Palais Rohan ? Vous devez saisir le nom du sigle tel qu'affiché.",
+Une vaste pelouse centrale, bordée de plantations, forme le cœur du jardin, sublimé par un majestueux ginkgo biloba et une collection de plantes de terre de bruyère.
+
+Plusieurs statues et œuvres d'art donnent au jardin un caractère particulier, faisant dialoguer nature et culture.`,
+
+q:`Que trouve-t-on de part et d'autre des jardins de la mairie, aile sud et aile nord, à l'arrière du Palais Rohan ?
+
+Vous devez saisir le nom du sigle tel qu'affiché.`,
 
 acceptedAnswers:[
 'musba'
@@ -513,24 +589,33 @@ points:600
 },
 
 
+
+/* QUESTION 3 */
+
 {
 place:'Rue du Pas Saint Georges',
 
-intro:`🎲 Votre patrimoine commence à prendre forme. Cette case Chance peut vous rapporter 400 EV supplémentaires.
+intro:`🎲 Votre patrimoine commence à prendre forme.
+
+Cette case Chance peut vous rapporter 400 EV supplémentaires.
 
 Vous allez devoir me découvrir.
 
 Je suis né à Bordeaux, dans cette ville de pierre blonde où la lumière, certains jours, semble hésiter entre la Garonne et les façades.
 
-Mon enfance demeure attachée à ces rues que je parcourais sans savoir encore qu’elles resteraient en moi toute ma vie. Je revois la maison de la rue du Pas-Saint-Georges, les pavés humides après la pluie, les portes sombres des hôtels anciens et, plus loin, le fleuve dont la présence semblait donner à la ville un parfum de voyage.
+Mon enfance demeure attachée à ces rues que je parcourais sans savoir encore qu'elles resteraient en moi toute ma vie.
+
+Je revois la maison de la rue du Pas-Saint-Georges, les pavés humides après la pluie, les portes sombres des hôtels anciens et, plus loin, le fleuve dont la présence semblait donner à la ville un parfum de voyage.
 
 Je ne savais pas encore que je deviendrais écrivain. Pourtant, sans doute, tout commençait déjà là.
 
 Bien des années plus tard, lorsque j'écrivis mes romans loin de ces rues, je compris que je n'avais jamais vraiment quitté Bordeaux.
 
-Car on peut s'éloigner de la ville de son enfance. Mais la ville de son enfance, elle, ne vous quitte jamais.`,
+Car on peut s'éloigner de la ville de son enfance.
 
-q:'Quel est le nom de cet auteur né au 86 rue du Pas St Georges ?',
+Mais la ville de son enfance, elle, ne vous quitte jamais.`,
+
+q:`Quel est le nom de cet auteur né au 86 rue du Pas St Georges ?`,
 
 acceptedAnswers:[
 'mauriac',
@@ -542,18 +627,27 @@ points:400
 },
 
 
+
+/* QUESTION 4 */
+
 {
 place:'Place Stalingrad',
 
-intro:`🎲 Encore une opportunité d'investissement ! Répondez correctement et ajoutez 300 EV à votre capital.
+intro:`🎲 Encore une opportunité d'investissement !
 
-Du haut de ses 6 mètres, le lion bleu domine la place. L’animal est représenté dans une posture fière, la patte avant droite posée sur un rocher, la tête levée et tournée vers la rive gauche.
+Répondez correctement et ajoutez 300 EV à votre capital.
 
-Il symbolise le renouveau du quartier. Il est fabriqué en polystyrène expansé recouvert de résine polyester armée de fibre de verre, reposant sur une structure en acier.
+Du haut de ses 6 mètres, le lion bleu domine la place.
+
+L'animal est représenté dans une posture fière, la patte avant droite posée sur un rocher, la tête levée et tournée vers la rive gauche.
+
+Il symbolise le renouveau du quartier.
+
+Il est fabriqué en polystyrène expansé recouvert de résine polyester armée de fibre de verre, reposant sur une structure en acier.
 
 Son aspect géométrique et monochrome lui donne une allure contemporaine, ludique et décalée.`,
 
-q:"Quelle est la couleur du roi des animaux bordelais ?",
+q:`Quelle est la couleur du roi des animaux bordelais ?`,
 
 acceptedAnswers:[
 'bleu',
@@ -564,12 +658,17 @@ points:300
 },
 
 
+
+/* QUESTION 5 */
+
 {
 place:'Bonus LAB',
 
-intro:`🏦 Vous avez terminé la Lab GEOPOLY Bordeaux. La banque peut désormais vous aider à financer une nouvelle maison, qui complétera votre patrimoine.`,
+intro:`🏦 Vous avez terminé la Lab GEOPOLY Bordeaux.
 
-q:"Combien d'EV avez-vous obtenus en réalisant la Lab GEOPOLY Bordeaux ?",
+La banque peut désormais vous aider à financer une nouvelle maison, qui complétera votre patrimoine.`,
+
+q:`Combien d'EV avez-vous obtenus en réalisant la Lab GEOPOLY Bordeaux ?`,
 
 acceptedAnswers:[
 '2050'
@@ -579,12 +678,17 @@ points:2050
 },
 
 
+
+/* QUESTION 6 */
+
 {
 place:'QUESTION SUBSIDIAIRE',
 
-intro:`🏨 Vous avez réussi les cinq premières étapes. Une dernière opération immobilière peut encore vous permettre de renforcer votre patrimoine avec un hôtel supplémentaire.`,
+intro:`🏨 Vous avez réussi les cinq premières étapes.
 
-q:'Quel est le montant du cumul des points de quatre des portes de la Lab "Aux portes de Bordeaux" (somme de A + C + D + E) ?',
+Une dernière opération immobilière peut encore vous permettre de renforcer votre patrimoine avec un hôtel supplémentaire.`,
+
+q:`Quel est le montant du cumul des points de quatre des portes de la Lab "Aux portes de Bordeaux" (somme de A + C + D + E) ?`,
 
 acceptedAnswers:[
 '5021'
@@ -598,15 +702,31 @@ final:true
 ];
 
 
+
+/* ==============================
+VARIABLES
+============================== */
+
 const STORAGE_KEY =
-'geopoly-bordeaux-progress-v12';
+'geopoly-bordeaux-progress-v13';
 
-let index = 0;
-let score = 0;
-let answered = false;
+let index =
+0;
 
-const results = [];
+let score =
+0;
 
+let answered =
+false;
+
+const results =
+[];
+
+
+
+/* ==============================
+ELEMENTS
+============================== */
 
 const scoreEl =
 document.getElementById('score');
@@ -676,6 +796,11 @@ totalQuestionsEl.textContent =
 questions.length;
 
 
+
+/* ==============================
+SAUVEGARDE
+============================== */
+
 function saveProgress(){
 
 try{
@@ -696,9 +821,14 @@ results:results
 
 }
 
-catch(error){}
+catch(error){
+
+console.log(error);
 
 }
+
+}
+
 
 
 function loadProgress(){
@@ -711,11 +841,17 @@ STORAGE_KEY
 );
 
 if(!savedText){
+
 return;
+
 }
 
+
 const saved =
-JSON.parse(savedText);
+JSON.parse(
+savedText
+);
+
 
 if(
 Number.isInteger(saved.index)
@@ -730,6 +866,7 @@ saved.index;
 
 }
 
+
 if(
 Number.isFinite(saved.score)
 &&
@@ -741,6 +878,7 @@ saved.score;
 
 }
 
+
 if(
 Array.isArray(saved.results)
 ){
@@ -749,6 +887,7 @@ results.length =
 0;
 
 saved.results.forEach(
+
 function(result){
 
 results.push(
@@ -756,15 +895,21 @@ result
 );
 
 }
+
 );
 
 }
 
 }
 
-catch(error){}
+catch(error){
+
+console.log(error);
 
 }
+
+}
+
 
 
 function clearProgress(){
@@ -777,10 +922,19 @@ STORAGE_KEY
 
 }
 
-catch(error){}
+catch(error){
+
+console.log(error);
 
 }
 
+}
+
+
+
+/* ==============================
+NORMALISATION REPONSES
+============================== */
 
 function normalizeAnswer(value){
 
@@ -805,6 +959,11 @@ return String(value)
 }
 
 
+
+/* ==============================
+5 PREMIERES REUSSIES ?
+============================== */
+
 function firstFiveSucceeded(){
 
 for(
@@ -824,6 +983,7 @@ return item.questionIndex === i;
 
 );
 
+
 if(
 !result
 ||
@@ -836,10 +996,16 @@ return false;
 
 }
 
+
 return true;
 
 }
 
+
+
+/* ==============================
+AFFICHAGE QUESTION
+============================== */
 
 function renderQuestion(){
 
@@ -887,6 +1053,7 @@ quizCard.style.display =
 finalCard.style.display =
 'none';
 
+
 answered =
 false;
 
@@ -905,11 +1072,13 @@ feedbackEl.style.display =
 feedbackEl.textContent =
 '';
 
+
 scoreEl.textContent =
 score;
 
 stepEl.textContent =
 index + 1;
+
 
 progressEl.style.width =
 
@@ -966,6 +1135,11 @@ input.placeholder =
 input.autocomplete =
 'off';
 
+input.setAttribute(
+'aria-label',
+'Votre réponse'
+);
+
 
 const submit =
 document.createElement('button');
@@ -1010,8 +1184,26 @@ submit
 
 );
 
+
+setTimeout(
+
+function(){
+
+input.focus();
+
+},
+
+100
+
+);
+
 }
 
+
+
+/* ==============================
+VERIFICATION REPONSE
+============================== */
 
 function checkAnswer(
 input,
@@ -1019,7 +1211,9 @@ submit
 ){
 
 if(answered){
+
 return;
+
 }
 
 
@@ -1030,7 +1224,7 @@ input.value.trim();
 if(!value){
 
 feedbackEl.textContent =
-'Saisis une réponse avant de valider.';
+'Saisissez une réponse avant de valider.';
 
 feedbackEl.style.display =
 'block';
@@ -1064,6 +1258,9 @@ normalized;
 
 );
 
+
+
+/* BONNE REPONSE */
 
 if(correct){
 
@@ -1128,7 +1325,7 @@ feedbackEl.textContent =
 +
 item.points
 +
-" EV pour l'achat d'une maison";
+' EV';
 
 
 feedbackEl.style.display =
@@ -1137,7 +1334,6 @@ feedbackEl.style.display =
 
 scoreEl.textContent =
 score;
-
 
 nextBtn.disabled =
 false;
@@ -1150,8 +1346,11 @@ return;
 }
 
 
+
+/* MAUVAISE REPONSE */
+
 feedbackEl.textContent =
-'Réponse incorrecte. Essaie encore.';
+'Réponse incorrecte. Essayez encore.';
 
 feedbackEl.style.display =
 'block';
@@ -1164,6 +1363,11 @@ input.focus();
 }
 
 
+
+/* ==============================
+PASSER UNE QUESTION
+============================== */
+
 skipBtn.addEventListener(
 
 'click',
@@ -1171,7 +1375,9 @@ skipBtn.addEventListener(
 function(){
 
 if(answered){
+
 return;
+
 }
 
 
@@ -1243,10 +1449,8 @@ true;
 skipBtn.disabled =
 true;
 
-
 nextBtn.disabled =
 false;
-
 
 scoreEl.textContent =
 score;
@@ -1259,6 +1463,11 @@ saveProgress();
 );
 
 
+
+/* ==============================
+CONTINUER
+============================== */
+
 nextBtn.addEventListener(
 
 'click',
@@ -1266,8 +1475,11 @@ nextBtn.addEventListener(
 function(){
 
 if(nextBtn.disabled){
+
 return;
+
 }
+
 
 index++;
 
@@ -1282,6 +1494,11 @@ renderQuestion();
 
 );
 
+
+
+/* ==============================
+QUESTION 6 VERROUILLEE
+============================== */
 
 function showLocked(){
 
@@ -1303,11 +1520,18 @@ finalCard.style.display =
 progressEl.style.width =
 '83.33%';
 
+
 rankEl.textContent =
 'Minimum de points non atteint';
 
+
 finalScoreEl.textContent =
-'Merci d'avoir joué avec nous, mais le minimum de points est non atteint, vous ne pouvez pas continuer l'aventure, la mystery restera une énigme pour vous sauf si vous perseverez et tentez de recommencer pour valider les questions manquantes.';
+`Merci d'avoir joué avec nous.
+
+La question subsidiaire ne peut être débloquée que si les cinq premières questions ont été réussies.
+
+Vous pouvez recommencer le parcours pour tenter de valider les questions manquantes.`;
+
 
 displaySummary();
 
@@ -1315,6 +1539,11 @@ saveProgress();
 
 }
 
+
+
+/* ==============================
+RESULTAT FINAL
+============================== */
 
 function showFinalResult(){
 
@@ -1361,9 +1590,11 @@ score >= 5000
 ){
 
 rank =
-`Bravo, vous avez atteint l'objectif de 5000 EV, soit l'équivalent de deux hôtels.
+`Bravo !
 
-En récompense de vos bonnes réponses, voici le mot de passe à entrer dans Certitude pour obtenir le positionnement de cette mystery.`;
+Vous avez atteint 5000 EV ou plus, soit l'équivalent de deux hôtels.
+
+En récompense de vos bonnes réponses, vous obtenez l'accès à la suite de l'aventure et au positionnement de la mystery.`;
 
 }
 
@@ -1372,18 +1603,22 @@ score >= 4000
 ){
 
 rank =
-`Bravo, vous avez atteint l'objectif de 4000 EV, l'équivalent de 5 maisons soit un hôtel.
+`Bravo !
 
-En récompense de vos bonnes réponses, voici le mot de passe à entrer dans Certitude pour obtenir le positionnement de cette mystery.`;
+Vous avez atteint au moins 4000 EV, soit l'équivalent de cinq maisons et donc d'un hôtel.
+
+En récompense de vos bonnes réponses, vous obtenez l'accès à la suite de l'aventure et au positionnement de la mystery.`;
 
 }
 
 else{
 
 rank =
-`Merci de votre participation, mais malheureusement vous n'avez pas obtenu le nombre d'EV suffisant pour obtenir un hôtel.
+`Merci de votre participation.
 
-Je ne suis pas en mesure de vous donner le mot code de cette mystery.`;
+Vous n'avez malheureusement pas obtenu les 4000 EV nécessaires pour constituer un hôtel.
+
+La mystery restera donc encore une énigme pour vous. Vous pouvez recommencer et tenter de valider les questions manquantes.`;
 
 }
 
@@ -1411,6 +1646,11 @@ saveProgress();
 
 }
 
+
+
+/* ==============================
+RECAPITULATIF
+============================== */
 
 function displaySummary(){
 
@@ -1474,6 +1714,11 @@ row
 }
 
 
+
+/* ==============================
+RECOMMENCER
+============================== */
+
 restartBtn.addEventListener(
 
 'click',
@@ -1492,7 +1737,9 @@ false;
 results.length =
 0;
 
+
 clearProgress();
+
 
 scoreEl.textContent =
 '0';
@@ -1503,11 +1750,19 @@ stepEl.textContent =
 progressEl.style.width =
 '0%';
 
+
 finalCard.style.display =
+'none';
+
+quizCard.style.display =
+'none';
+
+introText.style.display =
 'none';
 
 startBtn.style.display =
 'none';
+
 
 renderQuestion();
 
@@ -1516,10 +1771,17 @@ renderQuestion();
 );
 
 
+
+/* ==============================
+CHARGEMENT INITIAL
+============================== */
+
 loadProgress();
+
 
 scoreEl.textContent =
 score;
+
 
 quizCard.style.display =
 'none';
@@ -1565,6 +1827,11 @@ startBtn.textContent =
 }
 
 
+
+/* ==============================
+COMMENCER
+============================== */
+
 startBtn.addEventListener(
 
 'click',
@@ -1607,5 +1874,4 @@ renderQuestion();
 </script>
 
 </body>
-
 </html>
