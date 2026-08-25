@@ -2,7 +2,6 @@
 <html lang="fr">
 
 <head>
-
 <meta charset="UTF-8">
 
 <meta
@@ -251,7 +250,6 @@ flex-direction:column;
 }
 
 </style>
-
 </head>
 
 
@@ -262,9 +260,9 @@ flex-direction:column;
 <div class="wrap">
 
 
-<!-- =========================================
+<!-- =========================
      PRESENTATION
-========================================= -->
+========================= -->
 
 <section class="hero">
 
@@ -283,25 +281,36 @@ Bienvenue à l'agence bancaire du Geopoly de Bordeaux
 <br><br>
 
 Je vous poserai 4 questions au fil de la partie lorsque vous tomberez sur les cases "chance" symbolisées par "?" sur le plateau de jeu.
-<br>
-Chaque bonne réponse à une de ces 4 questions vous permettra d'obtenir des EV pour l'achat d'une maison
+
+<br><br>
+
+Chaque bonne réponse à une de ces 4 questions vous permettra d'obtenir des EV pour l'achat d'une maison.
 
 <br><br>
 
 Je vous poserai la cinquième question lorsque vous aurez terminé la Lab GEOPOLY Bordeaux.
-Selon le montant de vos gains obtenus au cours de la lab Geopoly-Bordeaux, je vous donnerais les fonds nécessaires pour l'achat d'une cinquième maison, automatiquement transformée en hôtel 
-<br><br>
-
-Avec ce patrimoine immobilier (un hôtel), je vous laisserai le mot de passe pour accéder aux registres de propriétés (accès aux coordonnées de cette cache)
 
 <br><br>
 
-La question subsidiaire  se débloque uniquement si les 5 premières sont réussies: elle est en lien avec les quatres portes de la lab "aux portes de bordeaux" et peut vous permettre d'obtenir un hotel supplémentaire
+Selon le montant de vos gains obtenus au cours de la Lab Geopoly-Bordeaux, je vous donnerai les fonds nécessaires pour l'achat d'une cinquième maison, automatiquement transformée en hôtel.
+
+<br><br>
+
+Avec ce patrimoine immobilier (un hôtel), je vous laisserai le mot de passe pour accéder aux registres de propriétés (accès aux coordonnées de cette cache).
+
+<br><br>
+
+La question subsidiaire se débloque uniquement si les 5 premières sont réussies. Elle est en lien avec les quatre portes de la Lab "Aux portes de Bordeaux" et peut vous permettre d'obtenir un hôtel supplémentaire.
 
 </div>
 
 
-<div class="scorebar">
+<!-- MASQUÉ AVANT LE DÉMARRAGE -->
+
+<div
+class="scorebar"
+id="gameStatus"
+style="display:none;">
 
 <div class="pill">
 
@@ -324,7 +333,10 @@ Question
 </div>
 
 
-<div class="progress">
+<div
+class="progress"
+id="gameProgress"
+style="display:none;">
 
 <div id="progress"></div>
 
@@ -347,10 +359,9 @@ Commencer le jeu
 </section>
 
 
-
-<!-- =========================================
+<!-- =========================
      QUESTIONS
-========================================= -->
+========================= -->
 
 <section
 class="card"
@@ -372,7 +383,7 @@ id="question">
 <div class="question-logo">
 
 <img
-src="./logo-geopoly-bordeaux.png?v=8"
+src="./logo-geopoly-bordeaux.png?v=10"
 alt="Logo GEOPOLY BORDEAUX">
 
 </div>
@@ -418,38 +429,29 @@ Continuer
 </section>
 
 
-
-<!-- =========================================
+<!-- =========================
      RESULTAT
-========================================= -->
+========================= -->
 
 <section
 class="card final"
 id="finalCard">
 
 <div class="eyebrow">
-
 Résultat final
-
 </div>
-
 
 <div
 class="rank"
 id="rank">
 </div>
 
-
-<div
-id="finalScore">
-</div>
-
+<div id="finalScore"></div>
 
 <div
 class="summary"
 id="summary">
 </div>
-
 
 <div class="actions">
 
@@ -466,11 +468,9 @@ Recommencer
 
 </section>
 
-
 </div>
 
 </div>
-
 
 
 <script>
@@ -480,12 +480,11 @@ document.addEventListener(
 function(){
 
 
-/* =========================================
+/* =========================
    QUESTIONS
-========================================= */
+========================= */
 
 const questions = [
-
 
 {
 place:'Jardin Public',
@@ -500,7 +499,6 @@ points:250
 },
 
 
-
 {
 place:'Jardins de la mairie',
 
@@ -513,7 +511,6 @@ acceptedAnswers:[
 
 points:250
 },
-
 
 
 {
@@ -531,7 +528,6 @@ points:500
 },
 
 
-
 {
 place:'Place Stalingrad',
 
@@ -543,7 +539,6 @@ acceptedAnswers:[
 
 points:500
 },
-
 
 
 {
@@ -560,7 +555,6 @@ points:2500
 },
 
 
-
 {
 place:'QUESTION SUBSIDIAIRE',
 
@@ -575,1248 +569,8 @@ points:1000,
 final:true
 }
 
-
 ];
 
 
-
-/* =========================================
+/* =========================
    VARIABLES
-========================================= */
-
-const STORAGE_KEY =
-'geopoly-bordeaux-progress-v9';
-
-
-let index =
-0;
-
-
-let score =
-0;
-
-
-let answered =
-false;
-
-
-const results =
-[];
-
-
-
-/* =========================================
-   ELEMENTS
-========================================= */
-
-const scoreEl =
-document.getElementById('score');
-
-
-const stepEl =
-document.getElementById('step');
-
-
-const totalQuestionsEl =
-document.getElementById('totalQuestions');
-
-
-const progressEl =
-document.getElementById('progress');
-
-
-const placeEl =
-document.getElementById('place');
-
-
-const questionEl =
-document.getElementById('question');
-
-
-const answersEl =
-document.getElementById('answers');
-
-
-const feedbackEl =
-document.getElementById('feedback');
-
-
-const skipBtn =
-document.getElementById('skipBtn');
-
-
-const nextBtn =
-document.getElementById('nextBtn');
-
-
-const startBtn =
-document.getElementById('startBtn');
-
-
-const quizCard =
-document.getElementById('quizCard');
-
-
-const finalCard =
-document.getElementById('finalCard');
-
-
-const restartBtn =
-document.getElementById('restartBtn');
-
-
-const rankEl =
-document.getElementById('rank');
-
-
-const finalScoreEl =
-document.getElementById('finalScore');
-
-
-const summaryEl =
-document.getElementById('summary');
-
-
-totalQuestionsEl.textContent =
-questions.length;
-
-
-
-/* =========================================
-   SAUVEGARDE
-========================================= */
-
-function saveProgress(){
-
-try{
-
-localStorage.setItem(
-
-STORAGE_KEY,
-
-JSON.stringify({
-
-index:index,
-
-score:score,
-
-results:results
-
-})
-
-);
-
-}
-
-catch(error){
-
-console.log(
-'Sauvegarde impossible',
-error
-);
-
-}
-
-}
-
-
-
-function loadProgress(){
-
-try{
-
-const savedText =
-localStorage.getItem(
-STORAGE_KEY
-);
-
-
-if(!savedText){
-
-return;
-
-}
-
-
-const saved =
-JSON.parse(
-savedText
-);
-
-
-if(
-Number.isInteger(saved.index)
-&&
-saved.index >= 0
-&&
-saved.index <= questions.length
-){
-
-index =
-saved.index;
-
-}
-
-
-if(
-Number.isFinite(saved.score)
-&&
-saved.score >= 0
-){
-
-score =
-saved.score;
-
-}
-
-
-if(
-Array.isArray(saved.results)
-){
-
-results.length =
-0;
-
-
-saved.results.forEach(
-function(result){
-
-results.push(
-result
-);
-
-}
-);
-
-}
-
-}
-
-catch(error){
-
-console.log(
-'Chargement impossible',
-error
-);
-
-}
-
-}
-
-
-
-function clearProgress(){
-
-try{
-
-localStorage.removeItem(
-STORAGE_KEY
-);
-
-}
-
-catch(error){
-
-console.log(
-'Suppression impossible',
-error
-);
-
-}
-
-}
-
-
-
-/* =========================================
-   NORMALISATION DES REPONSES
-========================================= */
-
-function normalizeAnswer(value){
-
-return String(value)
-
-.toLowerCase()
-
-.normalize('NFD')
-
-.replace(
-/[\u0300-\u036f]/g,
-''
-)
-
-.replace(
-/[^a-z0-9]+/g,
-' '
-)
-
-.trim();
-
-}
-
-
-
-/* =========================================
-   VERIFICATION DES 5 PREMIERES
-========================================= */
-
-function firstFiveSucceeded(){
-
-for(
-let i = 0;
-i < 5;
-i++
-){
-
-const result =
-results.find(
-function(item){
-
-return item.questionIndex === i;
-
-}
-);
-
-
-if(
-!result
-||
-result.status !== 'Bonne réponse'
-){
-
-return false;
-
-}
-
-}
-
-
-return true;
-
-}
-
-
-
-/* =========================================
-   AFFICHER UNE QUESTION
-========================================= */
-
-function renderQuestion(){
-
-
-if(
-index >= questions.length
-){
-
-showFinalResult();
-
-return;
-
-}
-
-
-const item =
-questions[index];
-
-
-
-/* La question 6 n'est accessible que si
-   les cinq premières sont réussies */
-
-if(
-index === 5
-&&
-!firstFiveSucceeded()
-){
-
-showLocked();
-
-return;
-
-}
-
-
-
-quizCard.style.display =
-'block';
-
-
-finalCard.style.display =
-'none';
-
-
-answered =
-false;
-
-
-nextBtn.disabled =
-true;
-
-
-/* PASSER reste disponible même question 6 */
-
-skipBtn.style.display =
-'block';
-
-
-skipBtn.disabled =
-false;
-
-
-feedbackEl.style.display =
-'none';
-
-
-feedbackEl.textContent =
-'';
-
-
-scoreEl.textContent =
-score;
-
-
-stepEl.textContent =
-index + 1;
-
-
-progressEl.style.width =
-
-(
-index
-/
-questions.length
-*
-100
-)
-+
-'%';
-
-
-placeEl.textContent =
-
-item.place
-+
-' · Bonus +'
-+
-item.points
-+
-' EV';
-
-
-questionEl.textContent =
-item.q;
-
-
-answersEl.innerHTML =
-'';
-
-
-
-/* =========================================
-   CHAMP DE REPONSE
-========================================= */
-
-const form =
-document.createElement('form');
-
-
-form.className =
-'open-answer';
-
-
-
-const input =
-document.createElement('input');
-
-
-input.type =
-'text';
-
-
-input.placeholder =
-'Saisissez votre réponse';
-
-
-input.autocomplete =
-'off';
-
-
-input.setAttribute(
-'aria-label',
-'Votre réponse'
-);
-
-
-
-const submit =
-document.createElement('button');
-
-
-submit.type =
-'submit';
-
-
-submit.className =
-'primary';
-
-
-submit.textContent =
-'Valider ma réponse';
-
-
-
-form.appendChild(
-input
-);
-
-
-form.appendChild(
-submit
-);
-
-
-answersEl.appendChild(
-form
-);
-
-
-
-form.addEventListener(
-
-'submit',
-
-function(event){
-
-event.preventDefault();
-
-
-checkAnswer(
-input,
-submit
-);
-
-}
-
-);
-
-
-setTimeout(
-function(){
-
-input.focus();
-
-},
-100
-);
-
-}
-
-
-
-/* =========================================
-   VERIFIER REPONSE
-========================================= */
-
-function checkAnswer(
-input,
-submit
-){
-
-if(answered){
-
-return;
-
-}
-
-
-const value =
-input.value.trim();
-
-
-if(!value){
-
-feedbackEl.textContent =
-'Saisis une réponse avant de valider.';
-
-
-feedbackEl.style.display =
-'block';
-
-
-return;
-
-}
-
-
-const item =
-questions[index];
-
-
-const normalized =
-normalizeAnswer(
-value
-);
-
-
-const correct =
-
-item.acceptedAnswers.some(
-
-function(answer){
-
-return normalizeAnswer(answer)
-===
-normalized;
-
-}
-
-);
-
-
-
-/* =========================================
-   BONNE REPONSE
-========================================= */
-
-if(correct){
-
-answered =
-true;
-
-
-input.disabled =
-true;
-
-
-submit.disabled =
-true;
-
-
-skipBtn.disabled =
-true;
-
-
-
-/* Evite de compter deux fois */
-
-const previous =
-results.findIndex(
-
-function(result){
-
-return result.questionIndex === index;
-
-}
-
-);
-
-
-if(previous !== -1){
-
-score -=
-results[previous].points;
-
-
-results.splice(
-previous,
-1
-);
-
-}
-
-
-
-score +=
-item.points;
-
-
-
-results.push({
-
-questionIndex:index,
-
-place:item.place,
-
-status:'Bonne réponse',
-
-points:item.points
-
-});
-
-
-
-feedbackEl.textContent =
-
-'Bonne réponse ! +'
-+
-item.points
-+
-' EV';
-
-
-feedbackEl.style.display =
-'block';
-
-
-scoreEl.textContent =
-score;
-
-
-nextBtn.disabled =
-false;
-
-
-saveProgress();
-
-
-return;
-
-}
-
-
-
-/* =========================================
-   MAUVAISE REPONSE
-========================================= */
-
-feedbackEl.textContent =
-
-'Réponse incorrecte. Essaie encore.';
-
-
-feedbackEl.style.display =
-'block';
-
-
-input.value =
-'';
-
-
-input.focus();
-
-}
-
-
-
-/* =========================================
-   PASSER UNE QUESTION
-========================================= */
-
-skipBtn.addEventListener(
-
-'click',
-
-function(){
-
-
-if(answered){
-
-return;
-
-}
-
-
-answered =
-true;
-
-
-
-const previous =
-results.findIndex(
-
-function(result){
-
-return result.questionIndex === index;
-
-}
-
-);
-
-
-if(previous !== -1){
-
-score -=
-results[previous].points;
-
-
-results.splice(
-previous,
-1
-);
-
-}
-
-
-
-results.push({
-
-questionIndex:index,
-
-place:questions[index].place,
-
-status:'Passée',
-
-points:0
-
-});
-
-
-
-feedbackEl.textContent =
-
-'Question passée. Aucun EV gagné.';
-
-
-feedbackEl.style.display =
-'block';
-
-
-
-const controls =
-answersEl.querySelectorAll(
-'input,button'
-);
-
-
-controls.forEach(
-
-function(element){
-
-element.disabled =
-true;
-
-}
-
-);
-
-
-skipBtn.disabled =
-true;
-
-
-nextBtn.disabled =
-false;
-
-
-scoreEl.textContent =
-score;
-
-
-saveProgress();
-
-}
-
-);
-
-
-
-/* =========================================
-   CONTINUER
-========================================= */
-
-nextBtn.addEventListener(
-
-'click',
-
-function(){
-
-
-if(nextBtn.disabled){
-
-return;
-
-}
-
-
-index++;
-
-
-answered =
-false;
-
-
-saveProgress();
-
-
-renderQuestion();
-
-}
-
-);
-
-
-
-/* =========================================
-   QUESTION 6 VERROUILLEE
-========================================= */
-
-function showLocked(){
-
-
-quizCard.style.display =
-'none';
-
-
-finalCard.style.display =
-'block';
-
-
-progressEl.style.width =
-'83.33%';
-
-
-rankEl.textContent =
-
-'Question subsidiaire verrouillée';
-
-
-finalScoreEl.textContent =
-
-'La question subsidiaire est accessible uniquement si les cinq premières questions ont été réussies.';
-
-
-displaySummary();
-
-
-saveProgress();
-
-}
-
-
-
-/* =========================================
-   RESULTAT FINAL
-========================================= */
-
-function showFinalResult(){
-
-
-quizCard.style.display =
-'none';
-
-
-finalCard.style.display =
-'block';
-
-
-progressEl.style.width =
-'100%';
-
-
-
-const max =
-questions.reduce(
-
-function(total,question){
-
-return total
-+
-question.points;
-
-},
-
-0
-
-);
-
-
-
-let rank =
-'Explorateur de Bordeaux';
-
-
-
-/* 5000 EV ET PLUS */
-
-if(
-score >= 5000
-){
-
-rank =
-'Expert du geocaching et l'accès à la mystery est BLABLABLABLA';
-
-}
-
-
-/* 4000 A 4999 EV */
-
-else if(
-score >= 4000
-){
-
-rank =
-'Géocacheur confirmé  et l'accès à la mystery est BLABLABLABLA';
-
-}
-
-
-/* 0 A 3999 EV */
-
-else{
-
-rank =
-'Explorateur de Bordeaux';
-
-}
-
-
-
-rankEl.textContent =
-rank;
-
-
-
-finalScoreEl.textContent =
-
-'Score : '
-+
-score
-+
-' / '
-+
-max
-+
-' EV';
-
-
-
-displaySummary();
-
-
-saveProgress();
-
-}
-
-
-
-/* =========================================
-   RECAPITULATIF
-========================================= */
-
-function displaySummary(){
-
-
-summaryEl.innerHTML =
-'';
-
-
-
-results.forEach(
-
-function(result){
-
-
-const row =
-document.createElement('div');
-
-
-row.className =
-'row';
-
-
-
-const left =
-document.createElement('span');
-
-
-left.innerHTML =
-
-result.place
-+
-'<div class="small">'
-+
-result.status
-+
-'</div>';
-
-
-
-const right =
-document.createElement('strong');
-
-
-right.textContent =
-
-'+'
-+
-result.points
-+
-' EV';
-
-
-
-row.appendChild(
-left
-);
-
-
-row.appendChild(
-right
-);
-
-
-summaryEl.appendChild(
-row
-);
-
-}
-
-);
-
-}
-
-
-
-/* =========================================
-   RECOMMENCER
-========================================= */
-
-restartBtn.addEventListener(
-
-'click',
-
-function(){
-
-
-index =
-0;
-
-
-score =
-0;
-
-
-answered =
-false;
-
-
-results.length =
-0;
-
-
-clearProgress();
-
-
-scoreEl.textContent =
-'0';
-
-
-stepEl.textContent =
-'1';
-
-
-progressEl.style.width =
-'0%';
-
-
-finalCard.style.display =
-'none';
-
-
-startBtn.style.display =
-'none';
-
-
-renderQuestion();
-
-}
-
-);
-
-
-
-/* =========================================
-   CHARGEMENT INITIAL
-========================================= */
-
-loadProgress();
-
-
-scoreEl.textContent =
-score;
-
-
-quizCard.style.display =
-'none';
-
-
-finalCard.style.display =
-'none';
-
-
-
-if(
-index > 0
-&&
-index < questions.length
-){
-
-startBtn.textContent =
-'Reprendre le jeu';
-
-}
-
-
-else if(
-index >= questions.length
-){
-
-startBtn.textContent =
-'Voir mon résultat';
-
-}
-
-
-else{
-
-startBtn.textContent =
-'Commencer le jeu';
-
-}
-
-
-
-/* =========================================
-   COMMENCER / REPRENDRE
-========================================= */
-
-startBtn.addEventListener(
-
-'click',
-
-function(){
-
-
-startBtn.style.display =
-'none';
-
-
-
-if(
-index >= questions.length
-){
-
-showFinalResult();
-
-return;
-
-}
-
-
-renderQuestion();
-
-}
-
-);
-
-
-}
-
-);
-
-</script>
-
-
-</body>
-
-</html>
