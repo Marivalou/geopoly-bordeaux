@@ -1,7 +1,29 @@
+Oui. J’ai repris ton fichier complet, corrigé l’erreur qui se trouvait dans la question 3, et intégré la nouvelle présentation.
+
+La logique reste la même, mais l’interface est maintenant pensée comme la maquette que tu as aimée : fond bleu nuit, panneaux ivoire, rouge GEOPOLY, score EV très visible, progression 1 à 6, et surtout après chaque bonne réponse, la question disparaît pour laisser place à une grande carte “Chance”. Chaque carte pourra avoir son propre personnage dans une attitude différente et son monument bordelais en fond. Le résultat final utilise également une carte spécifique.
+
+Pour les cartes, le code cherchera dans ton dépôt GitHub ces fichiers :
+
+carte-question-1.jpg
+carte-question-2.jpg
+carte-question-3.jpg
+carte-question-4.jpg
+carte-question-5.jpg
+carte-question-6.jpg
+
+carte-final-5000.jpg
+carte-final-4000.jpg
+carte-final-echec.jpg
+
+Tu pourras ensuite me demander de te fabriquer ces cartes individuellement dans le style exact de ton exemple. Même si elles ne sont pas encore présentes, le jeu fonctionnera : une carte graphique de remplacement s'affichera.
+
+Voici le fichier index.html complet à coller dans GitHub :
+
 <!DOCTYPE html>
 <html lang="fr">
 
 <head>
+
 <meta charset="UTF-8">
 
 <meta
@@ -10,305 +32,1248 @@ content="width=device-width, initial-scale=1.0">
 
 <title>GEOPOLY BORDEAUX</title>
 
+
 <style>
+
+/* =====================================================
+   BASE
+===================================================== */
 
 *{
 box-sizing:border-box;
 }
 
+html{
+min-height:100%;
+}
+
 body{
 margin:0;
-background:#f7f4ed;
-color:#1e1e1e;
-font-family:Arial,Helvetica,sans-serif;
+min-height:100vh;
+
+font-family:
+Arial,
+Helvetica,
+sans-serif;
+
+color:#102f55;
+
+background:
+linear-gradient(
+180deg,
+#092b50 0%,
+#0e3b68 45%,
+#071f3a 100%
+);
+
+background-attachment:fixed;
 }
+
+
+button,
+input{
+font-family:inherit;
+}
+
 
 #geopoly-app{
-padding:24px;
 min-height:100vh;
+padding:18px;
 }
 
+
 .wrap{
-max-width:760px;
+max-width:820px;
 margin:0 auto;
 }
 
+
+
+/* =====================================================
+   ENTETE GEOPOLY
+===================================================== */
+
+.geopoly-header{
+text-align:center;
+margin-bottom:16px;
+}
+
+
+.geopoly-logo-title{
+display:inline-block;
+
+background:#c82d25;
+
+color:white;
+
+font-weight:900;
+
+font-size:clamp(34px,8vw,58px);
+
+letter-spacing:.06em;
+
+line-height:1;
+
+padding:10px 20px;
+
+border:
+
+4px solid #ffffff;
+
+outline:
+
+3px solid #18212a;
+
+border-radius:9px;
+
+box-shadow:
+0 6px 14px rgba(0,0,0,.30);
+
+text-shadow:
+0 2px 2px rgba(0,0,0,.25);
+}
+
+
+.geopoly-subtitle{
+display:table;
+
+margin:
+-3px auto 0;
+
+background:#123c69;
+
+color:white;
+
+font-size:clamp(18px,5vw,28px);
+
+font-weight:800;
+
+letter-spacing:.10em;
+
+padding:
+6px 20px;
+
+border:
+3px solid white;
+
+outline:
+2px solid #18212a;
+
+border-radius:5px;
+}
+
+
+
+/* =====================================================
+   PANNEAUX
+===================================================== */
+
 .hero,
 .card{
-background:#ffffff;
-border:1px solid #ded8ca;
-border-radius:18px;
+
+position:relative;
+
+background:
+linear-gradient(
+135deg,
+#fffdf6,
+#f7eddb
+);
+
+border:
+3px solid #16212b;
+
+border-radius:20px;
+
 padding:22px;
+
+box-shadow:
+0 8px 22px rgba(0,0,0,.28);
+
+overflow:hidden;
 }
+
+
+.hero::before,
+.card::before{
+
+content:"";
+
+position:absolute;
+
+inset:6px;
+
+border:
+1px solid rgba(28,38,48,.28);
+
+border-radius:14px;
+
+pointer-events:none;
+}
+
 
 .hero{
 margin-bottom:18px;
 }
 
+
+
 .eyebrow{
+position:relative;
+z-index:2;
+
 font-size:13px;
-font-weight:700;
-letter-spacing:.08em;
+
+font-weight:900;
+
+letter-spacing:.10em;
+
 text-transform:uppercase;
-opacity:.68;
+
+color:#b52621;
 }
+
 
 h2{
-margin:6px 0 10px;
-font-size:30px;
+position:relative;
+z-index:2;
+
+margin:
+8px 0 18px;
+
+font-size:
+clamp(28px,7vw,40px);
+
 line-height:1.05;
+
+color:#12365e;
 }
+
 
 .intro{
-line-height:1.5;
+position:relative;
+z-index:2;
+
+line-height:1.65;
+
+font-size:16px;
 }
 
-.question-intro{
-line-height:1.55;
-margin:0 0 18px;
-padding:14px;
-border-radius:12px;
-background:#f2efe8;
-white-space:pre-line;
+
+
+/* =====================================================
+   PETITES CASES ACCUEIL
+===================================================== */
+
+.rules{
+position:relative;
+z-index:2;
+
+display:grid;
+
+grid-template-columns:
+repeat(3,1fr);
+
+gap:10px;
+
+margin-top:22px;
 }
+
+
+.rule{
+padding:15px 10px;
+
+text-align:center;
+
+border-right:
+1px solid #c8bca9;
+
+font-size:13px;
+
+line-height:1.45;
+}
+
+
+.rule:last-child{
+border-right:0;
+}
+
+
+.rule-icon{
+display:block;
+font-size:29px;
+margin-bottom:8px;
+}
+
+
+
+/* =====================================================
+   SCORE
+===================================================== */
 
 .scorebar{
+
+position:relative;
+z-index:2;
+
 display:flex;
-gap:12px;
+
+gap:10px;
+
 flex-wrap:wrap;
+
 margin-top:16px;
 }
 
+
 .pill{
-background:#f0ede5;
-border-radius:999px;
-padding:10px 14px;
-font-weight:700;
+
+flex:1;
+
+min-width:145px;
+
+background:#123b67;
+
+color:white;
+
+border:
+2px solid #d5b36d;
+
+border-radius:12px;
+
+padding:12px 15px;
+
+text-align:center;
+
+font-weight:800;
+
+box-shadow:
+0 3px 7px rgba(0,0,0,.15);
 }
+
+
+.pill strong{
+font-size:22px;
+color:#f4ca62;
+}
+
+
+
+/* =====================================================
+   PROGRESSION
+===================================================== */
 
 .progress{
-height:8px;
-background:#e7e0d3;
+
+position:relative;
+z-index:2;
+
+height:13px;
+
+background:#d8d0c1;
+
+border:
+1px solid #9f947f;
+
 border-radius:999px;
+
 overflow:hidden;
-margin:14px 0 0;
+
+margin-top:15px;
 }
+
 
 .progress > div{
+
 height:100%;
-background:#333;
+
+background:
+linear-gradient(
+90deg,
+#57983d,
+#e2bc37,
+#c6342c
+);
+
 width:0%;
-transition:width .25s ease;
+
+transition:
+width .35s ease;
 }
+
+
+
+/* =====================================================
+   QUESTIONS
+===================================================== */
 
 .place{
-font-size:13px;
-font-weight:700;
+
+position:relative;
+z-index:2;
+
+display:inline-block;
+
+background:#c42b24;
+
+color:#ffffff;
+
+padding:
+8px 18px;
+
+margin-bottom:15px;
+
+border-radius:7px;
+
+font-size:14px;
+
+font-weight:900;
+
 text-transform:uppercase;
-letter-spacing:.06em;
-opacity:.65;
+
+letter-spacing:.05em;
+
+box-shadow:
+0 3px 7px rgba(0,0,0,.20);
 }
+
+
+.question-intro{
+
+position:relative;
+z-index:2;
+
+line-height:1.6;
+
+margin-bottom:20px;
+
+padding:18px;
+
+border-radius:12px;
+
+background:
+rgba(223,228,233,.65);
+
+border:
+1px solid #c8c2b5;
+
+white-space:pre-line;
+
+color:#25384e;
+}
+
 
 .question{
-font-size:22px;
-font-weight:700;
-line-height:1.25;
-margin:10px 0 18px;
+
+position:relative;
+z-index:2;
+
+font-size:
+clamp(20px,5vw,25px);
+
+font-weight:900;
+
+line-height:1.35;
+
+margin:
+10px 0 20px;
+
+color:#0c315d;
 }
+
+
+
+/* =====================================================
+   LOGO QUESTION
+===================================================== */
 
 .question-logo{
+
+position:relative;
+z-index:2;
+
 display:flex;
+
 justify-content:center;
+
 align-items:center;
-margin:0 0 18px;
+
+margin:
+4px 0 20px;
 }
 
+
 .question-logo img{
+
 display:block;
-max-width:240px;
-width:70%;
+
+max-width:185px;
+
+width:52%;
+
 height:auto;
+
 object-fit:contain;
 }
 
+
+
+/* =====================================================
+   REPONSE
+===================================================== */
+
 .answers{
+
+position:relative;
+z-index:2;
+
 display:grid;
+
 gap:10px;
 }
+
 
 .open-answer{
+
 display:grid;
+
+grid-template-columns:
+1fr auto;
+
 gap:10px;
 }
 
+
 .open-answer input{
-font:inherit;
+
 font-size:16px;
-min-height:48px;
-border-radius:12px;
-border:1px solid #cfc7b8;
-padding:12px 14px;
-background:#faf8f3;
+
+min-height:52px;
+
+border-radius:9px;
+
+border:
+2px solid #788da4;
+
+padding:
+12px 14px;
+
+background:#fffefa;
+
 color:#1e1e1e;
+
 width:100%;
 }
 
+
+
+/* =====================================================
+   BOUTONS
+===================================================== */
+
 button{
-font:inherit;
-min-height:48px;
-border-radius:12px;
-border:1px solid #cfc7b8;
-padding:12px 14px;
+
+position:relative;
+z-index:2;
+
+font-size:15px;
+
+min-height:50px;
+
+border-radius:9px;
+
+border:
+2px solid #b6a98f;
+
+padding:
+12px 17px;
+
 cursor:pointer;
-background:#faf8f3;
-color:#1e1e1e;
+
+background:#f8eedb;
+
+color:#12365e;
+
+font-weight:800;
+
+transition:
+transform .12s ease,
+background .15s ease;
 }
 
-button:hover{
-background:#f1eee7;
+
+button:hover:not(:disabled){
+transform:
+translateY(-1px);
 }
+
 
 button:disabled{
 opacity:.45;
 cursor:not-allowed;
 }
 
+
 button:focus,
 input:focus{
-outline:3px solid #6f6f6f;
-outline-offset:2px;
+outline:
+3px solid #e4ae37;
+
+outline-offset:
+2px;
 }
 
+
 .actions{
+
+position:relative;
+z-index:2;
+
 display:flex;
+
 gap:10px;
+
 flex-wrap:wrap;
+
 margin-top:16px;
 }
 
+
 .primary{
-background:#202020;
-color:#ffffff;
-border-color:transparent;
+
+background:#123c69;
+
+color:white;
+
+border-color:#082641;
+
 text-align:center;
-font-weight:700;
+
+font-weight:900;
+
 flex:1;
+
+box-shadow:
+0 4px 8px rgba(0,0,0,.20);
 }
+
+
+.start-button{
+
+background:#c32c25;
+
+border-color:#8d1d18;
+
+font-size:17px;
+}
+
 
 .skip{
 text-align:center;
 flex:1;
 }
 
+
+
+/* =====================================================
+   ERREUR / FEEDBACK
+===================================================== */
+
 .feedback{
+
+position:relative;
+z-index:2;
+
 margin-top:16px;
+
 padding:14px;
-border-radius:12px;
-background:#f2efe8;
-font-weight:700;
+
+border-radius:10px;
+
+background:#ede6d9;
+
+border:
+1px solid #c8baa2;
+
+font-weight:800;
+
 display:none;
 }
+
+
+.feedback.wrong{
+
+background:#ffe9e7;
+
+color:#8f211b;
+
+border-color:#db8d86;
+}
+
+
+#errorBox{
+
+display:none;
+
+position:relative;
+z-index:5;
+
+margin-top:15px;
+
+padding:12px;
+
+border:
+2px solid #b00020;
+
+border-radius:10px;
+
+background:#fff0f0;
+
+color:#8b0000;
+
+font-weight:700;
+}
+
+
+
+/* =====================================================
+   CARTE DE RECOMPENSE
+===================================================== */
+
+.reward-card{
+
+display:none;
+
+position:relative;
+
+z-index:4;
+
+width:100%;
+
+aspect-ratio:1.55 / 1;
+
+min-height:330px;
+
+margin-top:5px;
+
+border:
+5px solid #171717;
+
+border-radius:20px;
+
+overflow:hidden;
+
+background:
+linear-gradient(
+135deg,
+#faf6eb,
+#e7dcc6
+);
+
+box-shadow:
+0 8px 20px rgba(0,0,0,.25);
+}
+
+
+.reward-background{
+
+position:absolute;
+
+inset:0;
+
+background-position:center;
+
+background-size:cover;
+
+background-repeat:no-repeat;
+}
+
+
+.reward-background::after{
+
+content:"";
+
+position:absolute;
+
+inset:0;
+
+background:
+linear-gradient(
+90deg,
+rgba(255,255,255,.05) 0%,
+rgba(255,255,255,.18) 40%,
+rgba(255,255,255,.92) 69%,
+rgba(255,255,255,.97) 100%
+);
+}
+
+
+.reward-content{
+
+position:absolute;
+
+z-index:4;
+
+right:3%;
+
+top:8%;
+
+width:48%;
+
+height:84%;
+
+display:flex;
+
+flex-direction:column;
+
+justify-content:center;
+
+text-align:center;
+
+color:#111;
+}
+
+
+.reward-label{
+
+font-size:
+clamp(13px,3vw,18px);
+
+font-weight:900;
+
+color:#b42721;
+
+text-transform:uppercase;
+
+margin-bottom:9px;
+}
+
+
+.reward-title{
+
+font-size:
+clamp(22px,6vw,39px);
+
+font-weight:900;
+
+line-height:1;
+
+text-transform:uppercase;
+
+margin-bottom:22px;
+}
+
+
+.reward-message{
+
+font-size:
+clamp(17px,4vw,27px);
+
+font-weight:900;
+
+line-height:1.1;
+
+margin-bottom:20px;
+}
+
+
+.reward-amount{
+
+font-size:
+clamp(36px,9vw,66px);
+
+font-weight:900;
+
+color:#123c69;
+}
+
+
+.reward-amount span{
+
+font-size:.48em;
+}
+
+
+.reward-fallback{
+
+position:absolute;
+
+z-index:2;
+
+left:4%;
+
+bottom:8%;
+
+font-size:
+clamp(55px,16vw,115px);
+
+opacity:.12;
+}
+
+
+
+/* =====================================================
+   FINAL
+===================================================== */
 
 .final{
 display:none;
 }
 
-.rank{
-font-size:25px;
-font-weight:800;
-margin:12px 0;
-white-space:pre-line;
-line-height:1.35;
+
+.final-visual{
+
+display:none;
+
+position:relative;
+
+width:100%;
+
+aspect-ratio:1.55 / 1;
+
+min-height:350px;
+
+border:
+5px solid #171717;
+
+border-radius:20px;
+
+overflow:hidden;
+
+background:
+linear-gradient(
+135deg,
+#f7ebd3,
+#fffdf6
+);
+
+box-shadow:
+0 8px 20px rgba(0,0,0,.25);
 }
+
+
+.final-background{
+
+position:absolute;
+
+inset:0;
+
+background-position:center;
+
+background-size:cover;
+
+background-repeat:no-repeat;
+}
+
+
+.final-background::after{
+
+content:"";
+
+position:absolute;
+
+inset:0;
+
+background:
+linear-gradient(
+90deg,
+rgba(255,255,255,.97) 0%,
+rgba(255,255,255,.90) 52%,
+rgba(255,255,255,.20) 75%,
+rgba(255,255,255,.05) 100%
+);
+}
+
+
+.final-message{
+
+position:absolute;
+
+z-index:4;
+
+left:5%;
+
+top:8%;
+
+width:58%;
+
+height:84%;
+
+display:flex;
+
+flex-direction:column;
+
+justify-content:center;
+
+text-align:center;
+}
+
+
+.final-label{
+
+display:inline-block;
+
+align-self:center;
+
+background:#c42c24;
+
+color:white;
+
+padding:
+7px 19px;
+
+border-radius:5px;
+
+font-size:
+clamp(13px,3vw,17px);
+
+font-weight:900;
+
+text-transform:uppercase;
+
+margin-bottom:14px;
+}
+
+
+.rank{
+
+font-size:
+clamp(21px,5.5vw,32px);
+
+font-weight:900;
+
+white-space:pre-line;
+
+line-height:1.3;
+
+color:#122f52;
+}
+
+
+.final-score-big{
+
+font-size:
+clamp(27px,7vw,48px);
+
+font-weight:900;
+
+color:#be2b24;
+
+margin-top:12px;
+}
+
+
+
+/* =====================================================
+   RECAP
+===================================================== */
 
 .summary{
+
+position:relative;
+z-index:2;
+
 display:grid;
-gap:8px;
-margin-top:16px;
+
+gap:7px;
+
+margin-top:20px;
 }
+
 
 .row{
+
 display:flex;
+
 justify-content:space-between;
-gap:16px;
-border-bottom:1px solid #e5dfd5;
-padding:10px 0;
+
+align-items:center;
+
+gap:12px;
+
+border-bottom:
+1px solid #d7cbb8;
+
+padding:
+11px 5px;
 }
 
+
 .small{
-font-size:14px;
+font-size:13px;
 opacity:.72;
 }
 
-#errorBox{
-display:none;
-margin-top:15px;
-padding:12px;
-border:2px solid #b00020;
-border-radius:10px;
-background:#fff0f0;
-color:#8b0000;
-font-weight:700;
-}
 
-@media(max-width:480px){
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media(max-width:600px){
 
 #geopoly-app{
-padding:14px;
+padding:10px;
 }
 
-h2{
-font-size:25px;
+.hero,
+.card{
+padding:17px;
 }
 
-.question{
-font-size:20px;
+.rules{
+grid-template-columns:1fr;
+}
+
+.rule{
+border-right:0;
+border-bottom:
+1px solid #c8bca9;
+}
+
+.rule:last-child{
+border-bottom:0;
+}
+
+.open-answer{
+grid-template-columns:1fr;
 }
 
 .actions{
 flex-direction:column;
 }
 
+.reward-card,
+.final-visual{
+aspect-ratio:auto;
+min-height:450px;
+}
+
+.reward-background::after{
+
+background:
+linear-gradient(
+180deg,
+rgba(255,255,255,.05) 0%,
+rgba(255,255,255,.15) 32%,
+rgba(255,255,255,.90) 52%,
+rgba(255,255,255,.98) 100%
+);
+}
+
+.reward-content{
+
+top:auto;
+
+bottom:4%;
+
+right:5%;
+
+left:5%;
+
+width:90%;
+
+height:48%;
+}
+
+
+.final-background::after{
+
+background:
+linear-gradient(
+180deg,
+rgba(255,255,255,.25) 0%,
+rgba(255,255,255,.65) 38%,
+rgba(255,255,255,.97) 57%,
+rgba(255,255,255,1) 100%
+);
+}
+
+
+.final-message{
+
+top:auto;
+
+bottom:3%;
+
+left:5%;
+
+width:90%;
+
+height:56%;
+}
+
 }
 
 </style>
+
 </head>
 
 
+
 <body>
+
 
 <div id="geopoly-app">
 
 <div class="wrap">
 
 
-<!-- =========================
-PAGE D'ACCUEIL
-========================= -->
+<!-- =====================================================
+     LOGO / TITRE
+===================================================== -->
 
-<section class="hero">
+<header class="geopoly-header">
+
+<div class="geopoly-logo-title">
+GEOPOLY
+</div>
+
+<div class="geopoly-subtitle">
+BORDEAUX
+</div>
+
+</header>
+
+
+
+<!-- =====================================================
+     ACCUEIL
+===================================================== -->
+
+<section class="hero" id="hero">
+
 
 <div class="eyebrow">
 GEOPOLY BORDEAUX
 </div>
 
+
 <h2>
-Cases "Chance"
+🎲 Cases « Chance »
 </h2>
+
 
 <div
 class="intro"
 id="introText">
 
-Bienvenue à l'agence bancaire du GEOPOLY de Bordeaux.
+Bienvenue à l'agence bancaire du
+<strong>GEOPOLY de Bordeaux</strong>.
 
 <br><br>
 
-Je vous poserai 4 questions au fil de la partie lorsque vous tomberez sur les cases "Chance" symbolisées par "?" sur le plateau de jeu.
+Je vous poserai 4 questions au fil de la partie lorsque vous tomberez sur les cases
+<strong>« Chance »</strong>
+symbolisées par
+<strong>« ? »</strong>
+sur le plateau de jeu.
 
 <br><br>
 
-Chaque bonne réponse vous permettra d'obtenir des EV pour financer votre patrimoine immobilier et acqérir des échoppes.
+Chaque bonne réponse vous permettra d'obtenir des
+<strong>EV</strong>
+pour financer votre patrimoine immobilier et acquérir des échoppes.
 
 <br><br>
 
@@ -318,7 +1283,45 @@ La cinquième question vous sera proposée à la fin de la Lab GEOPOLY Bordeaux.
 
 Si les 5 premières questions sont réussies, la question subsidiaire se débloquera.
 
+
+<div class="rules">
+
+<div class="rule">
+
+<span class="rule-icon">
+🏠
+</span>
+
+Chaque bonne réponse vous permet d'augmenter votre patrimoine.
+
 </div>
+
+
+<div class="rule">
+
+<span class="rule-icon">
+🏦
+</span>
+
+Cumulez les EV tout au long de votre aventure.
+
+</div>
+
+
+<div class="rule">
+
+<span class="rule-icon">
+🔑
+</span>
+
+Réussissez les 5 premières étapes pour accéder à la question subsidiaire.
+
+</div>
+
+</div>
+
+</div>
+
 
 
 <div
@@ -326,20 +1329,34 @@ class="scorebar"
 id="gameStatus"
 style="display:none;">
 
-<div class="pill">
-⭐ Score :
-<span id="score">0</span>
-EV
-</div>
 
 <div class="pill">
-Question
+
+💵 SCORE<br>
+
+<strong>
+<span id="score">0</span> EV
+</strong>
+
+</div>
+
+
+<div class="pill">
+
+🎲 PROGRESSION<br>
+
+<strong>
+
 <span id="step">1</span>
 /
 <span id="totalQuestions">6</span>
+
+</strong>
+
 </div>
 
 </div>
+
 
 
 <div
@@ -352,67 +1369,122 @@ style="display:none;">
 </div>
 
 
+
 <div class="actions">
 
 <button
 type="button"
-class="primary"
+class="primary start-button"
 id="startBtn">
 
-Commencer le jeu
+COMMENCER LE JEU ➜
 
 </button>
 
 </div>
 
+
 <div id="errorBox"></div>
+
 
 </section>
 
 
 
-<!-- =========================
-QUESTIONS
-========================= -->
+<!-- =====================================================
+     QUESTION
+===================================================== -->
 
 <section
 class="card"
 id="quizCard"
 style="display:none;">
 
+
 <div
 class="place"
 id="place">
 </div>
+
 
 <div
 class="question-intro"
 id="questionIntro">
 </div>
 
+
 <div
 class="question"
 id="question">
 </div>
 
+
 <div class="question-logo">
 
 <img
-src="logo-geopoly-bordeaux.png?v=13"
+src="logo-geopoly-bordeaux.png?v=14"
 alt="Logo GEOPOLY BORDEAUX">
 
 </div>
+
 
 <div
 class="answers"
 id="answers">
 </div>
 
+
 <div
 class="feedback"
 id="feedback"
 aria-live="polite">
 </div>
+
+
+
+<!-- CARTE DE RECOMPENSE -->
+
+<div
+class="reward-card"
+id="rewardCard">
+
+<div
+class="reward-background"
+id="rewardBackground">
+</div>
+
+<div
+class="reward-fallback">
+🎩
+</div>
+
+<div class="reward-content">
+
+<div
+class="reward-label"
+id="rewardLabel">
+</div>
+
+<div
+class="reward-title"
+id="rewardTitle">
+</div>
+
+<div
+class="reward-message"
+id="rewardMessage">
+</div>
+
+<div
+class="reward-amount"
+id="rewardAmount">
+</div>
+
+</div>
+
+</div>
+
+
 
 <div class="actions">
 
@@ -421,9 +1493,10 @@ type="button"
 class="skip"
 id="skipBtn">
 
-Passer cette question
+PASSER CETTE QUESTION
 
 </button>
+
 
 <button
 type="button"
@@ -431,26 +1504,39 @@ class="primary"
 id="nextBtn"
 disabled>
 
-Continuer
+CONTINUER ➜
 
 </button>
 
 </div>
 
+
 </section>
 
 
 
-<!-- =========================
-RESULTAT FINAL
-========================= -->
+<!-- =====================================================
+     RESULTAT FINAL
+===================================================== -->
 
 <section
 class="card final"
 id="finalCard">
 
-<div class="eyebrow">
-Résultat final
+
+<div
+class="final-visual"
+id="finalVisual">
+
+<div
+class="final-background"
+id="finalBackground">
+</div>
+
+<div class="final-message">
+
+<div class="final-label">
+RÉSULTAT FINAL
 </div>
 
 <div
@@ -459,13 +1545,20 @@ id="rank">
 </div>
 
 <div
+class="final-score-big"
 id="finalScore">
 </div>
+
+</div>
+
+</div>
+
 
 <div
 class="summary"
 id="summary">
 </div>
+
 
 <div class="actions">
 
@@ -474,16 +1567,18 @@ type="button"
 class="primary"
 id="restartBtn">
 
-Recommencer
+↻ RECOMMENCER LE JEU
 
 </button>
 
 </div>
 
+
 </section>
 
 
 </div>
+
 </div>
 
 
@@ -495,9 +1590,10 @@ Recommencer
 "use strict";
 
 
-/* ==============================
-AFFICHAGE DES ERREURS
-============================== */
+
+/* =====================================================
+   ERREURS
+===================================================== */
 
 window.addEventListener(
 'error',
@@ -512,7 +1608,9 @@ box.style.display =
 'block';
 
 box.textContent =
-'Erreur technique : ' + event.message;
+'Erreur technique : '
++
+event.message;
 
 }
 
@@ -521,16 +1619,20 @@ box.textContent =
 
 
 
-/* ==============================
-QUESTIONS
-============================== */
+/* =====================================================
+   QUESTIONS
+===================================================== */
 
 const questions = [
 
 
-/* QUESTION 1 */
+
+/* ========================
+   QUESTION 1
+======================== */
 
 {
+
 place:'Jardin Public',
 
 intro:`🎲 Case Chance !
@@ -550,23 +1652,40 @@ Au XVIIIe siècle, des bâtiments apparaissent le long de la rue d'Aviau. Cet en
 1858, c'est aussi l'année où le vieux jardin botanique de la ville s'installe au Jardin Public.
 
 Une réhabilitation du parc a permis la plantation de plusieurs centaines d'arbres et d'arbustes, en conservant l'esprit d'arboretum initial.
-Pour pouvoir répondre à la quetion, vous allez devoir regarder un plan du jardin (présent à l'entrée située cours de verdun en face du cours de Gourgues ) et vous rendre au numéro 12 ; traverser le pont devant vous. Vous allez avoir le manège sur votre droite et sur votre gauche, avant l'entrée de l'espace enfant, il y a un arbre avec une plaque  `,
 
-q:`Quel est le premier mot de 5 lettres présent sur cette plaque .  ?`,
+Pour pouvoir répondre à la question, vous allez devoir regarder un plan du jardin, présent à l'entrée située cours de Verdun en face du cours de Gourgue, et vous rendre au numéro 12.
+
+Traversez le pont devant vous. Vous aurez le manège sur votre droite et, sur votre gauche, avant l'entrée de l'espace enfant, vous trouverez un arbre avec une plaque.`,
+
+q:`Quel est le premier mot de 5 lettres présent sur cette plaque ?`,
 
 acceptedAnswers:[
-'tilia',
-'Tilia'
+'tilia'
 ],
 
-points:650
+points:650,
+
+cardImage:
+'carte-question-1.jpg',
+
+rewardLabel:
+'QUESTION 1',
+
+rewardTitle:
+'LE JARDIN PUBLIC',
+
+rewardMessage:
+'EXCELLENTE RÉPONSE !'
 },
 
 
 
-/* QUESTION 2 */
+/* ========================
+   QUESTION 2
+======================== */
 
 {
+
 place:'Jardins de la mairie',
 
 intro:`🎲 Nouvelle case Chance !
@@ -587,14 +1706,29 @@ acceptedAnswers:[
 'musba'
 ],
 
-points:600
+points:600,
+
+cardImage:
+'carte-question-2.jpg',
+
+rewardLabel:
+'QUESTION 2',
+
+rewardTitle:
+'JARDINS DE LA MAIRIE',
+
+rewardMessage:
+'PARFAIT !'
 },
 
 
 
-/* QUESTION 3 */
+/* ========================
+   QUESTION 3
+======================== */
 
 {
+
 place:'Rue du Pas Saint Georges',
 
 intro:`🎲 Votre patrimoine commence à prendre forme.
@@ -613,55 +1747,86 @@ Bien des années plus tard, lorsque j'écrivis mes romans loin de ces rues, je c
 
 Car on peut s'éloigner de la ville de son enfance.
 
-Mais la ville de son enfance, elle, ne vous quitte jamais. Je suis né au 86 de la rue du pas st georges, je suis François Mauriac
+Mais la ville de son enfance, elle, ne vous quitte jamais.
 
-q:`Quel est le prénom gravé dans la pierre d'une ancien établissement bordelais sur la facade de l'immeuble qui m'a vu naitre?`,
+Je suis né au 86 de la rue du Pas-Saint-Georges, je suis François Mauriac.`,
+
+q:`Quel est le prénom gravé dans la pierre d'un ancien établissement bordelais sur la façade de l'immeuble qui m'a vu naître ?`,
 
 acceptedAnswers:[
-'François',
 'françois',
 'francois'
 ],
 
-points:400
+points:400,
+
+cardImage:
+'carte-question-3.jpg',
+
+rewardLabel:
+'QUESTION 3',
+
+rewardTitle:
+'RUE DU PAS SAINT GEORGES',
+
+rewardMessage:
+'BRAVO !'
 },
 
 
 
-/* QUESTION 4 */
+/* ========================
+   QUESTION 4
+======================== */
 
 {
+
 place:'Place Stalingrad',
 
 intro:`🎲 Encore une opportunité d'investissement !
 
 Répondez correctement et ajoutez 300 EV à votre capital.
 
-Le lion déjà présent sur le blason de Bordeaux, domine la place du haut de ses 6M.
+Le lion, déjà présent sur le blason de Bordeaux, domine la place du haut de ses 6 mètres.
 
 L'animal est représenté dans une posture fière, la patte avant droite posée sur un rocher, la tête levée et tournée vers la rive gauche.
 
-Ia été réalisé par l'artiste plasticien Xavier Veilhan en 2005.
+Il a été réalisé par l'artiste plasticien Xavier Veilhan en 2005.
 
 Il est fabriqué en polystyrène expansé recouvert de résine polyester armée de fibre de verre, reposant sur une structure en acier.
 
 Son aspect géométrique et monochrome lui donne une allure contemporaine, ludique et décalée.`,
 
-q:`Quelle est la couleur du roi des animaux de bordeaux ?`,
+q:`Quelle est la couleur du roi des animaux de Bordeaux ?`,
 
 acceptedAnswers:[
 'bleu',
 'bleue'
 ],
 
-points:300
+points:300,
+
+cardImage:
+'carte-question-4.jpg',
+
+rewardLabel:
+'QUESTION 4',
+
+rewardTitle:
+'PLACE STALINGRAD',
+
+rewardMessage:
+'TRÈS BIEN !'
 },
 
 
 
-/* QUESTION 5 */
+/* ========================
+   QUESTION 5
+======================== */
 
 {
+
 place:'Bonus LAB',
 
 intro:`🏦 Vous avez terminé la Lab GEOPOLY Bordeaux.
@@ -674,14 +1839,29 @@ acceptedAnswers:[
 '2050'
 ],
 
-points:2050
+points:2050,
+
+cardImage:
+'carte-question-5.jpg',
+
+rewardLabel:
+'QUESTION 5',
+
+rewardTitle:
+'BONUS LAB',
+
+rewardMessage:
+'INCROYABLE !'
 },
 
 
 
-/* QUESTION 6 */
+/* ========================
+   QUESTION 6
+======================== */
 
 {
+
 place:'QUESTION SUBSIDIAIRE',
 
 intro:`🏨 Vous avez réussi les cinq premières étapes.
@@ -696,100 +1876,170 @@ acceptedAnswers:[
 
 points:1000,
 
-final:true
+final:true,
+
+cardImage:
+'carte-question-6.jpg',
+
+rewardLabel:
+'QUESTION SUBSIDIAIRE',
+
+rewardTitle:
+'DERNIÈRE ÉTAPE',
+
+rewardMessage:
+'FÉLICITATIONS !'
+
 }
 
 ];
 
 
 
-/* ==============================
-VARIABLES
-============================== */
+/* =====================================================
+   SAUVEGARDE
+===================================================== */
 
 const STORAGE_KEY =
-'geopoly-bordeaux-progress-v13';
+'geopoly-bordeaux-progress-v14';
+
 
 let index =
 0;
 
+
 let score =
 0;
 
+
 let answered =
 false;
+
 
 const results =
 [];
 
 
 
-/* ==============================
-ELEMENTS
-============================== */
+/* =====================================================
+   ELEMENTS
+===================================================== */
 
 const scoreEl =
 document.getElementById('score');
 
+
 const stepEl =
 document.getElementById('step');
+
 
 const totalQuestionsEl =
 document.getElementById('totalQuestions');
 
+
 const progressEl =
 document.getElementById('progress');
+
 
 const placeEl =
 document.getElementById('place');
 
+
 const questionIntroEl =
 document.getElementById('questionIntro');
+
 
 const questionEl =
 document.getElementById('question');
 
+
 const answersEl =
 document.getElementById('answers');
+
 
 const feedbackEl =
 document.getElementById('feedback');
 
+
 const skipBtn =
 document.getElementById('skipBtn');
+
 
 const nextBtn =
 document.getElementById('nextBtn');
 
+
 const startBtn =
 document.getElementById('startBtn');
+
 
 const quizCard =
 document.getElementById('quizCard');
 
+
 const finalCard =
 document.getElementById('finalCard');
+
 
 const restartBtn =
 document.getElementById('restartBtn');
 
+
 const rankEl =
 document.getElementById('rank');
+
 
 const finalScoreEl =
 document.getElementById('finalScore');
 
+
 const summaryEl =
 document.getElementById('summary');
+
 
 const gameStatus =
 document.getElementById('gameStatus');
 
+
 const gameProgress =
 document.getElementById('gameProgress');
 
+
 const introText =
 document.getElementById('introText');
+
+
+const rewardCard =
+document.getElementById('rewardCard');
+
+
+const rewardBackground =
+document.getElementById('rewardBackground');
+
+
+const rewardLabel =
+document.getElementById('rewardLabel');
+
+
+const rewardTitle =
+document.getElementById('rewardTitle');
+
+
+const rewardMessage =
+document.getElementById('rewardMessage');
+
+
+const rewardAmount =
+document.getElementById('rewardAmount');
+
+
+const finalVisual =
+document.getElementById('finalVisual');
+
+
+const finalBackground =
+document.getElementById('finalBackground');
+
 
 
 totalQuestionsEl.textContent =
@@ -797,9 +2047,9 @@ questions.length;
 
 
 
-/* ==============================
-SAUVEGARDE
-============================== */
+/* =====================================================
+   SAUVEGARDE
+===================================================== */
 
 function saveProgress(){
 
@@ -839,6 +2089,7 @@ const savedText =
 localStorage.getItem(
 STORAGE_KEY
 );
+
 
 if(!savedText){
 
@@ -886,6 +2137,7 @@ Array.isArray(saved.results)
 results.length =
 0;
 
+
 saved.results.forEach(
 
 function(result){
@@ -932,9 +2184,9 @@ console.log(error);
 
 
 
-/* ==============================
-NORMALISATION REPONSES
-============================== */
+/* =====================================================
+   REPONSES
+===================================================== */
 
 function normalizeAnswer(value){
 
@@ -960,9 +2212,9 @@ return String(value)
 
 
 
-/* ==============================
-5 PREMIERES REUSSIES ?
-============================== */
+/* =====================================================
+   5 PREMIERES REUSSIES
+===================================================== */
 
 function firstFiveSucceeded(){
 
@@ -1003,20 +2255,31 @@ return true;
 
 
 
-/* ==============================
-AFFICHAGE QUESTION
-============================== */
+/* =====================================================
+   AFFICHAGE QUESTION
+===================================================== */
 
 function renderQuestion(){
 
 gameStatus.style.display =
 'flex';
 
+
 gameProgress.style.display =
 'block';
 
+
 introText.style.display =
 'none';
+
+
+rewardCard.style.display =
+'none';
+
+
+feedbackEl.classList.remove(
+'wrong'
+);
 
 
 if(
@@ -1050,6 +2313,7 @@ questions[index];
 quizCard.style.display =
 'block';
 
+
 finalCard.style.display =
 'none';
 
@@ -1057,17 +2321,22 @@ finalCard.style.display =
 answered =
 false;
 
+
 nextBtn.disabled =
 true;
+
 
 skipBtn.style.display =
 'block';
 
+
 skipBtn.disabled =
 false;
 
+
 feedbackEl.style.display =
 'none';
+
 
 feedbackEl.textContent =
 '';
@@ -1075,6 +2344,7 @@ feedbackEl.textContent =
 
 scoreEl.textContent =
 score;
+
 
 stepEl.textContent =
 index + 1;
@@ -1097,11 +2367,29 @@ placeEl.textContent =
 
 item.place
 +
-' · Bonus +'
+' · +'
 +
 item.points
 +
 ' EV';
+
+
+questionIntroEl.style.display =
+'block';
+
+
+questionEl.style.display =
+'block';
+
+
+answersEl.style.display =
+'grid';
+
+
+document.querySelector(
+'.question-logo'
+).style.display =
+'flex';
 
 
 questionIntroEl.textContent =
@@ -1119,6 +2407,7 @@ answersEl.innerHTML =
 const form =
 document.createElement('form');
 
+
 form.className =
 'open-answer';
 
@@ -1126,14 +2415,18 @@ form.className =
 const input =
 document.createElement('input');
 
+
 input.type =
 'text';
+
 
 input.placeholder =
 'Saisissez votre réponse';
 
+
 input.autocomplete =
 'off';
+
 
 input.setAttribute(
 'aria-label',
@@ -1144,23 +2437,28 @@ input.setAttribute(
 const submit =
 document.createElement('button');
 
+
 submit.type =
 'submit';
+
 
 submit.className =
 'primary';
 
+
 submit.textContent =
-'Valider ma réponse';
+'VALIDER MA RÉPONSE ✓';
 
 
 form.appendChild(
 input
 );
 
+
 form.appendChild(
 submit
 );
+
 
 answersEl.appendChild(
 form
@@ -1201,9 +2499,72 @@ input.focus();
 
 
 
-/* ==============================
-VERIFICATION REPONSE
-============================== */
+/* =====================================================
+   CARTE BONNE REPONSE
+===================================================== */
+
+function showRewardCard(item){
+
+questionIntroEl.style.display =
+'none';
+
+
+questionEl.style.display =
+'none';
+
+
+answersEl.style.display =
+'none';
+
+
+document.querySelector(
+'.question-logo'
+).style.display =
+'none';
+
+
+feedbackEl.style.display =
+'none';
+
+
+rewardLabel.textContent =
+item.rewardLabel;
+
+
+rewardTitle.textContent =
+item.rewardTitle;
+
+
+rewardMessage.textContent =
+item.rewardMessage;
+
+
+rewardAmount.innerHTML =
+
+item.points
++
+' <span>EV</span>';
+
+
+rewardBackground.style.backgroundImage =
+
+"url('"
++
+item.cardImage
++
+"')";
+
+
+rewardCard.style.display =
+'block';
+
+}
+
+
+
+/* =====================================================
+   VERIFICATION
+===================================================== */
 
 function checkAnswer(
 input,
@@ -1223,11 +2584,18 @@ input.value.trim();
 
 if(!value){
 
+feedbackEl.classList.add(
+'wrong'
+);
+
+
 feedbackEl.textContent =
 'Saisissez une réponse avant de valider.';
 
+
 feedbackEl.style.display =
 'block';
+
 
 return;
 
@@ -1260,18 +2628,23 @@ normalized;
 
 
 
-/* BONNE REPONSE */
+/* =====================================================
+   BONNE REPONSE
+===================================================== */
 
 if(correct){
 
 answered =
 true;
 
+
 input.disabled =
 true;
 
+
 submit.disabled =
 true;
+
 
 skipBtn.disabled =
 true;
@@ -1293,6 +2666,7 @@ if(previous !== -1){
 
 score -=
 results[previous].points;
+
 
 results.splice(
 previous,
@@ -1319,21 +2693,27 @@ points:item.points
 });
 
 
-feedbackEl.textContent =
-
-'Bonne réponse ! +'
-+
-item.points
-+
-' EV';
-
-
-feedbackEl.style.display =
-'block';
-
-
 scoreEl.textContent =
 score;
+
+
+progressEl.style.width =
+
+(
+(index + 1)
+/
+questions.length
+*
+100
+)
++
+'%';
+
+
+showRewardCard(
+item
+);
+
 
 nextBtn.disabled =
 false;
@@ -1341,22 +2721,33 @@ false;
 
 saveProgress();
 
+
 return;
 
 }
 
 
 
-/* MAUVAISE REPONSE */
+/* =====================================================
+   MAUVAISE REPONSE
+===================================================== */
+
+feedbackEl.classList.add(
+'wrong'
+);
+
 
 feedbackEl.textContent =
-'Réponse incorrecte. Essayez encore.';
+'❌ Réponse incorrecte. Essayez encore.';
+
 
 feedbackEl.style.display =
 'block';
 
+
 input.value =
 '';
+
 
 input.focus();
 
@@ -1364,9 +2755,9 @@ input.focus();
 
 
 
-/* ==============================
-PASSER UNE QUESTION
-============================== */
+/* =====================================================
+   PASSER
+===================================================== */
 
 skipBtn.addEventListener(
 
@@ -1402,6 +2793,7 @@ if(previous !== -1){
 score -=
 results[previous].points;
 
+
 results.splice(
 previous,
 1
@@ -1423,8 +2815,14 @@ points:0
 });
 
 
+feedbackEl.classList.remove(
+'wrong'
+);
+
+
 feedbackEl.textContent =
 'Question passée. Aucun EV gagné.';
+
 
 feedbackEl.style.display =
 'block';
@@ -1449,8 +2847,10 @@ true;
 skipBtn.disabled =
 true;
 
+
 nextBtn.disabled =
 false;
+
 
 scoreEl.textContent =
 score;
@@ -1464,9 +2864,9 @@ saveProgress();
 
 
 
-/* ==============================
-CONTINUER
-============================== */
+/* =====================================================
+   CONTINUER
+===================================================== */
 
 nextBtn.addEventListener(
 
@@ -1483,10 +2883,13 @@ return;
 
 index++;
 
+
 answered =
 false;
 
+
 saveProgress();
+
 
 renderQuestion();
 
@@ -1496,44 +2899,60 @@ renderQuestion();
 
 
 
-/* ==============================
-QUESTION 6 VERROUILLEE
-============================== */
+/* =====================================================
+   QUESTION 6 VERROUILLEE
+===================================================== */
 
 function showLocked(){
 
 gameStatus.style.display =
 'flex';
 
+
 gameProgress.style.display =
 'block';
+
 
 introText.style.display =
 'none';
 
+
 quizCard.style.display =
 'none';
 
+
 finalCard.style.display =
 'block';
+
+
+finalVisual.style.display =
+'block';
+
+
+finalBackground.style.backgroundImage =
+"url('carte-final-echec.jpg')";
+
 
 progressEl.style.width =
 '83.33%';
 
 
 rankEl.textContent =
-'Minimum de points non atteint';
+`QUESTION SUBSIDIAIRE VERROUILLÉE
+
+Les cinq premières questions doivent être réussies.
+
+Vous pouvez recommencer le parcours pour tenter de valider les questions manquantes.`;
 
 
 finalScoreEl.textContent =
-`Merci d'avoir joué avec nous.
-
-La question subsidiaire ne peut être débloquée que si les cinq premières questions ont été réussies.
-
-Vous n'avez pas atteint le nombre d'EV minimum. Vous pouvez recommencer le parcours pour tenter de valider les questions manquantes.`;
+score
++
+' EV';
 
 
 displaySummary();
+
 
 saveProgress();
 
@@ -1541,26 +2960,35 @@ saveProgress();
 
 
 
-/* ==============================
-RESULTAT FINAL
-============================== */
+/* =====================================================
+   RESULTAT FINAL
+===================================================== */
 
 function showFinalResult(){
 
 gameStatus.style.display =
 'flex';
 
+
 gameProgress.style.display =
 'block';
+
 
 introText.style.display =
 'none';
 
+
 quizCard.style.display =
 'none';
 
+
 finalCard.style.display =
 'block';
+
+
+finalVisual.style.display =
+'block';
+
 
 progressEl.style.width =
 '100%';
@@ -1590,38 +3018,55 @@ score >= 5000
 ){
 
 rank =
-`Bravo !
+`FÉLICITATIONS !
 
-Vous êtes un grand Géopropriétaire bordelais
-Vous avez gagné le maximum d'EV possible ( 5000 EV ) soit l'équivalent de deux hôtels particuliers.
+Vous êtes un grand Géopropriétaire bordelais !
+
+Vous avez gagné le maximum d'EV possible, soit l'équivalent de deux hôtels particuliers.
+
+Pour signer le registre de propriété, entrez le mot de passe « portedelalune » dans Certitude afin d'obtenir les coordonnées de la cache.`;
 
 
-Pour signer le registre de propriété, entrez le mot de passe : "portedelalune" dans Certitude; Vous obtiendrez les coordonnées de la cache.`;
+finalBackground.style.backgroundImage =
+"url('carte-final-5000.jpg')";
 
 }
+
 
 else if(
 score >= 4000
 ){
 
 rank =
-`Bravo !
+`BRAVO !
 
-Vous êtes un Géopropriétaire Bordelais
-Vous avez atteint 4000 EV, soit l'équivalent d'un hôtel particulier.
+Vous êtes un Géopropriétaire bordelais !
 
-Pour signer le registre de propriété, entrez le mot de passe : "portedelalune" dans Certitude; Vous obtiendrez les coordonnées de la cache.`;
+Vous avez atteint au moins 4000 EV, soit l'équivalent d'un hôtel particulier.
+
+Pour signer le registre de propriété, entrez le mot de passe « portedelalune » dans Certitude afin d'obtenir les coordonnées de la cache.`;
+
+
+finalBackground.style.backgroundImage =
+"url('carte-final-4000.jpg')";
 
 }
+
 
 else{
 
 rank =
-`Merci de votre participation.
+`MERCI DE VOTRE PARTICIPATION
 
 Vous n'avez malheureusement pas obtenu les 4000 EV nécessaires pour constituer un hôtel particulier.
 
-La mystery restera donc encore une énigme pour vous. Vous pouvez recommencer et tenter de valider les questions manquantes.`;
+La mystery restera encore une énigme pour vous.
+
+Vous pouvez recommencer et tenter de valider les questions manquantes.`;
+
+
+finalBackground.style.backgroundImage =
+"url('carte-final-echec.jpg')";
 
 }
 
@@ -1632,8 +3077,6 @@ rank;
 
 finalScoreEl.textContent =
 
-'Score : '
-+
 score
 +
 ' / '
@@ -1645,15 +3088,16 @@ max
 
 displaySummary();
 
+
 saveProgress();
 
 }
 
 
 
-/* ==============================
-RECAPITULATIF
-============================== */
+/* =====================================================
+   RECAPITULATIF
+===================================================== */
 
 function displaySummary(){
 
@@ -1668,6 +3112,7 @@ function(result){
 const row =
 document.createElement('div');
 
+
 row.className =
 'row';
 
@@ -1675,9 +3120,14 @@ row.className =
 const left =
 document.createElement('span');
 
+
 left.innerHTML =
 
+'<strong>'
++
 result.place
++
+'</strong>'
 +
 '<div class="small">'
 +
@@ -1688,6 +3138,7 @@ result.status
 
 const right =
 document.createElement('strong');
+
 
 right.textContent =
 
@@ -1702,9 +3153,11 @@ row.appendChild(
 left
 );
 
+
 row.appendChild(
 right
 );
+
 
 summaryEl.appendChild(
 row
@@ -1718,9 +3171,9 @@ row
 
 
 
-/* ==============================
-RECOMMENCER
-============================== */
+/* =====================================================
+   RECOMMENCER
+===================================================== */
 
 restartBtn.addEventListener(
 
@@ -1731,11 +3184,14 @@ function(){
 index =
 0;
 
+
 score =
 0;
 
+
 answered =
 false;
+
 
 results.length =
 0;
@@ -1747,8 +3203,10 @@ clearProgress();
 scoreEl.textContent =
 '0';
 
+
 stepEl.textContent =
 '1';
+
 
 progressEl.style.width =
 '0%';
@@ -1757,11 +3215,14 @@ progressEl.style.width =
 finalCard.style.display =
 'none';
 
+
 quizCard.style.display =
 'none';
 
+
 introText.style.display =
 'none';
+
 
 startBtn.style.display =
 'none';
@@ -1775,9 +3236,9 @@ renderQuestion();
 
 
 
-/* ==============================
-CHARGEMENT INITIAL
-============================== */
+/* =====================================================
+   INITIALISATION
+===================================================== */
 
 loadProgress();
 
@@ -1789,14 +3250,18 @@ score;
 quizCard.style.display =
 'none';
 
+
 finalCard.style.display =
 'none';
+
 
 gameStatus.style.display =
 'none';
 
+
 gameProgress.style.display =
 'none';
+
 
 introText.style.display =
 'block';
@@ -1809,31 +3274,33 @@ index < questions.length
 ){
 
 startBtn.textContent =
-'Reprendre le jeu';
+'REPRENDRE LE JEU ➜';
 
 }
+
 
 else if(
 index >= questions.length
 ){
 
 startBtn.textContent =
-'Voir mon résultat';
+'VOIR MON RÉSULTAT ➜';
 
 }
+
 
 else{
 
 startBtn.textContent =
-'Commencer le jeu';
+'COMMENCER LE JEU ➜';
 
 }
 
 
 
-/* ==============================
-COMMENCER
-============================== */
+/* =====================================================
+   COMMENCER
+===================================================== */
 
 startBtn.addEventListener(
 
@@ -1844,11 +3311,14 @@ function(){
 startBtn.style.display =
 'none';
 
+
 introText.style.display =
 'none';
 
+
 gameStatus.style.display =
 'flex';
+
 
 gameProgress.style.display =
 'block';
@@ -1876,5 +3346,7 @@ renderQuestion();
 
 </script>
 
+
 </body>
+
 </html>
