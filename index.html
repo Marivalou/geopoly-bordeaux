@@ -76,7 +76,7 @@ margin:0 auto;
 
 
 /* =====================================================
-   LOGO OFFICIEL
+   LOGO
 ===================================================== */
 
 .geopoly-header{
@@ -191,7 +191,7 @@ font-size:16px;
 
 
 /* =====================================================
-   REGLES ACCUEIL
+   REGLES
 ===================================================== */
 
 .rules{
@@ -637,7 +637,7 @@ border-color:#db8d86;
 
 
 /* =====================================================
-   CARTE RECOMPENSE
+   CARTE DE RECOMPENSE
 ===================================================== */
 
 .reward-card{
@@ -684,7 +684,7 @@ box-shadow:
 
 
 /* =====================================================
-   FINAL
+   FINAL NORMAL
 ===================================================== */
 
 .final{
@@ -728,6 +728,93 @@ border-radius:14px;
 box-shadow:
 0 5px 16px rgba(0,0,0,.25);
 
+cursor:pointer;
+
+}
+
+
+
+/* =====================================================
+   RESULTAT PLEIN ECRAN
+===================================================== */
+
+.final-overlay{
+
+position:fixed;
+
+inset:0;
+
+z-index:9999;
+
+display:none;
+
+align-items:center;
+
+justify-content:center;
+
+flex-direction:column;
+
+padding:12px;
+
+background:
+rgba(3,16,31,.96);
+
+overflow:auto;
+
+}
+
+.final-overlay.active{
+
+display:flex;
+
+}
+
+.final-overlay-image{
+
+display:block;
+
+max-width:96vw;
+
+max-height:88vh;
+
+width:auto;
+
+height:auto;
+
+object-fit:contain;
+
+border-radius:12px;
+
+box-shadow:
+0 10px 35px rgba(0,0,0,.55);
+
+cursor:pointer;
+
+}
+
+.final-overlay-hint{
+
+margin-top:12px;
+
+padding:
+8px 14px;
+
+border-radius:999px;
+
+background:
+rgba(255,255,255,.92);
+
+color:#12365e;
+
+font-size:14px;
+
+font-weight:800;
+
+text-align:center;
+
+box-shadow:
+0 3px 10px rgba(0,0,0,.25);
+
 }
 
 
@@ -742,11 +829,17 @@ position:relative;
 
 z-index:2;
 
-display:grid;
+display:none;
 
 gap:7px;
 
 margin-top:20px;
+
+}
+
+.summary.visible{
+
+display:grid;
 
 }
 
@@ -885,6 +978,26 @@ object-fit:contain;
 
 }
 
+.final-overlay{
+
+padding:6px;
+
+}
+
+.final-overlay-image{
+
+max-width:98vw;
+
+max-height:86vh;
+
+}
+
+.final-overlay-hint{
+
+font-size:13px;
+
+}
+
 }
 
 </style>
@@ -896,6 +1009,31 @@ object-fit:contain;
 <body>
 
 
+<!-- =====================================================
+     RESULTAT PLEIN ECRAN
+===================================================== -->
+
+<div
+class="final-overlay"
+id="finalOverlay">
+
+<img
+id="finalOverlayImage"
+class="final-overlay-image"
+src=""
+alt="Résultat final GEOPOLY BORDEAUX">
+
+<div
+class="final-overlay-hint">
+
+👆 Touchez la carte pour voir le détail du score
+
+</div>
+
+</div>
+
+
+
 <div id="geopoly-app">
 
 <div class="wrap">
@@ -903,7 +1041,7 @@ object-fit:contain;
 
 
 <!-- =====================================================
-     UNIQUE LOGO EN HAUT
+     LOGO
 ===================================================== -->
 
 <header
@@ -911,7 +1049,7 @@ class="geopoly-header"
 id="topLogo">
 
 <img
-src="logo-geopoly-bordeaux.png?v=18"
+src="logo-geopoly-bordeaux.png?v=19"
 alt="GEOPOLY BORDEAUX"
 class="main-logo">
 
@@ -1027,7 +1165,7 @@ COMMENCER LE JEU ➜
 
 
 <!-- =====================================================
-     SCORE ET PROGRESSION
+     SCORE
 ===================================================== -->
 
 <div
@@ -1064,6 +1202,7 @@ EV
 
 
 </div>
+
 
 
 <div
@@ -1118,10 +1257,6 @@ aria-live="polite">
 </div>
 
 
-
-<!-- =====================================================
-     CARTE DE RECOMPENSE
-===================================================== -->
 
 <div
 class="reward-card"
@@ -1261,8 +1396,6 @@ const questions = [
 
 
 
-/* QUESTION 1 */
-
 {
 
 place:
@@ -1307,8 +1440,6 @@ cardImage:
 
 
 
-/* QUESTION 2 */
-
 {
 
 place:
@@ -1341,8 +1472,6 @@ cardImage:
 },
 
 
-
-/* QUESTION 3 */
 
 {
 
@@ -1387,8 +1516,6 @@ cardImage:
 
 
 
-/* QUESTION 4 */
-
 {
 
 place:
@@ -1426,8 +1553,6 @@ cardImage:
 
 
 
-/* QUESTION 5 */
-
 {
 
 place:
@@ -1453,8 +1578,6 @@ cardImage:
 },
 
 
-
-/* QUESTION 6 */
 
 {
 
@@ -1492,7 +1615,7 @@ cardImage:
 ===================================================== */
 
 const STORAGE_KEY =
-'geopoly-bordeaux-progress-v18';
+'geopoly-bordeaux-progress-v19';
 
 
 let index =
@@ -1521,142 +1644,129 @@ document.getElementById(
 'score'
 );
 
-
 const stepEl =
 document.getElementById(
 'step'
 );
-
 
 const totalQuestionsEl =
 document.getElementById(
 'totalQuestions'
 );
 
-
 const progressEl =
 document.getElementById(
 'progress'
 );
-
 
 const placeEl =
 document.getElementById(
 'place'
 );
 
-
 const questionIntroEl =
 document.getElementById(
 'questionIntro'
 );
-
 
 const questionEl =
 document.getElementById(
 'question'
 );
 
-
 const answersEl =
 document.getElementById(
 'answers'
 );
-
 
 const feedbackEl =
 document.getElementById(
 'feedback'
 );
 
-
 const skipBtn =
 document.getElementById(
 'skipBtn'
 );
-
 
 const nextBtn =
 document.getElementById(
 'nextBtn'
 );
 
-
 const startBtn =
 document.getElementById(
 'startBtn'
 );
-
 
 const quizCard =
 document.getElementById(
 'quizCard'
 );
 
-
 const finalCard =
 document.getElementById(
 'finalCard'
 );
-
 
 const restartBtn =
 document.getElementById(
 'restartBtn'
 );
 
-
 const summaryEl =
 document.getElementById(
 'summary'
 );
-
 
 const gameStatus =
 document.getElementById(
 'gameStatus'
 );
 
-
 const gameProgress =
 document.getElementById(
 'gameProgress'
 );
-
 
 const introText =
 document.getElementById(
 'introText'
 );
 
-
 const hero =
 document.getElementById(
 'hero'
 );
-
 
 const rewardCard =
 document.getElementById(
 'rewardCard'
 );
 
-
 const rewardImage =
 document.getElementById(
 'rewardImage'
 );
-
 
 const finalVisual =
 document.getElementById(
 'finalVisual'
 );
 
-
 const finalImage =
 document.getElementById(
 'finalImage'
+);
+
+const finalOverlay =
+document.getElementById(
+'finalOverlay'
+);
+
+const finalOverlayImage =
+document.getElementById(
+'finalOverlayImage'
 );
 
 
@@ -1666,7 +1776,7 @@ questions.length;
 
 
 /* =====================================================
-   RETOUR EN HAUT SUR LE LOGO
+   HAUT DE PAGE
 ===================================================== */
 
 function scrollToLogo(){
@@ -1847,7 +1957,7 @@ error
 
 
 /* =====================================================
-   NORMALISATION REPONSE
+   NORMALISATION
 ===================================================== */
 
 function normalizeAnswer(value){
@@ -1879,7 +1989,7 @@ value
 
 
 /* =====================================================
-   5 PREMIERES QUESTIONS
+   PREMIERES QUESTIONS
 ===================================================== */
 
 function firstFiveSucceeded(){
@@ -1922,7 +2032,7 @@ return true;
 
 
 /* =====================================================
-   AFFICHAGE QUESTION
+   QUESTION
 ===================================================== */
 
 function renderQuestion(){
@@ -2159,14 +2269,6 @@ submit
 );
 
 
-/*
-AUCUN focus automatique sur
-la zone de réponse.
-
-On revient tout en haut,
-sur le logo officiel.
-*/
-
 scrollToLogo();
 
 }
@@ -2174,7 +2276,7 @@ scrollToLogo();
 
 
 /* =====================================================
-   CARTE BONNE REPONSE
+   RECOMPENSE
 ===================================================== */
 
 function showRewardCard(item){
@@ -2202,7 +2304,7 @@ feedbackEl.style.display =
 rewardImage.src =
 item.cardImage
 +
-'?v=18';
+'?v=19';
 
 
 rewardImage.alt =
@@ -2288,10 +2390,6 @@ normalized;
 );
 
 
-
-/* =====================================================
-   BONNE REPONSE
-===================================================== */
 
 if(correct){
 
@@ -2389,10 +2487,6 @@ return;
 
 
 
-/* =====================================================
-   MAUVAISE REPONSE
-===================================================== */
-
 feedbackEl.classList.add(
 'wrong'
 );
@@ -2409,11 +2503,6 @@ feedbackEl.style.display =
 input.value =
 '';
 
-
-/*
-Ici seulement, on conserve le focus
-pour permettre de retenter rapidement.
-*/
 
 input.focus();
 
@@ -2568,7 +2657,82 @@ renderQuestion();
 
 
 /* =====================================================
-   QUESTION 6 VERROUILLEE
+   CARTE FINALE PLEIN ECRAN
+===================================================== */
+
+function openFinalOverlay(imageSrc){
+
+finalOverlayImage.src =
+imageSrc;
+
+
+finalOverlay.classList.add(
+'active'
+);
+
+
+document.body.style.overflow =
+'hidden';
+
+}
+
+
+
+function closeFinalOverlay(){
+
+finalOverlay.classList.remove(
+'active'
+);
+
+
+document.body.style.overflow =
+'';
+
+
+summaryEl.classList.add(
+'visible'
+);
+
+
+scrollToLogo();
+
+}
+
+
+
+finalOverlayImage.addEventListener(
+
+'click',
+
+function(){
+
+closeFinalOverlay();
+
+}
+
+);
+
+
+finalOverlay.addEventListener(
+
+'click',
+
+function(event){
+
+if(
+event.target === finalOverlay
+){
+
+closeFinalOverlay();
+
+}
+
+}
+
+
+
+/* =====================================================
+   FINAL VERROUILLE
 ===================================================== */
 
 function showLocked(){
@@ -2589,8 +2753,17 @@ finalVisual.style.display =
 'block';
 
 
+summaryEl.classList.remove(
+'visible'
+);
+
+
+const imageSrc =
+'carte-final-echec.jpg?v=19';
+
+
 finalImage.src =
-'carte-final-echec.jpg?v=18';
+imageSrc;
 
 
 progressEl.style.width =
@@ -2603,7 +2776,9 @@ displaySummary();
 saveProgress();
 
 
-scrollToLogo();
+openFinalOverlay(
+imageSrc
+);
 
 }
 
@@ -2631,16 +2806,24 @@ finalVisual.style.display =
 'block';
 
 
+summaryEl.classList.remove(
+'visible'
+);
+
+
 progressEl.style.width =
 '100%';
+
+
+let imageSrc;
 
 
 if(
 score >= 5000
 ){
 
-finalImage.src =
-'carte-final-5000.jpg?v=18';
+imageSrc =
+'carte-final-5000.jpg?v=19';
 
 }
 
@@ -2649,18 +2832,22 @@ else if(
 score >= 4000
 ){
 
-finalImage.src =
-'carte-final-4000.jpg?v=18';
+imageSrc =
+'carte-final-4000.jpg?v=19';
 
 }
 
 
 else{
 
-finalImage.src =
-'carte-final-echec.jpg?v=18';
+imageSrc =
+'carte-final-echec.jpg?v=19';
 
 }
+
+
+finalImage.src =
+imageSrc;
 
 
 displaySummary();
@@ -2669,14 +2856,36 @@ displaySummary();
 saveProgress();
 
 
-scrollToLogo();
+openFinalOverlay(
+imageSrc
+);
 
 }
 
 
 
 /* =====================================================
-   RECAPITULATIF
+   CLIC SUR PETITE CARTE FINALE
+===================================================== */
+
+finalImage.addEventListener(
+
+'click',
+
+function(){
+
+summaryEl.classList.toggle(
+'visible'
+);
+
+}
+
+);
+
+
+
+/* =====================================================
+   RECAP
 ===================================================== */
 
 function displaySummary(){
@@ -2802,6 +3011,11 @@ finalVisual.style.display =
 'none';
 
 
+summaryEl.classList.remove(
+'visible'
+);
+
+
 finalImage.removeAttribute(
 'src'
 );
@@ -2918,7 +3132,7 @@ startBtn.textContent =
 
 
 /* =====================================================
-   COMMENCER / REPRENDRE
+   COMMENCER
 ===================================================== */
 
 startBtn.addEventListener(
