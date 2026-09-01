@@ -24,6 +24,7 @@ box-sizing:border-box;
 
 html{
 min-height:100%;
+scroll-behavior:smooth;
 }
 
 body{
@@ -51,12 +52,10 @@ background-attachment:fixed;
 
 }
 
-
 button,
 input{
 font-family:inherit;
 }
-
 
 #geopoly-app{
 
@@ -65,7 +64,6 @@ min-height:100vh;
 padding:18px;
 
 }
-
 
 .wrap{
 
@@ -78,7 +76,7 @@ margin:0 auto;
 
 
 /* =====================================================
-   TITRE GEOPOLY
+   VRAI LOGO GEOPOLY BORDEAUX
 ===================================================== */
 
 .geopoly-header{
@@ -87,74 +85,21 @@ text-align:center;
 
 margin-bottom:18px;
 
-}
-
-
-.geopoly-logo-title{
-
-display:inline-block;
-
-background:#c82d25;
-
-color:white;
-
-font-weight:900;
-
-font-size:
-clamp(34px,8vw,58px);
-
-letter-spacing:.06em;
-
-line-height:1;
-
-padding:
-10px 20px;
-
-border:
-4px solid #ffffff;
-
-outline:
-3px solid #18212a;
-
-border-radius:9px;
-
-box-shadow:
-0 6px 14px rgba(0,0,0,.30);
-
-text-shadow:
-0 2px 2px rgba(0,0,0,.25);
+scroll-margin-top:10px;
 
 }
 
+.main-logo{
 
-.geopoly-subtitle{
+display:block;
 
-display:table;
+width:min(330px,82%);
 
-margin:
--3px auto 0;
+height:auto;
 
-background:#123c69;
+margin:0 auto;
 
-color:white;
-
-font-size:
-clamp(18px,5vw,28px);
-
-font-weight:800;
-
-letter-spacing:.10em;
-
-padding:
-6px 20px;
-
-border:
-3px solid white;
-
-outline:
-2px solid #18212a;
-
-border-radius:5px;
+object-fit:contain;
 
 }
 
@@ -190,7 +135,6 @@ overflow:hidden;
 
 }
 
-
 .hero::before,
 .card::before{
 
@@ -209,11 +153,9 @@ pointer-events:none;
 
 }
 
-
 .hero{
 margin-bottom:18px;
 }
-
 
 .eyebrow{
 
@@ -233,7 +175,6 @@ color:#b52621;
 
 }
 
-
 h2{
 
 position:relative;
@@ -251,7 +192,6 @@ line-height:1.05;
 color:#12365e;
 
 }
-
 
 .intro{
 
@@ -288,7 +228,6 @@ margin-top:22px;
 
 }
 
-
 .rule{
 
 padding:15px 10px;
@@ -304,11 +243,9 @@ line-height:1.45;
 
 }
 
-
 .rule:last-child{
 border-right:0;
 }
-
 
 .rule-icon{
 
@@ -342,7 +279,6 @@ margin-top:16px;
 
 }
 
-
 .pill{
 
 flex:1;
@@ -368,7 +304,6 @@ box-shadow:
 0 3px 7px rgba(0,0,0,.15);
 
 }
-
 
 .pill strong{
 
@@ -404,7 +339,6 @@ overflow:hidden;
 margin-top:15px;
 
 }
-
 
 .progress > div{
 
@@ -463,7 +397,6 @@ box-shadow:
 
 }
 
-
 .question-intro{
 
 position:relative;
@@ -488,10 +421,7 @@ white-space:pre-line;
 
 color:#25384e;
 
-scroll-margin-top:12px;
-
 }
-
 
 .question{
 
@@ -516,7 +446,7 @@ color:#0c315d;
 
 
 /* =====================================================
-   LOGO
+   PETIT LOGO SOUS LA QUESTION
 ===================================================== */
 
 .question-logo{
@@ -536,7 +466,6 @@ margin:
 
 }
 
-
 .question-logo img{
 
 display:block;
@@ -552,7 +481,7 @@ height:auto;
 
 
 /* =====================================================
-   CHAMP REPONSE
+   REPONSE
 ===================================================== */
 
 .answers{
@@ -567,7 +496,6 @@ gap:10px;
 
 }
 
-
 .open-answer{
 
 display:grid;
@@ -578,7 +506,6 @@ grid-template-columns:
 gap:10px;
 
 }
-
 
 .open-answer input{
 
@@ -640,14 +567,12 @@ background .15s ease;
 
 }
 
-
 button:hover:not(:disabled){
 
 transform:
 translateY(-1px);
 
 }
-
 
 button:disabled{
 
@@ -656,7 +581,6 @@ opacity:.45;
 cursor:not-allowed;
 
 }
-
 
 button:focus,
 input:focus{
@@ -668,7 +592,6 @@ outline-offset:
 2px;
 
 }
-
 
 .actions{
 
@@ -685,7 +608,6 @@ flex-wrap:wrap;
 margin-top:16px;
 
 }
-
 
 .primary{
 
@@ -706,7 +628,6 @@ box-shadow:
 
 }
 
-
 .start-button{
 
 background:#c32c25;
@@ -716,7 +637,6 @@ border-color:#8d1d18;
 font-size:17px;
 
 }
-
 
 .skip{
 
@@ -755,7 +675,6 @@ display:none;
 
 }
 
-
 .feedback.wrong{
 
 background:#ffe9e7;
@@ -793,7 +712,6 @@ border:0;
 
 }
 
-
 .reward-card img{
 
 display:block;
@@ -825,7 +743,6 @@ box-shadow:
 display:none;
 }
 
-
 .final-visual{
 
 display:none;
@@ -843,7 +760,6 @@ padding:0;
 background:transparent;
 
 }
-
 
 .final-visual img{
 
@@ -886,7 +802,6 @@ margin-top:20px;
 
 }
 
-
 .row{
 
 display:flex;
@@ -904,7 +819,6 @@ padding:
 11px 5px;
 
 }
-
 
 .small{
 
@@ -959,6 +873,11 @@ padding:10px;
 
 }
 
+.main-logo{
+
+width:min(290px,88%);
+
+}
 
 .hero,
 .card{
@@ -967,13 +886,11 @@ padding:16px;
 
 }
 
-
 .rules{
 
 grid-template-columns:1fr;
 
 }
-
 
 .rule{
 
@@ -984,13 +901,11 @@ border-bottom:
 
 }
 
-
 .rule:last-child{
 
 border-bottom:0;
 
 }
-
 
 .open-answer{
 
@@ -998,13 +913,11 @@ grid-template-columns:1fr;
 
 }
 
-
 .actions{
 
 flex-direction:column;
 
 }
-
 
 .reward-card img,
 .final-visual img{
@@ -1034,19 +947,26 @@ object-fit:contain;
 
 
 
-<header class="geopoly-header">
+<!-- =====================================================
+     LOGO PRINCIPAL
+===================================================== -->
 
-<div class="geopoly-logo-title">
-GEOPOLY
-</div>
+<header
+class="geopoly-header"
+id="topLogo">
 
-<div class="geopoly-subtitle">
-BORDEAUX
-</div>
+<img
+src="logo-geopoly-bordeaux.png?v=17"
+alt="GEOPOLY BORDEAUX"
+class="main-logo">
 
 </header>
 
 
+
+<!-- =====================================================
+     ACCUEIL
+===================================================== -->
 
 <section
 class="hero"
@@ -1204,6 +1124,10 @@ COMMENCER LE JEU ➜
 
 
 
+<!-- =====================================================
+     QUESTION
+===================================================== -->
+
 <section
 class="card"
 id="quizCard"
@@ -1233,7 +1157,7 @@ class="question-logo"
 id="questionLogo">
 
 <img
-src="logo-geopoly-bordeaux.png?v=16"
+src="logo-geopoly-bordeaux.png?v=17"
 alt="Logo GEOPOLY BORDEAUX">
 
 </div>
@@ -1252,6 +1176,8 @@ aria-live="polite">
 </div>
 
 
+
+<!-- CARTE DE RECOMPENSE -->
 
 <div
 class="reward-card"
@@ -1294,6 +1220,10 @@ CONTINUER ➜
 </section>
 
 
+
+<!-- =====================================================
+     FINAL
+===================================================== -->
 
 <section
 class="card final"
@@ -1349,6 +1279,10 @@ id="restartBtn">
 
 
 
+/* =====================================================
+   ERREURS
+===================================================== */
+
 window.addEventListener(
 'error',
 function(event){
@@ -1375,8 +1309,15 @@ event.message;
 
 
 
+/* =====================================================
+   QUESTIONS
+===================================================== */
+
 const questions = [
 
+
+
+/* QUESTION 1 */
 
 {
 
@@ -1422,6 +1363,8 @@ cardImage:
 
 
 
+/* QUESTION 2 */
+
 {
 
 place:
@@ -1454,6 +1397,8 @@ cardImage:
 },
 
 
+
+/* QUESTION 3 */
 
 {
 
@@ -1498,6 +1443,8 @@ cardImage:
 
 
 
+/* QUESTION 4 */
+
 {
 
 place:
@@ -1535,6 +1482,8 @@ cardImage:
 
 
 
+/* QUESTION 5 */
+
 {
 
 place:
@@ -1560,6 +1509,8 @@ cardImage:
 },
 
 
+
+/* QUESTION 6 */
 
 {
 
@@ -1592,8 +1543,12 @@ cardImage:
 
 
 
+/* =====================================================
+   VARIABLES
+===================================================== */
+
 const STORAGE_KEY =
-'geopoly-bordeaux-progress-v16';
+'geopoly-bordeaux-progress-v17';
 
 
 let index =
@@ -1611,6 +1566,16 @@ false;
 const results =
 [];
 
+
+
+/* =====================================================
+   ELEMENTS
+===================================================== */
+
+const topLogo =
+document.getElementById(
+'topLogo'
+);
 
 
 const scoreEl =
@@ -1762,6 +1727,40 @@ questions.length;
 
 
 
+/* =====================================================
+   REMONTER SUR LE LOGO
+===================================================== */
+
+function scrollToLogo(){
+
+setTimeout(
+
+function(){
+
+window.scrollTo({
+
+top:0,
+
+left:0,
+
+behavior:'smooth'
+
+});
+
+},
+
+80
+
+);
+
+}
+
+
+
+/* =====================================================
+   SAUVEGARDE
+===================================================== */
+
 function saveProgress(){
 
 try{
@@ -1909,6 +1908,10 @@ error
 
 
 
+/* =====================================================
+   NORMALISATION
+===================================================== */
+
 function normalizeAnswer(value){
 
 return String(
@@ -1936,6 +1939,10 @@ value
 }
 
 
+
+/* =====================================================
+   VERIFICATION DES 5 PREMIERES
+===================================================== */
 
 function firstFiveSucceeded(){
 
@@ -1975,6 +1982,10 @@ return true;
 }
 
 
+
+/* =====================================================
+   AFFICHAGE QUESTION
+===================================================== */
 
 function renderQuestion(){
 
@@ -2214,33 +2225,23 @@ submit
 );
 
 
-/* =====================================================
-   IMPORTANT :
-   on ne met PAS le focus sur l'input.
-   On remonte au début du descriptif.
-===================================================== */
+/*
+IMPORTANT :
+aucun input.focus() ici.
 
-setTimeout(
+Chaque question remonte
+sur le logo GEOPOLY.
+*/
 
-function(){
-
-questionIntroEl.scrollIntoView({
-
-behavior:'smooth',
-
-block:'start'
-
-});
-
-},
-
-120
-
-);
+scrollToLogo();
 
 }
 
 
+
+/* =====================================================
+   CARTE BONNE REPONSE
+===================================================== */
 
 function showRewardCard(item){
 
@@ -2271,7 +2272,7 @@ feedbackEl.style.display =
 rewardImage.src =
 item.cardImage
 +
-'?v=16';
+'?v=17';
 
 
 rewardImage.alt =
@@ -2283,9 +2284,21 @@ item.place;
 rewardCard.style.display =
 'block';
 
+
+/*
+La carte de récompense s'ouvre
+également depuis le logo.
+*/
+
+scrollToLogo();
+
 }
 
 
+
+/* =====================================================
+   VERIFICATION REPONSE
+===================================================== */
 
 function checkAnswer(
 input,
@@ -2350,6 +2363,10 @@ normalized;
 );
 
 
+
+/* =====================================================
+   BONNE REPONSE
+===================================================== */
 
 if(correct){
 
@@ -2447,6 +2464,10 @@ return;
 
 
 
+/* =====================================================
+   MAUVAISE REPONSE
+===================================================== */
+
 feedbackEl.classList.add(
 'wrong'
 );
@@ -2464,11 +2485,21 @@ input.value =
 '';
 
 
+/*
+Ici on garde le focus car
+l'utilisateur vient de répondre
+et veut probablement réessayer.
+*/
+
 input.focus();
 
 }
 
 
+
+/* =====================================================
+   PASSER
+===================================================== */
 
 skipBtn.addEventListener(
 
@@ -2575,6 +2606,10 @@ saveProgress();
 
 
 
+/* =====================================================
+   CONTINUER
+===================================================== */
+
 nextBtn.addEventListener(
 
 'click',
@@ -2608,6 +2643,10 @@ renderQuestion();
 
 
 
+/* =====================================================
+   QUESTION SUBSIDIAIRE VERROUILLEE
+===================================================== */
+
 function showLocked(){
 
 quizCard.style.display =
@@ -2623,7 +2662,7 @@ finalVisual.style.display =
 
 
 finalImage.src =
-'carte-final-echec.jpg?v=16';
+'carte-final-echec.jpg?v=17';
 
 
 progressEl.style.width =
@@ -2635,9 +2674,16 @@ displaySummary();
 
 saveProgress();
 
+
+scrollToLogo();
+
 }
 
 
+
+/* =====================================================
+   RESULTAT FINAL
+===================================================== */
 
 function showFinalResult(){
 
@@ -2662,7 +2708,7 @@ score >= 5000
 ){
 
 finalImage.src =
-'carte-final-5000.jpg?v=16';
+'carte-final-5000.jpg?v=17';
 
 }
 
@@ -2672,7 +2718,7 @@ score >= 4000
 ){
 
 finalImage.src =
-'carte-final-4000.jpg?v=16';
+'carte-final-4000.jpg?v=17';
 
 }
 
@@ -2680,7 +2726,7 @@ finalImage.src =
 else{
 
 finalImage.src =
-'carte-final-echec.jpg?v=16';
+'carte-final-echec.jpg?v=17';
 
 }
 
@@ -2690,9 +2736,16 @@ displaySummary();
 
 saveProgress();
 
+
+scrollToLogo();
+
 }
 
 
+
+/* =====================================================
+   RECAPITULATIF
+===================================================== */
 
 function displaySummary(){
 
@@ -2772,6 +2825,10 @@ row
 
 
 
+/* =====================================================
+   RECOMMENCER
+===================================================== */
+
 restartBtn.addEventListener(
 
 'click',
@@ -2838,6 +2895,10 @@ renderQuestion();
 
 
 
+/* =====================================================
+   INITIALISATION
+===================================================== */
+
 loadProgress();
 
 
@@ -2899,6 +2960,10 @@ startBtn.textContent =
 }
 
 
+
+/* =====================================================
+   COMMENCER
+===================================================== */
 
 startBtn.addEventListener(
 
