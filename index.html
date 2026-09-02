@@ -684,6 +684,53 @@ box-shadow:
 
 
 /* =====================================================
+   CARTE ALERTE RETOUR LAB
+===================================================== */
+
+.alert-card{
+
+display:none;
+
+position:relative;
+
+z-index:5;
+
+width:100%;
+
+margin:0 auto;
+
+padding:0;
+
+background:transparent;
+
+border:0;
+
+}
+
+.alert-card img{
+
+display:block;
+
+width:100%;
+
+height:auto;
+
+max-width:100%;
+
+object-fit:contain;
+
+margin:0 auto;
+
+border-radius:14px;
+
+box-shadow:
+0 5px 16px rgba(0,0,0,.25);
+
+}
+
+
+
+/* =====================================================
    FINAL NORMAL
 ===================================================== */
 
@@ -968,6 +1015,7 @@ flex-direction:column;
 }
 
 .reward-card img,
+.alert-card img,
 .final-visual img{
 
 width:100%;
@@ -1259,6 +1307,23 @@ id="rewardCard">
 id="rewardImage"
 src=""
 alt="Carte de récompense">
+
+</div>
+
+
+
+<!-- =====================================================
+     ALERTE RETOUR LAB
+===================================================== -->
+
+<div
+class="alert-card"
+id="alertCard">
+
+<img
+id="alertImage"
+src=""
+alt="Retournez sur la Lab Cache">
 
 </div>
 
@@ -1592,6 +1657,9 @@ let score =
 let answered =
 false;
 
+let showingAlert =
+false;
+
 const results =
 [];
 
@@ -1666,6 +1734,12 @@ document.getElementById('rewardCard');
 
 const rewardImage =
 document.getElementById('rewardImage');
+
+const alertCard =
+document.getElementById('alertCard');
+
+const alertImage =
+document.getElementById('alertImage');
 
 const finalVisual =
 document.getElementById('finalVisual');
@@ -1917,9 +1991,19 @@ gameProgress.style.display =
 rewardCard.style.display =
 'none';
 
+alertCard.style.display =
+'none';
+
 rewardImage.removeAttribute(
 'src'
 );
+
+alertImage.removeAttribute(
+'src'
+);
+
+showingAlert =
+false;
 
 feedbackEl.classList.remove(
 'wrong'
@@ -1965,6 +2049,9 @@ false;
 
 nextBtn.disabled =
 true;
+
+nextBtn.textContent =
+'CONTINUER ➜';
 
 skipBtn.style.display =
 'block';
@@ -2129,6 +2216,9 @@ answersEl.style.display =
 feedbackEl.style.display =
 'none';
 
+alertCard.style.display =
+'none';
+
 
 rewardImage.src =
 item.cardImage
@@ -2144,6 +2234,79 @@ item.place;
 
 rewardCard.style.display =
 'block';
+
+
+/* On supprime PASSER dès le résultat */
+
+skipBtn.style.display =
+'none';
+
+nextBtn.style.display =
+'block';
+
+nextBtn.disabled =
+false;
+
+nextBtn.textContent =
+'CONTINUER ➜';
+
+
+scrollToLogo();
+
+}
+
+
+
+/* =====================================================
+   ALERTE RETOUR LAB
+===================================================== */
+
+function showLabAlert(){
+
+placeEl.style.display =
+'none';
+
+questionIntroEl.style.display =
+'none';
+
+questionEl.style.display =
+'none';
+
+answersEl.style.display =
+'none';
+
+feedbackEl.style.display =
+'none';
+
+rewardCard.style.display =
+'none';
+
+
+alertImage.src =
+'carte-alerte-lab.png?v=20';
+
+alertImage.alt =
+'Vous pouvez maintenant retourner sur la Lab Cache en attendant la prochaine case Chance';
+
+alertCard.style.display =
+'block';
+
+
+skipBtn.style.display =
+'none';
+
+nextBtn.style.display =
+'block';
+
+nextBtn.disabled =
+false;
+
+nextBtn.textContent =
+'CONTINUER ➜';
+
+
+showingAlert =
+true;
 
 
 scrollToLogo();
@@ -2400,11 +2563,19 @@ true;
 );
 
 
+/* Le bouton PASSER disparaît */
+
+skipBtn.style.display =
+'none';
+
 skipBtn.disabled =
 true;
 
 nextBtn.disabled =
 false;
+
+nextBtn.textContent =
+'CONTINUER ➜';
 
 scoreEl.textContent =
 score;
@@ -2433,9 +2604,38 @@ return;
 
 }
 
+
+/*
+Après les questions 1, 2 et 3,
+on affiche d'abord la carte d'alerte.
+*/
+
+if(
+index >= 0
+&&
+index <= 2
+&&
+!showingAlert
+){
+
+showLabAlert();
+
+return;
+
+}
+
+
+/*
+Si la carte d'alerte est déjà affichée,
+le second clic passe à la question suivante.
+*/
+
 index++;
 
 answered =
+false;
+
+showingAlert =
 false;
 
 saveProgress();
@@ -2753,6 +2953,9 @@ score =
 answered =
 false;
 
+showingAlert =
+false;
+
 results.length =
 0;
 
@@ -2790,6 +2993,20 @@ finalImage.removeAttribute(
 );
 
 finalOverlayImage.removeAttribute(
+'src'
+);
+
+rewardCard.style.display =
+'none';
+
+alertCard.style.display =
+'none';
+
+rewardImage.removeAttribute(
+'src'
+);
+
+alertImage.removeAttribute(
 'src'
 );
 
@@ -2844,6 +3061,12 @@ finalCard.style.display =
 'none';
 
 finalVisual.style.display =
+'none';
+
+rewardCard.style.display =
+'none';
+
+alertCard.style.display =
 'none';
 
 gameStatus.style.display =
