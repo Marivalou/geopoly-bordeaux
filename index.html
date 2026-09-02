@@ -1576,8 +1576,6 @@ place:
 
 intro:`🎲 Nouvelle case Chance !
 
-
-
 Une deuxième échoppe est à votre portée. 600 EV sont en jeu.
 
 Le jardin de la mairie, créé au XIXe siècle, s'étend sur un hectare et offre un écrin de verdure en plein cœur de la ville.
@@ -2146,8 +2144,18 @@ skipBtn.style.display =
 skipBtn.disabled =
 false;
 
+if(index === 4 || index === 5){
+
+placeEl.style.display =
+'none';
+
+}
+else{
+
 placeEl.style.display =
 'inline-block';
+
+}
 
 questionIntroEl.style.display =
 'block';
