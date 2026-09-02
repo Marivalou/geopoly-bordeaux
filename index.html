@@ -11,7 +11,6 @@ content="width=device-width, initial-scale=1.0">
 
 <title>GEOPOLY BORDEAUX</title>
 
-
 <style>
 
 /* =====================================================
@@ -74,7 +73,6 @@ margin:0 auto;
 }
 
 
-
 /* =====================================================
    LOGO
 ===================================================== */
@@ -101,7 +99,6 @@ margin:0 auto;
 object-fit:contain;
 
 }
-
 
 
 /* =====================================================
@@ -189,7 +186,6 @@ font-size:16px;
 }
 
 
-
 /* =====================================================
    REGLES
 ===================================================== */
@@ -239,7 +235,6 @@ font-size:29px;
 margin-bottom:8px;
 
 }
-
 
 
 /* =====================================================
@@ -297,7 +292,6 @@ color:#f4ca62;
 }
 
 
-
 /* =====================================================
    PROGRESSION
 ===================================================== */
@@ -342,7 +336,6 @@ transition:
 width .35s ease;
 
 }
-
 
 
 /* =====================================================
@@ -428,7 +421,6 @@ color:#0c315d;
 }
 
 
-
 /* =====================================================
    REPONSE
 ===================================================== */
@@ -477,7 +469,6 @@ color:#1e1e1e;
 width:100%;
 
 }
-
 
 
 /* =====================================================
@@ -596,7 +587,6 @@ flex:1;
 }
 
 
-
 /* =====================================================
    FEEDBACK
 ===================================================== */
@@ -633,7 +623,6 @@ color:#8f211b;
 border-color:#db8d86;
 
 }
-
 
 
 /* =====================================================
@@ -682,7 +671,6 @@ box-shadow:
 }
 
 
-
 /* =====================================================
    CARTE ALERTE RETOUR LAB
 ===================================================== */
@@ -727,7 +715,6 @@ box-shadow:
 0 5px 16px rgba(0,0,0,.25);
 
 }
-
 
 
 /* =====================================================
@@ -793,7 +780,6 @@ outline-offset:
 }
 
 
-
 /* =====================================================
    FINAL NORMAL
 ===================================================== */
@@ -842,7 +828,6 @@ box-shadow:
 cursor:pointer;
 
 }
-
 
 
 /* =====================================================
@@ -929,7 +914,6 @@ box-shadow:
 }
 
 
-
 /* =====================================================
    RECAP
 ===================================================== */
@@ -981,7 +965,6 @@ opacity:.72;
 }
 
 
-
 /* =====================================================
    ERREUR
 ===================================================== */
@@ -1010,7 +993,6 @@ color:#8b0000;
 font-weight:700;
 
 }
-
 
 
 /* =====================================================
@@ -1124,9 +1106,7 @@ font-size:13px;
 
 </head>
 
-
 <body>
-
 
 <!-- =====================================================
      FINAL PLEIN ECRAN
@@ -1152,11 +1132,9 @@ class="final-overlay-hint">
 </div>
 
 
-
 <div id="geopoly-app">
 
 <div class="wrap">
-
 
 
 <!-- =====================================================
@@ -1175,7 +1153,6 @@ class="main-logo">
 </header>
 
 
-
 <!-- =====================================================
      ACCUEIL
 ===================================================== -->
@@ -1184,11 +1161,9 @@ class="main-logo">
 class="hero"
 id="hero">
 
-
 <h2>
 🎲 Cases « Chance »
 </h2>
-
 
 <div
 class="intro"
@@ -1209,13 +1184,12 @@ Chaque bonne réponse vous permettra d'obtenir des
 <strong>EV</strong>
 pour financer votre patrimoine immobilier et acquérir des échoppes.
 <br><br>
-   
+
 La cinquième question vous sera proposée à la fin de la Lab GEOPOLY Bordeaux.
 <br>
 Si les 5 premières questions sont réussies, la question subsidiaire se débloquera.
 
 <div class="rules">
-
 
 <div class="rule">
 
@@ -1227,7 +1201,6 @@ Chaque bonne réponse augmente votre patrimoine immobilier.
 
 </div>
 
-
 <div class="rule">
 
 <span class="rule-icon">
@@ -1237,7 +1210,6 @@ Chaque bonne réponse augmente votre patrimoine immobilier.
 Cumulez les EV tout au long de votre aventure.
 
 </div>
-
 
 <div class="rule">
 
@@ -1249,11 +1221,9 @@ Réussissez les 5 premières étapes pour accéder à la question subsidiaire.
 
 </div>
 
-
 </div>
 
 </div>
-
 
 
 <div class="actions">
@@ -1269,12 +1239,9 @@ COMMENCER LE JEU ➜
 
 </div>
 
-
 <div id="errorBox"></div>
 
-
 </section>
-
 
 
 <!-- =====================================================
@@ -1286,7 +1253,6 @@ class="scorebar"
 id="gameStatus"
 style="display:none;">
 
-
 <div class="pill">
 
 💵 SCORE<br>
@@ -1297,7 +1263,6 @@ EV
 </strong>
 
 </div>
-
 
 <div class="pill">
 
@@ -1313,9 +1278,7 @@ EV
 
 </div>
 
-
 </div>
-
 
 
 <div
@@ -1328,7 +1291,6 @@ style="display:none;">
 </div>
 
 
-
 <!-- =====================================================
      QUESTION
 ===================================================== -->
@@ -1338,37 +1300,31 @@ class="card"
 id="quizCard"
 style="display:none;">
 
-
 <div
 class="place"
 id="place">
 </div>
-
 
 <div
 class="question-intro"
 id="questionIntro">
 </div>
 
-
 <div
 class="question"
 id="question">
 </div>
-
 
 <div
 class="answers"
 id="answers">
 </div>
 
-
 <div
 class="feedback"
 id="feedback"
 aria-live="polite">
 </div>
-
 
 
 <div
@@ -1381,7 +1337,6 @@ src=""
 alt="Carte de récompense">
 
 </div>
-
 
 
 <!-- =====================================================
@@ -1397,7 +1352,6 @@ id="alertImage"
 src=""
 alt="Retournez sur la Lab Cache">
 
-
 <a
 href="https://labs.geocaching.com/goto/d1c47bec-213c-4bbf-ba66-912c1a610f7a"
 target="_blank"
@@ -1411,7 +1365,6 @@ class="lab-link">
 </div>
 
 
-
 <div class="actions">
 
 <button
@@ -1422,7 +1375,6 @@ id="skipBtn">
 PASSER CETTE QUESTION
 
 </button>
-
 
 <button
 type="button"
@@ -1436,9 +1388,7 @@ CONTINUER ➜
 
 </div>
 
-
 </section>
-
 
 
 <!-- =====================================================
@@ -1448,7 +1398,6 @@ CONTINUER ➜
 <section
 class="card final"
 id="finalCard">
-
 
 <div
 class="final-visual"
@@ -1461,12 +1410,10 @@ alt="Résultat final GEOPOLY">
 
 </div>
 
-
 <div
 class="summary"
 id="summary">
 </div>
-
 
 <div class="actions">
 
@@ -1481,14 +1428,11 @@ id="restartBtn">
 
 </div>
 
-
 </section>
 
-
 </div>
 
 </div>
-
 
 
 <script>
@@ -1496,7 +1440,6 @@ id="restartBtn">
 (function(){
 
 "use strict";
-
 
 
 /* =====================================================
@@ -1526,7 +1469,6 @@ event.message;
 
 }
 );
-
 
 
 /* =====================================================
@@ -1568,7 +1510,6 @@ cardImage:
 
 },
 
-
 {
 
 place:
@@ -1597,7 +1538,6 @@ cardImage:
 'carte-question-2.jpg'
 
 },
-
 
 {
 
@@ -1633,7 +1573,6 @@ cardImage:
 
 },
 
-
 {
 
 place:
@@ -1665,7 +1604,6 @@ cardImage:
 
 },
 
-
 {
 
 place:
@@ -1689,7 +1627,6 @@ cardImage:
 'carte-question-5.jpg'
 
 },
-
 
 {
 
@@ -1721,7 +1658,6 @@ cardImage:
 ];
 
 
-
 /* =====================================================
    VARIABLES
 ===================================================== */
@@ -1743,7 +1679,6 @@ false;
 
 const results =
 [];
-
 
 
 /* =====================================================
@@ -1839,7 +1774,6 @@ totalQuestionsEl.textContent =
 questions.length;
 
 
-
 /* =====================================================
    RETOUR LOGO
 ===================================================== */
@@ -1860,7 +1794,6 @@ behavior:'smooth'
 );
 
 }
-
 
 
 /* =====================================================
@@ -1893,7 +1826,6 @@ console.log(error);
 }
 
 }
-
 
 
 function loadProgress(){
@@ -1967,7 +1899,6 @@ console.log(error);
 }
 
 
-
 /* =====================================================
    SUPPRESSION SAUVEGARDE
 ===================================================== */
@@ -1988,7 +1919,6 @@ console.log(error);
 }
 
 }
-
 
 
 /* =====================================================
@@ -2016,7 +1946,6 @@ return String(value)
 .trim();
 
 }
-
 
 
 /* =====================================================
@@ -2055,7 +1984,6 @@ return false;
 return true;
 
 }
-
 
 
 /* =====================================================
@@ -2144,10 +2072,23 @@ skipBtn.style.display =
 skipBtn.disabled =
 false;
 
-if(index === 4 || index === 5){
+
+/* =====================================================
+   ENCADRE ROUGE
+   QUESTIONS 1 A 4 UNIQUEMENT
+===================================================== */
+
+if(
+index === 4
+||
+index === 5
+){
 
 placeEl.style.display =
 'none';
+
+placeEl.textContent =
+'';
 
 }
 else{
@@ -2155,7 +2096,18 @@ else{
 placeEl.style.display =
 'inline-block';
 
+placeEl.textContent =
+
+item.place
++
+' · +'
++
+item.points
++
+' EV';
+
 }
+
 
 questionIntroEl.style.display =
 'block';
@@ -2189,17 +2141,6 @@ questions.length
 )
 +
 '%';
-
-
-placeEl.textContent =
-
-item.place
-+
-' · +'
-+
-item.points
-+
-' EV';
 
 
 questionIntroEl.textContent =
@@ -2289,7 +2230,6 @@ scrollToLogo();
 }
 
 
-
 /* =====================================================
    CARTE DE RECOMPENSE
 ===================================================== */
@@ -2349,7 +2289,6 @@ scrollToLogo();
 }
 
 
-
 /* =====================================================
    ALERTE RETOUR LAB
 ===================================================== */
@@ -2405,7 +2344,6 @@ true;
 scrollToLogo();
 
 }
-
 
 
 /* =====================================================
@@ -2468,7 +2406,6 @@ normalized;
 
 }
 );
-
 
 
 if(correct){
@@ -2557,7 +2494,6 @@ return;
 }
 
 
-
 /* mauvaise réponse */
 
 feedbackEl.classList.add(
@@ -2576,7 +2512,6 @@ input.value =
 input.focus();
 
 }
-
 
 
 /* =====================================================
@@ -2678,7 +2613,6 @@ saveProgress();
 );
 
 
-
 /* =====================================================
    CONTINUER
 ===================================================== */
@@ -2737,7 +2671,6 @@ renderQuestion();
 );
 
 
-
 /* =====================================================
    OUVRIR CARTE FINALE PLEIN ECRAN
 ===================================================== */
@@ -2755,7 +2688,6 @@ document.body.style.overflow =
 'hidden';
 
 }
-
 
 
 /* =====================================================
@@ -2780,7 +2712,6 @@ scrollToLogo();
 }
 
 
-
 /* =====================================================
    CLIC SUR CARTE PLEIN ECRAN
 ===================================================== */
@@ -2793,7 +2724,6 @@ closeFinalOverlay();
 
 }
 );
-
 
 
 /* =====================================================
@@ -2814,7 +2744,6 @@ closeFinalOverlay();
 
 }
 );
-
 
 
 /* =====================================================
@@ -2861,7 +2790,6 @@ imageSrc
 );
 
 }
-
 
 
 /* =====================================================
@@ -2932,7 +2860,6 @@ imageSrc
 }
 
 
-
 /* =====================================================
    CLIC SUR PETITE CARTE FINALE
 ===================================================== */
@@ -2947,7 +2874,6 @@ summaryEl.classList.toggle(
 
 }
 );
-
 
 
 /* =====================================================
@@ -3024,7 +2950,6 @@ row
 );
 
 }
-
 
 
 /* =====================================================
@@ -3133,7 +3058,6 @@ scrollToLogo();
 );
 
 
-
 /* =====================================================
    INITIALISATION
 ===================================================== */
@@ -3199,7 +3123,6 @@ startBtn.textContent =
 }
 
 
-
 /* =====================================================
    COMMENCER
 ===================================================== */
@@ -3241,7 +3164,6 @@ renderQuestion();
 })();
 
 </script>
-
 
 </body>
 
