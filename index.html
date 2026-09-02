@@ -731,6 +731,70 @@ box-shadow:
 
 
 /* =====================================================
+   BOUTON RETOUR LAB
+===================================================== */
+
+.lab-link{
+
+position:relative;
+
+z-index:6;
+
+display:block;
+
+width:100%;
+
+margin-top:16px;
+
+padding:15px 18px;
+
+background:#c32c25;
+
+color:#ffffff;
+
+border:2px solid #8d1d18;
+
+border-radius:9px;
+
+text-align:center;
+
+text-decoration:none;
+
+font-size:16px;
+
+font-weight:900;
+
+box-shadow:
+0 4px 8px rgba(0,0,0,.20);
+
+transition:
+transform .12s ease,
+background .15s ease;
+
+}
+
+.lab-link:hover{
+
+transform:
+translateY(-1px);
+
+background:#a9231e;
+
+}
+
+.lab-link:focus{
+
+outline:
+3px solid #e4ae37;
+
+outline-offset:
+2px;
+
+}
+
+
+
+/* =====================================================
    FINAL NORMAL
 ===================================================== */
 
@@ -1023,6 +1087,14 @@ width:100%;
 height:auto;
 
 object-fit:contain;
+
+}
+
+.lab-link{
+
+font-size:15px;
+
+padding:14px 12px;
 
 }
 
@@ -1324,6 +1396,17 @@ id="alertCard">
 id="alertImage"
 src=""
 alt="Retournez sur la Lab Cache">
+
+
+<a
+href="https://labs.geocaching.com/goto/d1c47bec-213c-4bbf-ba66-912c1a610f7a"
+target="_blank"
+rel="noopener noreferrer"
+class="lab-link">
+
+📍 RETOURNER SUR LA LAB GEOPOLY ➜
+
+</a>
 
 </div>
 
@@ -1887,6 +1970,10 @@ console.log(error);
 
 
 
+/* =====================================================
+   SUPPRESSION SAUVEGARDE
+===================================================== */
+
 function clearProgress(){
 
 try{
@@ -2236,8 +2323,6 @@ rewardCard.style.display =
 'block';
 
 
-/* On supprime PASSER dès le résultat */
-
 skipBtn.style.display =
 'none';
 
@@ -2562,8 +2647,6 @@ true;
 }
 );
 
-
-/* Le bouton PASSER disparaît */
 
 skipBtn.style.display =
 'none';
