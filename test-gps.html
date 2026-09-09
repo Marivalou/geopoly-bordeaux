@@ -288,10 +288,10 @@ ACTIVER MA POSITION GPS
 <strong>Point cible :</strong><br>
 
 Latitude :
-44.885793<br>
+44.8669<br>
 
 Longitude :
--0.648815
+-0.6046
 
 <br><br>
 
@@ -361,8 +361,8 @@ VALIDER MA RÉPONSE
    PARAMÈTRES
 ===================================================== */
 
-const TARGET_LAT = 44.885793;
-const TARGET_LON = -0.648815;
+const TARGET_LAT = 44.8669;
+const TARGET_LON = -0.6046;
 
 /*
 Rayon de déclenchement en mètres
@@ -463,10 +463,10 @@ function() {
     }
 
     status.textContent =
-    "📡 Recherche de votre position...";
+        "📡 Recherche de votre position...";
 
     startGPS.style.display =
-    "none";
+        "none";
 
 
     navigator.geolocation.watchPosition(
