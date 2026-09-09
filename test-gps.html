@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>GEOPOLY Bordeaux - Test GPS</title>
+
+<style>
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+
+    font-family: Arial, Helvetica, sans-serif;
+
+    background:
+    linear-gradient(
+        180deg,
+        #092b50 0%,
+        #0e3b68 45%,
+        #071f3a 100%
+    );
+
+    color: #102f55;
+
+    display: flex;
+    justify-content: center;
+
+    padding: 20px;
+}
+
+.container {
+    width: 100%;
+    max-width: 650px;
+}
+
+
+/* =====================================================
+   TITRE
+===================================================== */
+
+h1 {
+    color: white;
+    text-align: center;
+
+    font-size: 28px;
+
+    margin-top: 10px;
+    margin-bottom: 25px;
+}
+
+.subtitle {
+    color: #dceaff;
+    text-align: center;
+
+    margin-bottom: 25px;
+}
+
+
+/* =====================================================
+   CARTE
+===================================================== */
+
+.card {
+
+    background: white;
+
+    border-radius: 18px;
+
+    padding: 24px;
+
+    box-shadow:
+    0 12px 30px rgba(0,0,0,0.30);
+
+    margin-bottom: 20px;
+}
+
+
+/* =====================================================
+   GPS
+===================================================== */
+
+.status {
+
+    text-align: center;
+
+    font-size: 18px;
+    font-weight: bold;
+
+    margin-bottom: 20px;
+}
+
+.distance {
+
+    text-align: center;
+
+    font-size: 36px;
+
+    font-weight: bold;
+
+    color: #0e3b68;
+
+    margin: 20px 0;
+}
+
+.small {
+
+    font-size: 14px;
+
+    color: #64748b;
+
+    line-height: 1.5;
+}
+
+.coordinates {
+
+    background: #f1f5f9;
+
+    border-radius: 10px;
+
+    padding: 12px;
+
+    margin-top: 20px;
+
+    font-size: 13px;
+
+    line-height: 1.6;
+}
+
+
+/* =====================================================
+   BOUTON
+===================================================== */
+
+button {
+
+    width: 100%;
+
+    padding: 15px;
+
+    border: none;
+
+    border-radius: 12px;
+
+    font-size: 17px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    background: #ffc928;
+
+    color: #102f55;
+
+    margin-top: 15px;
+}
+
+
+/* =====================================================
+   QUESTION
+===================================================== */
+
+#questionCard {
+
+    display: none;
+}
+
+.arrived {
+
+    background: #e8f7ee;
+
+    border: 2px solid #34a853;
+
+    color: #176b31;
+
+    padding: 15px;
+
+    border-radius: 12px;
+
+    text-align: center;
+
+    font-weight: bold;
+
+    font-size: 20px;
+
+    margin-bottom: 20px;
+}
+
+.question-title {
+
+    font-size: 22px;
+
+    font-weight: bold;
+
+    margin-bottom: 15px;
+}
+
+input {
+
+    width: 100%;
+
+    padding: 14px;
+
+    font-size: 17px;
+
+    border-radius: 10px;
+
+    border: 2px solid #ccd5df;
+
+    margin-top: 10px;
+}
+
+#feedback {
+
+    margin-top: 15px;
+
+    font-weight: bold;
+
+    text-align: center;
+}
+
+
+/* =====================================================
+   PRÉCISION GPS
+===================================================== */
+
+.accuracy-good {
+    color: #238636;
+}
+
+.accuracy-medium {
+    color: #d97706;
+}
+
+.accuracy-bad {
+    color: #c62828;
+}
+
+</style>
+</head>
+
+
+<body>
+
+<div class="container">
+
+<h1>📍 GEOPOLY BORDEAUX</h1>
+
+<div class="subtitle">
+Test de déclenchement GPS
+</div>
+
+
+<!-- =====================================================
+     CARTE GPS
+===================================================== -->
+
+<div class="card" id="gpsCard">
+
+<div class="status" id="status">
+GPS non activé
+</div>
+
+<div class="distance" id="distance">
+-- m
+</div>
+
+<div class="small" style="text-align:center;">
+Distance jusqu'au point GEOPOLY
+</div>
+
+
+<button id="startGPS">
+ACTIVER MA POSITION GPS
+</button>
+
+
+<div class="coordinates">
+
+<strong>Point cible :</strong><br>
+
+Latitude :
+44.885793<br>
+
+Longitude :
+-0.648815
+
+<br><br>
+
+<strong>Position du téléphone :</strong><br>
+
+Latitude :
+<span id="latitude">--</span><br>
+
+Longitude :
+<span id="longitude">--</span><br>
+
+Précision GPS :
+<span id="accuracy">--</span>
+
+</div>
+
+</div>
+
+
+
+<!-- =====================================================
+     QUESTION
+===================================================== -->
+
+<div class="card" id="questionCard">
+
+<div class="arrived">
+📍 VOUS ÊTES ARRIVÉ !
+</div>
+
+<div class="question-title">
+Question GEOPOLY
+</div>
+
+<p>
+Vous êtes maintenant suffisamment proche du point GPS
+pour débloquer cette question.
+</p>
+
+<p>
+<strong>
+Quel est le premier mot de 5 lettres indiqué sur la plaque ?
+</strong>
+</p>
+
+<input
+type="text"
+id="answer"
+placeholder="Votre réponse"
+autocomplete="off"
+>
+
+<button id="validate">
+VALIDER MA RÉPONSE
+</button>
+
+<div id="feedback"></div>
+
+</div>
+
+</div>
+
+
+<script>
+
+/* =====================================================
+   PARAMÈTRES
+===================================================== */
+
+const TARGET_LAT = 44.885793;
+const TARGET_LON = -0.648815;
+
+/*
+Rayon de déclenchement en mètres
+*/
+
+const TRIGGER_RADIUS = 30;
+
+
+/* =====================================================
+   ÉLÉMENTS
+===================================================== */
+
+const startGPS =
+document.getElementById("startGPS");
+
+const status =
+document.getElementById("status");
+
+const distanceDisplay =
+document.getElementById("distance");
+
+const latitudeDisplay =
+document.getElementById("latitude");
+
+const longitudeDisplay =
+document.getElementById("longitude");
+
+const accuracyDisplay =
+document.getElementById("accuracy");
+
+const questionCard =
+document.getElementById("questionCard");
+
+let questionUnlocked = false;
+
+
+/* =====================================================
+   CALCUL DE DISTANCE GPS
+   Formule de Haversine
+===================================================== */
+
+function calculateDistance(
+    lat1,
+    lon1,
+    lat2,
+    lon2
+) {
+
+    const R = 6371000;
+
+    const toRad = value =>
+        value * Math.PI / 180;
+
+    const dLat =
+        toRad(lat2 - lat1);
+
+    const dLon =
+        toRad(lon2 - lon1);
+
+    const a =
+
+        Math.sin(dLat / 2) *
+        Math.sin(dLat / 2)
+
+        +
+
+        Math.cos(toRad(lat1)) *
+        Math.cos(toRad(lat2)) *
+
+        Math.sin(dLon / 2) *
+        Math.sin(dLon / 2);
+
+    const c =
+        2 *
+        Math.atan2(
+            Math.sqrt(a),
+            Math.sqrt(1 - a)
+        );
+
+    return R * c;
+}
+
+
+/* =====================================================
+   ACTIVATION GPS
+===================================================== */
+
+startGPS.addEventListener(
+"click",
+function() {
+
+    if (!navigator.geolocation) {
+
+        status.textContent =
+        "❌ GPS non disponible sur ce téléphone.";
+
+        return;
+    }
+
+    status.textContent =
+    "📡 Recherche de votre position...";
+
+    startGPS.style.display =
+    "none";
+
+
+    navigator.geolocation.watchPosition(
+
+        updatePosition,
+
+        gpsError,
+
+        {
+
+            enableHighAccuracy: true,
+
+            timeout: 15000,
+
+            maximumAge: 0
+
+        }
+
+    );
+
+});
+
+
+/* =====================================================
+   MISE À JOUR POSITION
+===================================================== */
+
+function updatePosition(position) {
+
+    const lat =
+        position.coords.latitude;
+
+    const lon =
+        position.coords.longitude;
+
+    const accuracy =
+        position.coords.accuracy;
+
+
+    latitudeDisplay.textContent =
+        lat.toFixed(6);
+
+    longitudeDisplay.textContent =
+        lon.toFixed(6);
+
+
+    accuracyDisplay.textContent =
+        Math.round(accuracy) + " m";
+
+
+    /* couleur précision */
+
+    accuracyDisplay.className = "";
+
+    if (accuracy <= 15) {
+
+        accuracyDisplay.classList.add(
+            "accuracy-good"
+        );
+
+    }
+    else if (accuracy <= 40) {
+
+        accuracyDisplay.classList.add(
+            "accuracy-medium"
+        );
+
+    }
+    else {
+
+        accuracyDisplay.classList.add(
+            "accuracy-bad"
+        );
+
+    }
+
+
+    /* calcul distance */
+
+    const distance =
+        calculateDistance(
+            lat,
+            lon,
+            TARGET_LAT,
+            TARGET_LON
+        );
+
+
+    distanceDisplay.textContent =
+        Math.round(distance) + " m";
+
+
+    /* =================================================
+       DÉCLENCHEMENT
+    ================================================= */
+
+    if (distance <= TRIGGER_RADIUS) {
+
+        unlockQuestion();
+
+    }
+    else {
+
+        status.innerHTML =
+        "🚶 Approchez-vous du point GEOPOLY";
+
+    }
+
+}
+
+
+/* =====================================================
+   DÉVERROUILLAGE
+===================================================== */
+
+function unlockQuestion() {
+
+    if (questionUnlocked) {
+        return;
+    }
+
+    questionUnlocked = true;
+
+    status.innerHTML =
+        "✅ Zone GPS atteinte";
+
+    distanceDisplay.innerHTML =
+        "ARRIVÉ !";
+
+    questionCard.style.display =
+        "block";
+
+
+    /*
+    On positionne automatiquement
+    l'écran sur la question
+    */
+
+    questionCard.scrollIntoView({
+
+        behavior: "smooth",
+
+        block: "start"
+
+    });
+
+}
+
+
+/* =====================================================
+   ERREURS GPS
+===================================================== */
+
+function gpsError(error) {
+
+    startGPS.style.display =
+        "block";
+
+    if (error.code === 1) {
+
+        status.innerHTML =
+        "❌ Autorisation GPS refusée.";
+
+    }
+
+    else if (error.code === 2) {
+
+        status.innerHTML =
+        "❌ Position GPS indisponible.";
+
+    }
+
+    else if (error.code === 3) {
+
+        status.innerHTML =
+        "⚠️ Le GPS met trop de temps à répondre.";
+
+    }
+
+    else {
+
+        status.innerHTML =
+        "❌ Erreur GPS.";
+
+    }
+
+}
+
+
+/* =====================================================
+   TEST DE LA RÉPONSE
+===================================================== */
+
+document
+.getElementById("validate")
+.addEventListener(
+"click",
+checkAnswer
+);
+
+
+document
+.getElementById("answer")
+.addEventListener(
+"keydown",
+function(event) {
+
+    if (event.key === "Enter") {
+
+        checkAnswer();
+
+    }
+
+});
+
+
+function checkAnswer() {
+
+    const answer =
+        document
+        .getElementById("answer")
+        .value
+        .trim()
+        .toLowerCase();
+
+
+    const feedback =
+        document.getElementById(
+            "feedback"
+        );
+
+
+    if (answer === "tilia") {
+
+        feedback.style.color =
+            "#238636";
+
+        feedback.innerHTML =
+            "✅ Bonne réponse !";
+
+    }
+
+    else {
+
+        feedback.style.color =
+            "#c62828";
+
+        feedback.innerHTML =
+            "❌ Réponse incorrecte. Essaie encore.";
+
+    }
+
+}
+
+</script>
+
+</body>
+</html>
