@@ -987,6 +987,260 @@ font-weight:700;
 }
 
 
+
+/* =====================================================
+   PATRIMOINE GEOPOLY
+===================================================== */
+
+.property-stage{
+display:none;
+position:relative;
+z-index:5;
+width:100%;
+margin:0 auto;
+}
+
+.property-stage-title{
+margin:2px 0 8px;
+font-size:clamp(24px,6vw,34px);
+font-weight:900;
+line-height:1.1;
+text-align:center;
+color:#12365e;
+}
+
+.property-stage-text{
+margin:0 0 18px;
+text-align:center;
+line-height:1.5;
+color:#34495e;
+font-weight:700;
+}
+
+.property-grid{
+display:grid;
+grid-template-columns:repeat(2,minmax(0,1fr));
+gap:12px;
+margin-top:16px;
+}
+
+.property-choice{
+position:relative;
+min-height:118px;
+padding:0;
+overflow:hidden;
+background:#fff;
+border:2px solid #16212b;
+border-radius:12px;
+box-shadow:0 4px 10px rgba(0,0,0,.16);
+}
+
+.property-choice:hover:not(:disabled){
+transform:translateY(-2px);
+}
+
+.property-choice-band{
+display:block;
+height:42px;
+width:100%;
+border-bottom:2px solid #16212b;
+}
+
+.property-choice-name{
+display:flex;
+align-items:center;
+justify-content:center;
+min-height:72px;
+padding:10px;
+font-size:15px;
+font-weight:900;
+line-height:1.2;
+text-align:center;
+color:#102f55;
+background:#fffdf8;
+}
+
+.property-board{
+width:min(460px,100%);
+margin:18px auto 8px;
+background:#fffdf8;
+border:3px solid #16212b;
+border-radius:15px;
+overflow:hidden;
+box-shadow:0 8px 20px rgba(0,0,0,.24);
+}
+
+.property-band{
+min-height:92px;
+padding:12px 12px 10px;
+border-bottom:3px solid #16212b;
+display:flex;
+align-items:flex-end;
+justify-content:center;
+}
+
+.property-buildings{
+display:flex;
+align-items:flex-end;
+justify-content:center;
+gap:9px;
+min-height:55px;
+}
+
+.house-shape,
+.hotel-shape{
+position:relative;
+display:inline-block;
+filter:drop-shadow(0 2px 1px rgba(0,0,0,.28));
+}
+
+.house-shape{
+width:46px;
+height:32px;
+background:#218838;
+border:2px solid #0d4e1d;
+border-radius:2px;
+}
+
+.house-shape::before{
+content:"";
+position:absolute;
+left:4px;
+top:-22px;
+width:32px;
+height:32px;
+background:#218838;
+border-left:2px solid #0d4e1d;
+border-top:2px solid #0d4e1d;
+transform:rotate(45deg);
+z-index:-1;
+}
+
+.house-shape::after{
+content:"";
+position:absolute;
+left:17px;
+bottom:0;
+width:10px;
+height:18px;
+background:#f4e3aa;
+border:2px solid #0d4e1d;
+}
+
+.hotel-shape{
+width:68px;
+height:42px;
+background:#c62828;
+border:2px solid #7c1111;
+border-radius:3px;
+}
+
+.hotel-shape::before{
+content:"";
+position:absolute;
+left:7px;
+top:-23px;
+width:48px;
+height:34px;
+background:#c62828;
+border-left:2px solid #7c1111;
+border-top:2px solid #7c1111;
+transform:rotate(34deg) skewX(-20deg);
+z-index:-1;
+}
+
+.hotel-shape::after{
+content:"";
+position:absolute;
+left:25px;
+bottom:0;
+width:14px;
+height:24px;
+background:#f4e3aa;
+border:2px solid #7c1111;
+}
+
+.property-body{
+padding:20px 16px 18px;
+text-align:center;
+background:
+linear-gradient(180deg,#fffdf8 0%,#f5ead7 100%);
+}
+
+.property-kicker{
+font-size:12px;
+font-weight:900;
+letter-spacing:.14em;
+text-transform:uppercase;
+color:#6b5b45;
+margin-bottom:8px;
+}
+
+.property-name{
+font-size:clamp(24px,6vw,34px);
+font-weight:900;
+line-height:1.1;
+color:#102f55;
+}
+
+.property-level{
+margin-top:12px;
+font-size:16px;
+font-weight:900;
+color:#12365e;
+}
+
+.property-confirmation{
+margin-top:14px;
+padding:12px;
+border-radius:10px;
+background:#edf6e9;
+border:1px solid #9fbd92;
+text-align:center;
+font-weight:800;
+color:#2a5b24;
+}
+
+@media(max-width:600px){
+
+.property-grid{
+grid-template-columns:1fr;
+gap:10px;
+}
+
+.property-choice{
+min-height:96px;
+}
+
+.property-choice-band{
+height:34px;
+}
+
+.property-choice-name{
+min-height:58px;
+}
+
+.property-band{
+min-height:82px;
+}
+
+.house-shape{
+transform:scale(.84);
+margin:0 -2px;
+}
+
+.hotel-shape{
+transform:scale(.88);
+margin:0 -2px;
+}
+
+.property-buildings{
+gap:4px;
+}
+
+}
+
+
 /* =====================================================
    MOBILE
 ===================================================== */
@@ -1332,6 +1586,71 @@ alt="Carte de récompense">
 </div>
 
 
+<div
+class="property-stage"
+id="propertyStage">
+
+<div
+class="property-stage-title"
+id="propertyStageTitle">
+</div>
+
+<div
+class="property-stage-text"
+id="propertyStageText">
+</div>
+
+<div
+class="property-grid"
+id="propertyGrid">
+</div>
+
+<div
+class="property-board"
+id="propertyBoard"
+style="display:none;">
+
+<div
+class="property-band"
+id="propertyBand">
+
+<div
+class="property-buildings"
+id="propertyBuildings">
+</div>
+
+</div>
+
+<div class="property-body">
+
+<div class="property-kicker">
+VOTRE PATRIMOINE GEOPOLY
+</div>
+
+<div
+class="property-name"
+id="propertyName">
+</div>
+
+<div
+class="property-level"
+id="propertyLevel">
+</div>
+
+</div>
+
+</div>
+
+<div
+class="property-confirmation"
+id="propertyConfirmation"
+style="display:none;">
+</div>
+
+</div>
+
+
+
 <!-- =====================================================
      ALERTE RETOUR LAB
 ===================================================== -->
@@ -1655,8 +1974,53 @@ cardImage:
    VARIABLES
 ===================================================== */
 
+
+const properties = [
+
+{
+name:'Cours du XXX Juillet',
+color:'#9a6038'
+},
+
+{
+name:'Place Gambetta',
+color:'#57b7e8'
+},
+
+{
+name:"Cours d'Albret",
+color:'#e25a9b'
+},
+
+{
+name:'Rue Duffour Dubergier',
+color:'#f39a2e'
+},
+
+{
+name:'Rue Saint-James',
+color:'#d9272e'
+},
+
+{
+name:'Place du Palais',
+color:'#f3d51f'
+},
+
+{
+name:'Place Stalingrad',
+color:'#35a34a'
+},
+
+{
+name:'Parc aux Angéliques',
+color:'#163e6d'
+}
+
+];
+
 const STORAGE_KEY =
-'geopoly-bordeaux-progress-v19';
+'geopoly-bordeaux-progress-v20';
 
 let index =
 0;
@@ -1669,6 +2033,15 @@ false;
 
 let showingAlert =
 false;
+
+let showingPropertyStage =
+false;
+
+let propertyStageSeen =
+false;
+
+let selectedProperty =
+null;
 
 const results =
 [];
@@ -1750,6 +2123,36 @@ document.getElementById('alertCard');
 const alertImage =
 document.getElementById('alertImage');
 
+const propertyStage =
+document.getElementById('propertyStage');
+
+const propertyStageTitle =
+document.getElementById('propertyStageTitle');
+
+const propertyStageText =
+document.getElementById('propertyStageText');
+
+const propertyGrid =
+document.getElementById('propertyGrid');
+
+const propertyBoard =
+document.getElementById('propertyBoard');
+
+const propertyBand =
+document.getElementById('propertyBand');
+
+const propertyBuildings =
+document.getElementById('propertyBuildings');
+
+const propertyName =
+document.getElementById('propertyName');
+
+const propertyLevel =
+document.getElementById('propertyLevel');
+
+const propertyConfirmation =
+document.getElementById('propertyConfirmation');
+
 const finalVisual =
 document.getElementById('finalVisual');
 
@@ -1805,7 +2208,8 @@ JSON.stringify({
 
 index:index,
 score:score,
-results:results
+results:results,
+selectedProperty:selectedProperty
 
 })
 
@@ -1879,6 +2283,21 @@ results.push(result);
 
 }
 );
+
+}
+
+if(
+saved.selectedProperty
+&&
+typeof saved.selectedProperty.name === 'string'
+&&
+typeof saved.selectedProperty.color === 'string'
+){
+
+selectedProperty = {
+name:saved.selectedProperty.name,
+color:saved.selectedProperty.color
+};
 
 }
 
@@ -1999,6 +2418,15 @@ rewardCard.style.display =
 
 alertCard.style.display =
 'none';
+
+propertyStage.style.display =
+'none';
+
+showingPropertyStage =
+false;
+
+propertyStageSeen =
+false;
 
 rewardImage.removeAttribute(
 'src'
@@ -2223,6 +2651,340 @@ scrollToLogo();
 }
 
 
+
+/* =====================================================
+   PATRIMOINE - OUTILS
+===================================================== */
+
+function getPropertyStageData(questionIndex){
+
+if(questionIndex === 0){
+return {
+count:1,
+type:'house',
+label:'1 échoppe'
+};
+}
+
+if(questionIndex === 1){
+return {
+count:2,
+type:'house',
+label:'2 échoppes'
+};
+}
+
+if(questionIndex === 2){
+return {
+count:3,
+type:'house',
+label:'3 échoppes'
+};
+}
+
+if(questionIndex === 3){
+return {
+count:4,
+type:'house',
+label:'4 échoppes'
+};
+}
+
+if(questionIndex === 4){
+return {
+count:1,
+type:'hotel',
+label:'1 hôtel particulier'
+};
+}
+
+return {
+count:2,
+type:'hotel',
+label:'2 hôtels particuliers'
+};
+
+}
+
+
+function renderBuildings(stageData){
+
+propertyBuildings.innerHTML =
+'';
+
+for(
+let i = 0;
+i < stageData.count;
+i++
+){
+
+const building =
+document.createElement(
+'span'
+);
+
+building.className =
+stageData.type === 'hotel'
+?
+'hotel-shape'
+:
+'house-shape';
+
+building.setAttribute(
+'aria-hidden',
+'true'
+);
+
+propertyBuildings.appendChild(
+building
+);
+
+}
+
+}
+
+
+function renderSelectedProperty(){
+
+if(!selectedProperty){
+
+return;
+
+}
+
+const stageData =
+getPropertyStageData(
+index
+);
+
+propertyGrid.style.display =
+'none';
+
+propertyBoard.style.display =
+'block';
+
+propertyBand.style.background =
+selectedProperty.color;
+
+propertyName.textContent =
+selectedProperty.name;
+
+propertyLevel.textContent =
+stageData.label;
+
+renderBuildings(
+stageData
+);
+
+propertyConfirmation.style.display =
+'block';
+
+if(index === 0){
+
+propertyConfirmation.textContent =
+'✓ Cette rue devient votre propriété pour toute la partie.';
+
+}
+else if(index <= 3){
+
+propertyConfirmation.textContent =
+'🏠 Votre patrimoine s’agrandit sur la même propriété.';
+
+}
+else{
+
+propertyConfirmation.textContent =
+'🏨 Votre patrimoine immobilier monte en gamme !';
+
+}
+
+nextBtn.style.display =
+'block';
+
+nextBtn.disabled =
+false;
+
+nextBtn.textContent =
+'CONTINUER ➜';
+
+saveProgress();
+
+}
+
+
+function chooseProperty(property){
+
+selectedProperty = {
+name:property.name,
+color:property.color
+};
+
+renderSelectedProperty();
+
+}
+
+
+function showPropertyStage(){
+
+placeEl.style.display =
+'none';
+
+questionIntroEl.style.display =
+'none';
+
+questionEl.style.display =
+'none';
+
+answersEl.style.display =
+'none';
+
+feedbackEl.style.display =
+'none';
+
+rewardCard.style.display =
+'none';
+
+alertCard.style.display =
+'none';
+
+propertyStage.style.display =
+'block';
+
+skipBtn.style.display =
+'none';
+
+showingPropertyStage =
+true;
+
+propertyStageSeen =
+true;
+
+propertyGrid.innerHTML =
+'';
+
+propertyBoard.style.display =
+'none';
+
+propertyConfirmation.style.display =
+'none';
+
+
+if(
+index === 0
+&&
+!selectedProperty
+){
+
+propertyStageTitle.textContent =
+'🏠 CHOISISSEZ VOTRE RUE';
+
+propertyStageText.textContent =
+'Votre première échoppe est gagnée. Choisissez maintenant la rue dans laquelle vous souhaitez construire votre patrimoine GEOPOLY. Ce choix sera conservé pour toute la partie.';
+
+properties.forEach(
+function(property){
+
+const button =
+document.createElement(
+'button'
+);
+
+button.type =
+'button';
+
+button.className =
+'property-choice';
+
+button.setAttribute(
+'aria-label',
+'Choisir '
++
+property.name
+);
+
+const band =
+document.createElement(
+'span'
+);
+
+band.className =
+'property-choice-band';
+
+band.style.background =
+property.color;
+
+const name =
+document.createElement(
+'span'
+);
+
+name.className =
+'property-choice-name';
+
+name.textContent =
+property.name;
+
+button.appendChild(
+band
+);
+
+button.appendChild(
+name
+);
+
+button.addEventListener(
+'click',
+function(){
+
+chooseProperty(
+property
+);
+
+propertyStageTitle.textContent =
+'🏠 VOTRE PREMIÈRE ÉCHOPPE';
+
+propertyStageText.textContent =
+'Votre choix est enregistré. Les prochaines constructions seront ajoutées automatiquement sur cette propriété.';
+
+}
+);
+
+propertyGrid.appendChild(
+button
+);
+
+}
+);
+
+nextBtn.style.display =
+'none';
+
+}
+else{
+
+propertyStageTitle.textContent =
+index === 4
+?
+'🏨 VOTRE HÔTEL PARTICULIER'
+:
+index === 5
+?
+'🏨🏨 DEUXIÈME HÔTEL PARTICULIER'
+:
+'🏠 VOTRE PATRIMOINE S’AGRANDIT';
+
+propertyStageText.textContent =
+'Voici l’évolution de votre propriété après cette bonne réponse.';
+
+renderSelectedProperty();
+
+}
+
+scrollToLogo();
+
+}
+
+
 /* =====================================================
    CARTE DE RECOMPENSE
 ===================================================== */
@@ -2246,6 +3008,12 @@ feedbackEl.style.display =
 
 alertCard.style.display =
 'none';
+
+propertyStage.style.display =
+'none';
+
+showingPropertyStage =
+false;
 
 
 rewardImage.src =
@@ -2305,6 +3073,12 @@ feedbackEl.style.display =
 
 rewardCard.style.display =
 'none';
+
+propertyStage.style.display =
+'none';
+
+showingPropertyStage =
+false;
 
 
 alertImage.src =
@@ -2624,8 +3398,37 @@ return;
 
 
 /*
+Après chaque bonne réponse,
+on affiche d'abord l'évolution du patrimoine.
+*/
+
+const currentResult =
+results.find(
+function(result){
+
+return result.questionIndex === index;
+
+}
+);
+
+if(
+currentResult
+&&
+currentResult.status === 'Bonne réponse'
+&&
+!propertyStageSeen
+){
+
+showPropertyStage();
+
+return;
+
+}
+
+
+/*
 Après les questions 1, 2 et 3,
-on affiche d'abord la carte d'alerte.
+on conserve ensuite la carte d'alerte retour Lab.
 */
 
 if(
@@ -2644,8 +3447,8 @@ return;
 
 
 /*
-Si la carte d'alerte est déjà affichée,
-le second clic passe à la question suivante.
+Après le patrimoine (et éventuellement l'alerte),
+on passe à la question suivante.
 */
 
 index++;
@@ -2654,6 +3457,12 @@ answered =
 false;
 
 showingAlert =
+false;
+
+showingPropertyStage =
+false;
+
+propertyStageSeen =
 false;
 
 saveProgress();
@@ -2965,6 +3774,15 @@ false;
 showingAlert =
 false;
 
+showingPropertyStage =
+false;
+
+propertyStageSeen =
+false;
+
+selectedProperty =
+null;
+
 results.length =
 0;
 
@@ -3009,6 +3827,18 @@ rewardCard.style.display =
 'none';
 
 alertCard.style.display =
+'none';
+
+propertyStage.style.display =
+'none';
+
+propertyGrid.innerHTML =
+'';
+
+propertyBoard.style.display =
+'none';
+
+propertyConfirmation.style.display =
 'none';
 
 rewardImage.removeAttribute(
@@ -3075,6 +3905,9 @@ rewardCard.style.display =
 'none';
 
 alertCard.style.display =
+'none';
+
+propertyStage.style.display =
 'none';
 
 gameStatus.style.display =
