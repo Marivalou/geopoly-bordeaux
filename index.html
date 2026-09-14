@@ -73,6 +73,7 @@ margin:0 auto;
 }
 
 
+
 /* =====================================================
    LOGO
 ===================================================== */
@@ -99,6 +100,7 @@ margin:0 auto;
 object-fit:contain;
 
 }
+
 
 
 /* =====================================================
@@ -186,6 +188,7 @@ font-size:16px;
 }
 
 
+
 /* =====================================================
    REGLES
 ===================================================== */
@@ -235,6 +238,7 @@ font-size:29px;
 margin-bottom:8px;
 
 }
+
 
 
 /* =====================================================
@@ -292,6 +296,7 @@ color:#f4ca62;
 }
 
 
+
 /* =====================================================
    PROGRESSION
 ===================================================== */
@@ -336,6 +341,7 @@ transition:
 width .35s ease;
 
 }
+
 
 
 /* =====================================================
@@ -421,6 +427,7 @@ color:#0c315d;
 }
 
 
+
 /* =====================================================
    REPONSE
 ===================================================== */
@@ -469,6 +476,7 @@ color:#1e1e1e;
 width:100%;
 
 }
+
 
 
 /* =====================================================
@@ -587,6 +595,7 @@ flex:1;
 }
 
 
+
 /* =====================================================
    FEEDBACK
 ===================================================== */
@@ -625,6 +634,7 @@ border-color:#db8d86;
 }
 
 
+
 /* =====================================================
    CARTE RECOMPENSE
 ===================================================== */
@@ -648,6 +658,7 @@ background:transparent;
 border:0;
 
 }
+
 
 
 /* =====================================================
@@ -675,9 +686,9 @@ border:0;
 }
 
 
+
 /* =====================================================
    RENDU DES CARTES
-   Blanc plus franc sur smartphone
 ===================================================== */
 
 .reward-card img,
@@ -716,6 +727,7 @@ brightness(1.08)
 contrast(1.02);
 
 }
+
 
 
 /* =====================================================
@@ -781,6 +793,7 @@ outline-offset:
 }
 
 
+
 /* =====================================================
    FINAL NORMAL
 ===================================================== */
@@ -806,6 +819,7 @@ padding:0;
 background:transparent;
 
 }
+
 
 
 /* =====================================================
@@ -906,6 +920,7 @@ box-shadow:
 }
 
 
+
 /* =====================================================
    RECAP
 ===================================================== */
@@ -955,6 +970,7 @@ font-size:13px;
 opacity:.72;
 
 }
+
 
 
 /* =====================================================
@@ -1077,6 +1093,7 @@ border-bottom:3px solid #16212b;
 display:flex;
 align-items:flex-end;
 justify-content:center;
+overflow:hidden;
 }
 
 .property-buildings{
@@ -1085,80 +1102,94 @@ align-items:flex-end;
 justify-content:center;
 gap:9px;
 min-height:55px;
+width:100%;
+overflow:visible;
 }
 
-.house-shape,
-.hotel-shape{
-position:relative;
-display:inline-block;
-filter:drop-shadow(0 2px 1px rgba(0,0,0,.28));
+
+/* =====================================================
+   MAISONS / HOTELS MONOPOLY
+===================================================== */
+
+.property-building{
+
+display:block;
+
+width:58px;
+
+height:auto;
+
+object-fit:contain;
+
+flex:0 0 auto;
+
+filter:
+drop-shadow(0 3px 3px rgba(0,0,0,.30));
+
 }
 
-.house-shape{
-width:46px;
-height:32px;
-background:#218838;
-border:2px solid #0d4e1d;
-border-radius:2px;
+.property-building.hotel{
+
+width:86px;
+
 }
 
-.house-shape::before{
-content:"";
-position:absolute;
-left:4px;
-top:-22px;
-width:32px;
-height:32px;
-background:#218838;
-border-left:2px solid #0d4e1d;
-border-top:2px solid #0d4e1d;
-transform:rotate(45deg);
-z-index:-1;
+
+/* =====================================================
+   ANIMATION DU NOUVEL ELEMENT UNIQUEMENT
+===================================================== */
+
+.property-building.building-enter{
+
+animation:
+buildingArrival .9s
+cubic-bezier(.20,.80,.25,1.10)
+both;
+
 }
 
-.house-shape::after{
-content:"";
-position:absolute;
-left:17px;
-bottom:0;
-width:10px;
-height:18px;
-background:#f4e3aa;
-border:2px solid #0d4e1d;
+@keyframes buildingArrival{
+
+0%{
+
+opacity:0;
+
+transform:
+translateX(320px)
+scale(.88);
+
 }
 
-.hotel-shape{
-width:68px;
-height:42px;
-background:#c62828;
-border:2px solid #7c1111;
-border-radius:3px;
+70%{
+
+opacity:1;
+
+transform:
+translateX(-8px)
+scale(1.03);
+
 }
 
-.hotel-shape::before{
-content:"";
-position:absolute;
-left:7px;
-top:-23px;
-width:48px;
-height:34px;
-background:#c62828;
-border-left:2px solid #7c1111;
-border-top:2px solid #7c1111;
-transform:rotate(34deg) skewX(-20deg);
-z-index:-1;
+85%{
+
+transform:
+translateX(4px)
+scale(.99);
+
 }
 
-.hotel-shape::after{
-content:"";
-position:absolute;
-left:25px;
-bottom:0;
-width:14px;
-height:24px;
-background:#f4e3aa;
-border:2px solid #7c1111;
+100%{
+
+opacity:1;
+
+transform:
+translateX(0)
+scale(1);
+
 }
+
+}
+
 
 .property-body{
 padding:20px 16px 18px;
@@ -1201,44 +1232,6 @@ font-weight:800;
 color:#2a5b24;
 }
 
-@media(max-width:600px){
-
-.property-grid{
-grid-template-columns:1fr;
-gap:10px;
-}
-
-.property-choice{
-min-height:96px;
-}
-
-.property-choice-band{
-height:34px;
-}
-
-.property-choice-name{
-min-height:58px;
-}
-
-.property-band{
-min-height:82px;
-}
-
-.house-shape{
-transform:scale(.84);
-margin:0 -2px;
-}
-
-.hotel-shape{
-transform:scale(.88);
-margin:0 -2px;
-}
-
-.property-buildings{
-gap:4px;
-}
-
-}
 
 
 /* =====================================================
@@ -1346,6 +1339,45 @@ font-size:13px;
 
 }
 
+.property-grid{
+grid-template-columns:1fr;
+gap:10px;
+}
+
+.property-choice{
+min-height:96px;
+}
+
+.property-choice-band{
+height:34px;
+}
+
+.property-choice-name{
+min-height:58px;
+}
+
+.property-band{
+min-height:82px;
+}
+
+.property-building{
+
+width:46px;
+
+}
+
+.property-building.hotel{
+
+width:70px;
+
+}
+
+.property-buildings{
+
+gap:5px;
+
+}
+
 }
 
 </style>
@@ -1353,6 +1385,7 @@ font-size:13px;
 </head>
 
 <body>
+
 
 
 <!-- =====================================================
@@ -1379,9 +1412,11 @@ class="final-overlay-hint">
 </div>
 
 
+
 <div id="geopoly-app">
 
 <div class="wrap">
+
 
 
 <!-- =====================================================
@@ -1398,6 +1433,7 @@ alt="GEOPOLY BORDEAUX"
 class="main-logo">
 
 </header>
+
 
 
 <!-- =====================================================
@@ -1472,6 +1508,7 @@ Réussissez les 5 premières étapes pour accéder à la question subsidiaire.
 </div>
 
 
+
 <div class="actions">
 
 <button
@@ -1488,6 +1525,7 @@ COMMENCER LE JEU ➜
 <div id="errorBox"></div>
 
 </section>
+
 
 
 <!-- =====================================================
@@ -1527,6 +1565,7 @@ EV
 </div>
 
 
+
 <div
 class="progress"
 id="gameProgress"
@@ -1535,6 +1574,7 @@ style="display:none;">
 <div id="progress"></div>
 
 </div>
+
 
 
 <!-- =====================================================
@@ -1573,6 +1613,7 @@ aria-live="polite">
 </div>
 
 
+
 <div
 class="reward-card"
 id="rewardCard">
@@ -1583,6 +1624,7 @@ src=""
 alt="Carte de récompense">
 
 </div>
+
 
 
 <div
@@ -1676,6 +1718,7 @@ class="lab-link">
 </div>
 
 
+
 <div class="actions">
 
 <button
@@ -1700,6 +1743,7 @@ CONTINUER ➜
 </div>
 
 </section>
+
 
 
 <!-- =====================================================
@@ -1744,6 +1788,7 @@ id="restartBtn">
 </div>
 
 </div>
+
 
 
 <script>
@@ -1898,9 +1943,8 @@ cardImage:'carte-question-6.jpg'
 
 
 /* =====================================================
-   VARIABLES
+   PROPRIETES
 ===================================================== */
-
 
 const properties = [
 
@@ -1945,6 +1989,11 @@ color:'#163e6d'
 }
 
 ];
+
+
+/* =====================================================
+   VARIABLES
+===================================================== */
 
 const STORAGE_KEY =
 'geopoly-bordeaux-progress-v22';
@@ -2571,7 +2620,6 @@ scrollToLogo();
 }
 
 
-
 /* =====================================================
    PATRIMOINE - OUTILS
 ===================================================== */
@@ -2627,10 +2675,15 @@ label:'2 hôtels particuliers'
 }
 
 
+/* =====================================================
+   PATRIMOINE - AFFICHAGE DES BATIMENTS
+===================================================== */
+
 function renderBuildings(stageData){
 
 propertyBuildings.innerHTML =
 '';
+
 
 for(
 let i = 0;
@@ -2640,20 +2693,53 @@ i++
 
 const building =
 document.createElement(
-'span'
+'img'
 );
+
+
+if(
+stageData.type === 'hotel'
+){
+
+building.src =
+'hotel monopoly.png';
+
+building.alt =
+'Hôtel particulier';
 
 building.className =
-stageData.type === 'hotel'
-?
-'hotel-shape'
-:
-'house-shape';
+'property-building hotel';
 
-building.setAttribute(
-'aria-hidden',
-'true'
+}
+else{
+
+building.src =
+'maison monopoly.png';
+
+building.alt =
+'Échoppe';
+
+building.className =
+'property-building';
+
+}
+
+
+/*
+Seul le nouvel élément est animé.
+Les précédents sont affichés directement.
+*/
+
+if(
+i === stageData.count - 1
+){
+
+building.classList.add(
+'building-enter'
 );
+
+}
+
 
 propertyBuildings.appendChild(
 building
@@ -2663,6 +2749,10 @@ building
 
 }
 
+
+/* =====================================================
+   PATRIMOINE - PROPRIETE SELECTIONNEE
+===================================================== */
 
 function renderSelectedProperty(){
 
@@ -2732,6 +2822,10 @@ saveProgress();
 }
 
 
+/* =====================================================
+   CHOIX DE LA PROPRIETE
+===================================================== */
+
 function chooseProperty(property){
 
 selectedProperty = {
@@ -2743,6 +2837,10 @@ renderSelectedProperty();
 
 }
 
+
+/* =====================================================
+   AFFICHAGE DU PATRIMOINE
+===================================================== */
 
 function showPropertyStage(){
 
@@ -3367,7 +3465,7 @@ return;
 
 
 /*
-Après le patrimoine (et éventuellement l'alerte),
+Après le patrimoine et l'alerte éventuelle,
 on passe à la question suivante.
 */
 
