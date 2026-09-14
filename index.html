@@ -1117,11 +1117,16 @@ box-shadow:
 
 }
 
+/* =====================================================
+   BANDE COLOREE
+===================================================== */
+
 .property-band{
 
-min-height:100px;
+min-height:105px;
 
-padding:12px 12px 10px;
+padding:
+14px 12px 10px;
 
 border-bottom:
 3px solid #16212b;
@@ -1146,7 +1151,7 @@ justify-content:center;
 
 gap:9px;
 
-min-height:68px;
+min-height:72px;
 
 width:100%;
 
@@ -1154,36 +1159,43 @@ width:100%;
 
 
 /* =====================================================
-   MAISONS ET HOTELS EN IMAGES
+   MAISONS / HOTELS EN IMAGES
 ===================================================== */
 
 .property-building{
 
 display:block;
 
-width:58px;
+width:54px;
 
-height:auto;
+height:54px;
 
 object-fit:contain;
+
+object-position:center bottom;
 
 flex:0 0 auto;
 
 filter:
-drop-shadow(0 3px 3px rgba(0,0,0,.30));
+drop-shadow(0 3px 3px rgba(0,0,0,.28));
 
 }
 
 .property-building.hotel{
 
-width:88px;
+width:82px;
+
+height:62px;
+
+object-fit:contain;
+
+object-position:center bottom;
 
 }
 
 
 /* =====================================================
    ANIMATION
-   SEUL LE NOUVEL ELEMENT ARRIVE
 ===================================================== */
 
 .property-building.building-enter{
@@ -1451,25 +1463,34 @@ min-height:58px;
 
 .property-band{
 
-min-height:88px;
+min-height:96px;
+
+padding:
+12px 8px 8px;
 
 }
 
 .property-building{
 
-width:46px;
+width:44px;
+
+height:44px;
 
 }
 
 .property-building.hotel{
 
-width:72px;
+width:68px;
+
+height:52px;
 
 }
 
 .property-buildings{
 
 gap:5px;
+
+min-height:58px;
 
 }
 
@@ -1481,10 +1502,6 @@ gap:5px;
 
 <body>
 
-
-<!-- =====================================================
-     FINAL PLEIN ECRAN
-===================================================== -->
 
 <div
 class="final-overlay"
@@ -1506,15 +1523,10 @@ class="final-overlay-hint">
 </div>
 
 
-
 <div id="geopoly-app">
 
 <div class="wrap">
 
-
-<!-- =====================================================
-     LOGO
-===================================================== -->
 
 <header
 class="geopoly-header"
@@ -1527,10 +1539,6 @@ class="main-logo">
 
 </header>
 
-
-<!-- =====================================================
-     ACCUEIL
-===================================================== -->
 
 <section
 class="hero"
@@ -1627,10 +1635,6 @@ COMMENCER LE JEU ➜
 </section>
 
 
-<!-- =====================================================
-     SCORE
-===================================================== -->
-
 <div
 class="scorebar"
 id="gameStatus"
@@ -1674,10 +1678,6 @@ style="display:none;">
 </div>
 
 
-<!-- =====================================================
-     QUESTION / ETAPES
-===================================================== -->
-
 <section
 class="card"
 id="quizCard"
@@ -1710,8 +1710,6 @@ aria-live="polite">
 </div>
 
 
-<!-- CARTE RECOMPENSE -->
-
 <div
 class="reward-card"
 id="rewardCard">
@@ -1723,8 +1721,6 @@ alt="Carte de récompense">
 
 </div>
 
-
-<!-- PATRIMOINE -->
 
 <div
 class="property-stage"
@@ -1790,8 +1786,6 @@ style="display:none;">
 </div>
 
 
-<!-- ALERTE LAB -->
-
 <div
 class="alert-card"
 id="alertCard">
@@ -1814,8 +1808,6 @@ class="lab-link">
 
 </div>
 
-
-<!-- ACTIONS -->
 
 <div class="actions">
 
@@ -1842,10 +1834,6 @@ CONTINUER ➜
 
 </section>
 
-
-<!-- =====================================================
-     FINAL
-===================================================== -->
 
 <section
 class="card final"
@@ -1888,17 +1876,12 @@ id="restartBtn">
 </div>
 
 
-
 <script>
 
 (function(){
 
 "use strict";
 
-
-/* =====================================================
-   ERREURS
-===================================================== */
 
 window.addEventListener(
 'error',
@@ -1925,13 +1908,7 @@ event.message;
 );
 
 
-/* =====================================================
-   ETAPES
-===================================================== */
-
 const questions = [
-
-/* ETAPE 1 */
 
 {
 place:'Jardin Public',
@@ -1949,9 +1926,6 @@ points:500,
 cardImage:
 'carte-question-1.jpg'
 },
-
-
-/* ETAPE 2 */
 
 {
 place:'Jardins de la mairie',
@@ -1972,9 +1946,6 @@ cardImage:
 'carte-question-2.jpg'
 },
 
-
-/* ETAPE 3 */
-
 {
 place:'Place Camille Jullian',
 
@@ -1993,9 +1964,6 @@ points:1250,
 cardImage:
 'carte-question-3.jpg'
 },
-
-
-/* ETAPE 4 */
 
 {
 place:"Gare d’Orléans",
@@ -2016,9 +1984,6 @@ cardImage:
 'carte-question-4.jpg'
 },
 
-
-/* ETAPE 5 AUTOMATIQUE */
-
 {
 place:'Bonus des 4 LAB',
 
@@ -2029,9 +1994,6 @@ points:0,
 cardImage:
 'carte-question-5.jpg'
 },
-
-
-/* ETAPE 6 */
 
 {
 place:'QUESTION SUBSIDIAIRE',
@@ -2056,10 +2018,6 @@ cardImage:
 
 ];
 
-
-/* =====================================================
-   PROPRIETES
-===================================================== */
 
 const properties = [
 
@@ -2106,10 +2064,6 @@ color:'#163e6d'
 ];
 
 
-/* =====================================================
-   CARTES LAB
-===================================================== */
-
 const labCards = [
 
 'carte-lab-1.jpg',
@@ -2120,10 +2074,6 @@ const labCards = [
 
 ];
 
-
-/* =====================================================
-   VARIABLES
-===================================================== */
 
 const STORAGE_KEY =
 'geopoly-bordeaux-progress-v23';
@@ -2144,10 +2094,6 @@ let selectedProperty = null;
 
 const results = [];
 
-
-/* =====================================================
-   ELEMENTS
-===================================================== */
 
 const scoreEl =
 document.getElementById('score');
@@ -2272,10 +2218,6 @@ totalQuestionsEl.textContent =
 questions.length;
 
 
-/* =====================================================
-   SCROLL HAUT
-===================================================== */
-
 function scrollToLogo(){
 
 setTimeout(
@@ -2297,10 +2239,6 @@ behavior:'smooth'
 
 }
 
-
-/* =====================================================
-   SAUVEGARDE
-===================================================== */
 
 function saveProgress(){
 
@@ -2334,10 +2272,6 @@ console.log(error);
 
 }
 
-
-/* =====================================================
-   CHARGEMENT
-===================================================== */
 
 function loadProgress(){
 
@@ -2432,10 +2366,6 @@ console.log(error);
 }
 
 
-/* =====================================================
-   EFFACER SAUVEGARDE
-===================================================== */
-
 function clearProgress(){
 
 try{
@@ -2453,10 +2383,6 @@ console.log(error);
 
 }
 
-
-/* =====================================================
-   NORMALISATION
-===================================================== */
 
 function normalizeAnswer(value){
 
@@ -2481,10 +2407,6 @@ return String(value)
 }
 
 
-/* =====================================================
-   TROUVER RESULTAT
-===================================================== */
-
 function getResult(
 questionIndex
 ){
@@ -2501,10 +2423,6 @@ questionIndex;
 
 }
 
-
-/* =====================================================
-   LES 4 PREMIERES REUSSIES ?
-===================================================== */
 
 function firstFourSucceeded(){
 
@@ -2535,10 +2453,6 @@ return true;
 
 }
 
-
-/* =====================================================
-   AJOUT / REMPLACEMENT RESULTAT
-===================================================== */
 
 function storeResult(
 questionIndex,
@@ -2594,10 +2508,6 @@ points
 }
 
 
-/* =====================================================
-   RESET AFFICHAGE ETAPE
-===================================================== */
-
 function resetStageDisplay(){
 
 rewardCard.style.display =
@@ -2636,10 +2546,6 @@ false;
 }
 
 
-/* =====================================================
-   AFFICHER UNE QUESTION
-===================================================== */
-
 function renderQuestion(){
 
 hero.style.display =
@@ -2665,8 +2571,6 @@ return;
 }
 
 
-/* BONUS AUTOMATIQUE */
-
 if(
 index === 4
 ){
@@ -2688,8 +2592,6 @@ return;
 
 }
 
-
-/* QUESTION 6 VERROUILLEE */
 
 if(
 index === 5
@@ -2732,8 +2634,6 @@ skipBtn.style.display =
 skipBtn.disabled =
 false;
 
-
-/* ENCADRE ROUGE Q1 A Q4 */
 
 if(
 index <= 3
@@ -2876,10 +2776,6 @@ scrollToLogo();
 }
 
 
-/* =====================================================
-   BONUS AUTOMATIQUE ETAPE 5
-===================================================== */
-
 function showAutomaticBonus(){
 
 const item =
@@ -2991,10 +2887,6 @@ scrollToLogo();
 }
 
 
-/* =====================================================
-   DONNEES PATRIMOINE
-===================================================== */
-
 function getPropertyStageData(
 questionIndex
 ){
@@ -3092,10 +2984,6 @@ label:'2 hôtels particuliers'
 }
 
 
-/* =====================================================
-   AFFICHAGE MAISONS / HOTELS
-===================================================== */
-
 function renderBuildings(
 stageData
 ){
@@ -3144,11 +3032,6 @@ building.className =
 }
 
 
-/*
-Seul le dernier élément créé
-est animé.
-*/
-
 if(
 i === stageData.count - 1
 ){
@@ -3168,10 +3051,6 @@ building
 
 }
 
-
-/* =====================================================
-   PROPRIETE SELECTIONNEE
-===================================================== */
 
 function renderSelectedProperty(){
 
@@ -3262,10 +3141,6 @@ saveProgress();
 }
 
 
-/* =====================================================
-   CHOIX PROPRIETE
-===================================================== */
-
 function chooseProperty(
 property
 ){
@@ -3285,10 +3160,6 @@ renderSelectedProperty();
 
 }
 
-
-/* =====================================================
-   AFFICHAGE PATRIMOINE
-===================================================== */
 
 function showPropertyStage(){
 
@@ -3336,8 +3207,6 @@ propertyBoard.style.display =
 propertyConfirmation.style.display =
 'none';
 
-
-/* PREMIER CHOIX DE RUE */
 
 if(
 index === 0
@@ -3438,10 +3307,6 @@ nextBtn.style.display =
 'none';
 
 }
-
-
-/* PROPRIETE DEJA CHOISIE */
-
 else{
 
 if(
@@ -3486,10 +3351,6 @@ scrollToLogo();
 
 }
 
-
-/* =====================================================
-   CARTE RECOMPENSE
-===================================================== */
 
 function showRewardCard(
 item
@@ -3552,10 +3413,6 @@ scrollToLogo();
 
 }
 
-
-/* =====================================================
-   CARTE LAB 1 / 2 / 3
-===================================================== */
 
 function showLabAlert(){
 
@@ -3650,10 +3507,6 @@ scrollToLogo();
 
 }
 
-
-/* =====================================================
-   VERIFICATION REPONSE
-===================================================== */
 
 function checkAnswer(
 input,
@@ -3777,8 +3630,6 @@ return;
 }
 
 
-/* MAUVAISE REPONSE */
-
 feedbackEl.classList.add(
 'wrong'
 );
@@ -3796,10 +3647,6 @@ input.focus();
 
 }
 
-
-/* =====================================================
-   PASSER UNE QUESTION
-===================================================== */
 
 skipBtn.addEventListener(
 'click',
@@ -3882,10 +3729,6 @@ saveProgress();
 );
 
 
-/* =====================================================
-   BOUTON CONTINUER
-===================================================== */
-
 nextBtn.addEventListener(
 'click',
 function(){
@@ -3904,12 +3747,6 @@ getResult(
 index
 );
 
-
-/*
-Q1 A Q4 :
-après la carte de récompense,
-afficher le patrimoine.
-*/
 
 if(
 index <= 3
@@ -3930,12 +3767,6 @@ return;
 }
 
 
-/*
-ETAPE 5 AUTOMATIQUE :
-après la carte bonus,
-afficher l'hôtel.
-*/
-
 if(
 index === 4
 &&
@@ -3955,12 +3786,6 @@ return;
 }
 
 
-/*
-Q6 :
-après la carte de récompense,
-afficher le deuxième hôtel.
-*/
-
 if(
 index === 5
 &&
@@ -3979,11 +3804,6 @@ return;
 
 }
 
-
-/*
-APRES Q1 Q2 Q3 :
-CARTE LAB.
-*/
 
 if(
 index >= 0
@@ -4008,10 +3828,6 @@ return;
 }
 
 
-/*
-ETAPE SUIVANTE
-*/
-
 index++;
 
 answered =
@@ -4035,10 +3851,6 @@ renderQuestion();
 );
 
 
-/* =====================================================
-   OUVRIR FINAL
-===================================================== */
-
 function openFinalOverlay(
 imageSrc
 ){
@@ -4055,10 +3867,6 @@ document.body.style.overflow =
 
 }
 
-
-/* =====================================================
-   FERMER FINAL
-===================================================== */
 
 function closeFinalOverlay(){
 
@@ -4077,10 +3885,6 @@ scrollToLogo();
 
 }
 
-
-/* =====================================================
-   CLIC CARTE FINAL
-===================================================== */
 
 finalOverlayImage.addEventListener(
 'click',
@@ -4107,10 +3911,6 @@ closeFinalOverlay();
 }
 );
 
-
-/* =====================================================
-   BONUS / Q6 VERROUILLES
-===================================================== */
 
 function showLocked(){
 
@@ -4139,12 +3939,6 @@ finalImage.src =
 imageSrc;
 
 
-/*
-4 étapes sur 6 maximum
-si une des quatre premières
-n'a pas été réussie.
-*/
-
 progressEl.style.width =
 '66.67%';
 
@@ -4159,10 +3953,6 @@ imageSrc
 
 }
 
-
-/* =====================================================
-   RESULTAT FINAL
-===================================================== */
 
 function showFinalResult(){
 
@@ -4228,10 +4018,6 @@ imageSrc
 }
 
 
-/* =====================================================
-   PETITE CARTE FINAL
-===================================================== */
-
 finalImage.addEventListener(
 'click',
 function(){
@@ -4243,10 +4029,6 @@ summaryEl.classList.toggle(
 }
 );
 
-
-/* =====================================================
-   RECAP
-===================================================== */
 
 function displaySummary(){
 
@@ -4331,10 +4113,6 @@ row
 
 }
 
-
-/* =====================================================
-   RECOMMENCER
-===================================================== */
 
 restartBtn.addEventListener(
 'click',
@@ -4462,10 +4240,6 @@ scrollToLogo();
 );
 
 
-/* =====================================================
-   INITIALISATION
-===================================================== */
-
 loadProgress();
 
 
@@ -4529,10 +4303,6 @@ startBtn.textContent =
 
 }
 
-
-/* =====================================================
-   COMMENCER
-===================================================== */
 
 startBtn.addEventListener(
 'click',
