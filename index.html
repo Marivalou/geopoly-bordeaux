@@ -651,7 +651,7 @@ border:0;
 
 
 /* =====================================================
-   CARTE ALERTE LAB
+   CARTE ALERTE RETOUR LAB
 ===================================================== */
 
 .alert-card{
@@ -676,7 +676,7 @@ border:0;
 
 
 /* =====================================================
-   IMAGES CARTES
+   RENDU DES CARTES
 ===================================================== */
 
 .reward-card img,
@@ -718,7 +718,7 @@ contrast(1.02);
 
 
 /* =====================================================
-   RETOUR LAB
+   BOUTON RETOUR LAB
 ===================================================== */
 
 .lab-link{
@@ -769,9 +769,19 @@ background:#a9231e;
 
 }
 
+.lab-link:focus{
+
+outline:
+3px solid #e4ae37;
+
+outline-offset:
+2px;
+
+}
+
 
 /* =====================================================
-   FINAL
+   FINAL NORMAL
 ===================================================== */
 
 .final{
@@ -855,6 +865,10 @@ cursor:pointer;
 
 background:#ffffff;
 
+opacity:1;
+
+mix-blend-mode:normal;
+
 -webkit-filter:
 brightness(1.08)
 contrast(1.02);
@@ -884,6 +898,9 @@ font-size:14px;
 font-weight:800;
 
 text-align:center;
+
+box-shadow:
+0 3px 10px rgba(0,0,0,.25);
 
 }
 
@@ -1117,8 +1134,9 @@ box-shadow:
 
 }
 
+
 /* =====================================================
-   BANDE COLOREE
+   BANDE DE PROPRIETE
 ===================================================== */
 
 .property-band{
@@ -1149,9 +1167,9 @@ align-items:flex-end;
 
 justify-content:center;
 
-gap:9px;
+gap:8px;
 
-min-height:72px;
+min-height:68px;
 
 width:100%;
 
@@ -1159,7 +1177,7 @@ width:100%;
 
 
 /* =====================================================
-   MAISONS / HOTELS EN IMAGES
+   VRAIES IMAGES MAISON / HOTEL
 ===================================================== */
 
 .property-building{
@@ -1196,6 +1214,7 @@ object-position:center bottom;
 
 /* =====================================================
    ANIMATION
+   SEUL LE NOUVEL ELEMENT BOUGE
 ===================================================== */
 
 .property-building.building-enter{
@@ -1503,6 +1522,10 @@ min-height:58px;
 <body>
 
 
+<!-- =====================================================
+     FINAL PLEIN ECRAN
+===================================================== -->
+
 <div
 class="final-overlay"
 id="finalOverlay">
@@ -1523,10 +1546,15 @@ class="final-overlay-hint">
 </div>
 
 
+
 <div id="geopoly-app">
 
 <div class="wrap">
 
+
+<!-- =====================================================
+     LOGO
+===================================================== -->
 
 <header
 class="geopoly-header"
@@ -1539,6 +1567,10 @@ class="main-logo">
 
 </header>
 
+
+<!-- =====================================================
+     ACCUEIL
+===================================================== -->
 
 <section
 class="hero"
@@ -1557,28 +1589,21 @@ Bienvenue à l'agence bancaire du
 
 <br><br>
 
-Je vous poserai
-<strong>4 questions</strong>
-au fil de la partie lorsque vous tomberez sur les cases
+Je vous poserai 4 questions au fil de la partie lorsque vous tomberez sur les cases
 <strong>« Chance »</strong>
 symbolisées par
 <strong>« ? »</strong>
 sur le plateau de jeu.
 
-<br><br>
+<br>
 
 Chaque bonne réponse vous permettra d'obtenir des
 <strong>EV</strong>
-et de développer votre patrimoine immobilier.
+pour financer votre patrimoine immobilier et acquérir des échoppes.
 
 <br><br>
 
-Si vous réussissez les
-<strong>4 premières questions</strong>,
-vous débloquerez automatiquement un
-<strong>hôtel particulier</strong>
-et pourrez accéder à la
-<strong>question subsidiaire</strong>.
+Si les 4 premières questions sont réussies, votre hôtel particulier sera débloqué automatiquement puis la question subsidiaire sera accessible.
 
 <div class="rules">
 
@@ -1588,7 +1613,7 @@ et pourrez accéder à la
 🏠
 </span>
 
-Chaque bonne réponse ajoute une nouvelle construction à votre propriété.
+Chaque bonne réponse augmente votre patrimoine immobilier.
 
 </div>
 
@@ -1608,7 +1633,7 @@ Cumulez les EV tout au long de votre aventure.
 🔑
 </span>
 
-Réussissez les 4 cases Chance pour débloquer le bonus puis la question subsidiaire.
+Réussissez les 4 premières questions pour accéder à la question subsidiaire.
 
 </div>
 
@@ -1635,6 +1660,10 @@ COMMENCER LE JEU ➜
 </section>
 
 
+<!-- =====================================================
+     SCORE
+===================================================== -->
+
 <div
 class="scorebar"
 id="gameStatus"
@@ -1645,11 +1674,14 @@ style="display:none;">
 💵 SCORE<br>
 
 <strong>
+
 <span id="score">0</span>
 EV
+
 </strong>
 
 </div>
+
 
 <div class="pill">
 
@@ -1677,6 +1709,10 @@ style="display:none;">
 
 </div>
 
+
+<!-- =====================================================
+     QUESTION
+===================================================== -->
 
 <section
 class="card"
@@ -1710,6 +1746,10 @@ aria-live="polite">
 </div>
 
 
+<!-- =====================================================
+     CARTE RECOMPENSE
+===================================================== -->
+
 <div
 class="reward-card"
 id="rewardCard">
@@ -1721,6 +1761,10 @@ alt="Carte de récompense">
 
 </div>
 
+
+<!-- =====================================================
+     PATRIMOINE
+===================================================== -->
 
 <div
 class="property-stage"
@@ -1786,6 +1830,10 @@ style="display:none;">
 </div>
 
 
+<!-- =====================================================
+     ALERTE LAB
+===================================================== -->
+
 <div
 class="alert-card"
 id="alertCard">
@@ -1793,7 +1841,7 @@ id="alertCard">
 <img
 id="alertImage"
 src=""
-alt="Poursuivez votre aventure sur la Lab">
+alt="Retour sur la Lab GEOPOLY">
 
 <a
 id="labLink"
@@ -1808,6 +1856,10 @@ class="lab-link">
 
 </div>
 
+
+<!-- =====================================================
+     ACTIONS
+===================================================== -->
 
 <div class="actions">
 
@@ -1834,6 +1886,10 @@ CONTINUER ➜
 
 </section>
 
+
+<!-- =====================================================
+     FINAL
+===================================================== -->
 
 <section
 class="card final"
@@ -1876,12 +1932,17 @@ id="restartBtn">
 </div>
 
 
+
 <script>
 
 (function(){
 
 "use strict";
 
+
+/* =====================================================
+   ERREURS
+===================================================== */
 
 window.addEventListener(
 'error',
@@ -1908,6 +1969,10 @@ event.message;
 );
 
 
+/* =====================================================
+   QUESTIONS / ETAPES
+===================================================== */
+
 const questions = [
 
 {
@@ -1926,6 +1991,7 @@ points:500,
 cardImage:
 'carte-question-1.jpg'
 },
+
 
 {
 place:'Jardins de la mairie',
@@ -1946,6 +2012,7 @@ cardImage:
 'carte-question-2.jpg'
 },
 
+
 {
 place:'Place Camille Jullian',
 
@@ -1964,6 +2031,7 @@ points:1250,
 cardImage:
 'carte-question-3.jpg'
 },
+
 
 {
 place:"Gare d’Orléans",
@@ -1984,6 +2052,9 @@ cardImage:
 'carte-question-4.jpg'
 },
 
+
+/* ETAPE 5 : AUTOMATIQUE */
+
 {
 place:'Bonus des 4 LAB',
 
@@ -1995,10 +2066,13 @@ cardImage:
 'carte-question-5.jpg'
 },
 
+
+/* QUESTION 6 */
+
 {
 place:'QUESTION SUBSIDIAIRE',
 
-intro:`🏨 Votre hôtel particulier est acquis !
+intro:`🏨 Vous avez réussi les quatre premières questions et remporté votre hôtel particulier.
 
 Une dernière opération immobilière peut encore vous permettre de renforcer votre patrimoine avec un deuxième hôtel particulier.`,
 
@@ -2018,6 +2092,10 @@ cardImage:
 
 ];
 
+
+/* =====================================================
+   PROPRIETES
+===================================================== */
 
 const properties = [
 
@@ -2064,6 +2142,10 @@ color:'#163e6d'
 ];
 
 
+/* =====================================================
+   CARTES LAB
+===================================================== */
+
 const labCards = [
 
 'carte-lab-1.jpg',
@@ -2075,25 +2157,41 @@ const labCards = [
 ];
 
 
+/* =====================================================
+   VARIABLES
+===================================================== */
+
 const STORAGE_KEY =
-'geopoly-bordeaux-progress-v23';
+'geopoly-bordeaux-progress-v24';
 
-let index = 0;
+let index =
+0;
 
-let score = 0;
+let score =
+0;
 
-let answered = false;
+let answered =
+false;
 
-let showingAlert = false;
+let showingAlert =
+false;
 
-let showingPropertyStage = false;
+let showingPropertyStage =
+false;
 
-let propertyStageSeen = false;
+let propertyStageSeen =
+false;
 
-let selectedProperty = null;
+let selectedProperty =
+null;
 
-const results = [];
+const results =
+[];
 
+
+/* =====================================================
+   ELEMENTS
+===================================================== */
 
 const scoreEl =
 document.getElementById('score');
@@ -2218,6 +2316,10 @@ totalQuestionsEl.textContent =
 questions.length;
 
 
+/* =====================================================
+   RETOUR LOGO
+===================================================== */
+
 function scrollToLogo(){
 
 setTimeout(
@@ -2239,6 +2341,10 @@ behavior:'smooth'
 
 }
 
+
+/* =====================================================
+   SAUVEGARDE
+===================================================== */
 
 function saveProgress(){
 
@@ -2272,6 +2378,10 @@ console.log(error);
 
 }
 
+
+/* =====================================================
+   CHARGEMENT
+===================================================== */
 
 function loadProgress(){
 
@@ -2337,11 +2447,9 @@ results.push(result);
 if(
 saved.selectedProperty
 &&
-typeof saved.selectedProperty.name
-=== 'string'
+typeof saved.selectedProperty.name === 'string'
 &&
-typeof saved.selectedProperty.color
-=== 'string'
+typeof saved.selectedProperty.color === 'string'
 ){
 
 selectedProperty = {
@@ -2366,6 +2474,10 @@ console.log(error);
 }
 
 
+/* =====================================================
+   SUPPRESSION SAUVEGARDE
+===================================================== */
+
 function clearProgress(){
 
 try{
@@ -2383,6 +2495,10 @@ console.log(error);
 
 }
 
+
+/* =====================================================
+   NORMALISATION
+===================================================== */
 
 function normalizeAnswer(value){
 
@@ -2407,14 +2523,18 @@ return String(value)
 }
 
 
+/* =====================================================
+   RESULTAT D'UNE ETAPE
+===================================================== */
+
 function getResult(
 questionIndex
 ){
 
 return results.find(
-function(item){
+function(result){
 
-return item.questionIndex
+return result.questionIndex
 ===
 questionIndex;
 
@@ -2423,6 +2543,10 @@ questionIndex;
 
 }
 
+
+/* =====================================================
+   VERIFICATION DES 4 QUESTIONS
+===================================================== */
 
 function firstFourSucceeded(){
 
@@ -2438,9 +2562,7 @@ getResult(i);
 if(
 !result
 ||
-result.status
-!==
-'Bonne réponse'
+result.status !== 'Bonne réponse'
 ){
 
 return false;
@@ -2453,6 +2575,10 @@ return true;
 
 }
 
+
+/* =====================================================
+   ENREGISTRER RESULTAT
+===================================================== */
 
 function storeResult(
 questionIndex,
@@ -2508,43 +2634,9 @@ points
 }
 
 
-function resetStageDisplay(){
-
-rewardCard.style.display =
-'none';
-
-alertCard.style.display =
-'none';
-
-propertyStage.style.display =
-'none';
-
-rewardImage.removeAttribute(
-'src'
-);
-
-alertImage.removeAttribute(
-'src'
-);
-
-feedbackEl.style.display =
-'none';
-
-feedbackEl.classList.remove(
-'wrong'
-);
-
-propertyStageSeen =
-false;
-
-showingPropertyStage =
-false;
-
-showingAlert =
-false;
-
-}
-
+/* =====================================================
+   AFFICHAGE QUESTION
+===================================================== */
 
 function renderQuestion(){
 
@@ -2557,7 +2649,35 @@ gameStatus.style.display =
 gameProgress.style.display =
 'block';
 
-resetStageDisplay();
+rewardCard.style.display =
+'none';
+
+alertCard.style.display =
+'none';
+
+propertyStage.style.display =
+'none';
+
+showingPropertyStage =
+false;
+
+propertyStageSeen =
+false;
+
+rewardImage.removeAttribute(
+'src'
+);
+
+alertImage.removeAttribute(
+'src'
+);
+
+showingAlert =
+false;
+
+feedbackEl.classList.remove(
+'wrong'
+);
 
 
 if(
@@ -2570,6 +2690,10 @@ return;
 
 }
 
+
+/* =====================================================
+   ETAPE 5 AUTOMATIQUE
+===================================================== */
 
 if(
 index === 4
@@ -2592,6 +2716,10 @@ return;
 
 }
 
+
+/* =====================================================
+   QUESTION 6 VERROUILLEE
+===================================================== */
 
 if(
 index === 5
@@ -2635,6 +2763,11 @@ skipBtn.disabled =
 false;
 
 
+/* =====================================================
+   ENCADRE ROUGE
+   QUESTIONS 1 A 4 UNIQUEMENT
+===================================================== */
+
 if(
 index <= 3
 ){
@@ -2668,6 +2801,9 @@ answersEl.style.display =
 
 feedbackEl.style.display =
 'none';
+
+feedbackEl.textContent =
+'';
 
 
 scoreEl.textContent =
@@ -2776,6 +2912,10 @@ scrollToLogo();
 }
 
 
+/* =====================================================
+   ETAPE 5 AUTOMATIQUE
+===================================================== */
+
 function showAutomaticBonus(){
 
 const item =
@@ -2823,21 +2963,18 @@ propertyStage.style.display =
 'none';
 
 
-stepEl.textContent =
-'5';
-
 scoreEl.textContent =
 score;
+
+stepEl.textContent =
+'5';
 
 progressEl.style.width =
 '83.33%';
 
 
-let bonusResult =
-getResult(4);
-
 if(
-!bonusResult
+!getResult(4)
 ){
 
 results.push({
@@ -2860,10 +2997,11 @@ saveProgress();
 rewardImage.src =
 item.cardImage
 +
-'?v=23';
+'?v=24';
 
 rewardImage.alt =
 'Bonus des quatre LAB';
+
 
 rewardCard.style.display =
 'block';
@@ -2886,6 +3024,10 @@ scrollToLogo();
 
 }
 
+
+/* =====================================================
+   PATRIMOINE - DONNEES
+===================================================== */
 
 function getPropertyStageData(
 questionIndex
@@ -2984,6 +3126,10 @@ label:'2 hôtels particuliers'
 }
 
 
+/* =====================================================
+   AFFICHAGE MAISONS / HOTELS
+===================================================== */
+
 function renderBuildings(
 stageData
 ){
@@ -3009,7 +3155,7 @@ stageData.type === 'hotel'
 ){
 
 building.src =
-'hotel-monopoly.png';
+'hotel-monopoly.png?v=24';
 
 building.alt =
 'Hôtel particulier';
@@ -3021,7 +3167,7 @@ building.className =
 else{
 
 building.src =
-'maison-monopoly.png';
+'maison-monopoly.png?v=24';
 
 building.alt =
 'Échoppe';
@@ -3031,6 +3177,8 @@ building.className =
 
 }
 
+
+/* SEUL LE DERNIER ELEMENT EST ANIME */
 
 if(
 i === stageData.count - 1
@@ -3051,6 +3199,10 @@ building
 
 }
 
+
+/* =====================================================
+   PROPRIETE SELECTIONNEE
+===================================================== */
 
 function renderSelectedProperty(){
 
@@ -3141,6 +3293,10 @@ saveProgress();
 }
 
 
+/* =====================================================
+   CHOIX PROPRIETE
+===================================================== */
+
 function chooseProperty(
 property
 ){
@@ -3160,6 +3316,10 @@ renderSelectedProperty();
 
 }
 
+
+/* =====================================================
+   AFFICHAGE PATRIMOINE
+===================================================== */
 
 function showPropertyStage(){
 
@@ -3207,6 +3367,10 @@ propertyBoard.style.display =
 propertyConfirmation.style.display =
 'none';
 
+
+/* =====================================================
+   PREMIERE ECHOPPE : CHOIX DE RUE
+===================================================== */
 
 if(
 index === 0
@@ -3307,6 +3471,12 @@ nextBtn.style.display =
 'none';
 
 }
+
+
+/* =====================================================
+   PROPRIETE EXISTANTE
+===================================================== */
+
 else{
 
 if(
@@ -3352,6 +3522,10 @@ scrollToLogo();
 }
 
 
+/* =====================================================
+   CARTE RECOMPENSE
+===================================================== */
+
 function showRewardCard(
 item
 ){
@@ -3384,7 +3558,7 @@ false;
 rewardImage.src =
 item.cardImage
 +
-'?v=23';
+'?v=24';
 
 rewardImage.alt =
 'Récompense '
@@ -3413,6 +3587,10 @@ scrollToLogo();
 
 }
 
+
+/* =====================================================
+   ALERTE LAB
+===================================================== */
 
 function showLabAlert(){
 
@@ -3455,7 +3633,7 @@ false;
 alertImage.src =
 labCards[index]
 +
-'?v=23';
+'?v=24';
 
 
 if(
@@ -3507,6 +3685,10 @@ scrollToLogo();
 
 }
 
+
+/* =====================================================
+   VERIFICATION REPONSE
+===================================================== */
 
 function checkAnswer(
 input,
@@ -3630,6 +3812,10 @@ return;
 }
 
 
+/* =====================================================
+   MAUVAISE REPONSE
+===================================================== */
+
 feedbackEl.classList.add(
 'wrong'
 );
@@ -3647,6 +3833,10 @@ input.focus();
 
 }
 
+
+/* =====================================================
+   PASSER
+===================================================== */
 
 skipBtn.addEventListener(
 'click',
@@ -3718,7 +3908,6 @@ false;
 nextBtn.textContent =
 'CONTINUER ➜';
 
-
 scoreEl.textContent =
 score;
 
@@ -3728,6 +3917,10 @@ saveProgress();
 }
 );
 
+
+/* =====================================================
+   CONTINUER
+===================================================== */
 
 nextBtn.addEventListener(
 'click',
@@ -3748,14 +3941,17 @@ index
 );
 
 
+/* =====================================================
+   APRES BONNE REPONSE Q1 A Q4
+   AFFICHER PATRIMOINE
+===================================================== */
+
 if(
 index <= 3
 &&
 currentResult
 &&
-currentResult.status
-===
-'Bonne réponse'
+currentResult.status === 'Bonne réponse'
 &&
 !propertyStageSeen
 ){
@@ -3766,15 +3962,18 @@ return;
 
 }
 
+
+/* =====================================================
+   APRES BONUS AUTOMATIQUE Q5
+   AFFICHER HOTEL
+===================================================== */
 
 if(
 index === 4
 &&
 currentResult
 &&
-currentResult.status
-===
-'Bonus débloqué'
+currentResult.status === 'Bonus débloqué'
 &&
 !propertyStageSeen
 ){
@@ -3785,15 +3984,18 @@ return;
 
 }
 
+
+/* =====================================================
+   APRES Q6 REUSSIE
+   AFFICHER DEUXIEME HOTEL
+===================================================== */
 
 if(
 index === 5
 &&
 currentResult
 &&
-currentResult.status
-===
-'Bonne réponse'
+currentResult.status === 'Bonne réponse'
 &&
 !propertyStageSeen
 ){
@@ -3805,18 +4007,16 @@ return;
 }
 
 
+/* =====================================================
+   APRES Q1 Q2 Q3
+   CARTE LAB
+   CONSERVE MEME SI QUESTION PASSEE
+===================================================== */
+
 if(
 index >= 0
 &&
 index <= 2
-&&
-currentResult
-&&
-currentResult.status
-===
-'Bonne réponse'
-&&
-propertyStageSeen
 &&
 !showingAlert
 ){
@@ -3827,6 +4027,10 @@ return;
 
 }
 
+
+/* =====================================================
+   ETAPE SUIVANTE
+===================================================== */
 
 index++;
 
@@ -3851,6 +4055,10 @@ renderQuestion();
 );
 
 
+/* =====================================================
+   OUVRIR FINAL PLEIN ECRAN
+===================================================== */
+
 function openFinalOverlay(
 imageSrc
 ){
@@ -3867,6 +4075,10 @@ document.body.style.overflow =
 
 }
 
+
+/* =====================================================
+   FERMER FINAL
+===================================================== */
 
 function closeFinalOverlay(){
 
@@ -3886,6 +4098,10 @@ scrollToLogo();
 }
 
 
+/* =====================================================
+   CLIC CARTE PLEIN ECRAN
+===================================================== */
+
 finalOverlayImage.addEventListener(
 'click',
 function(){
@@ -3895,6 +4111,10 @@ closeFinalOverlay();
 }
 );
 
+
+/* =====================================================
+   CLIC SUR FOND
+===================================================== */
 
 finalOverlay.addEventListener(
 'click',
@@ -3911,6 +4131,10 @@ closeFinalOverlay();
 }
 );
 
+
+/* =====================================================
+   QUESTION 6 VERROUILLEE
+===================================================== */
 
 function showLocked(){
 
@@ -3932,7 +4156,7 @@ summaryEl.classList.remove(
 
 
 const imageSrc =
-'carte-final-echec.jpg?v=23';
+'carte-final-echec.jpg?v=24';
 
 
 finalImage.src =
@@ -3953,6 +4177,10 @@ imageSrc
 
 }
 
+
+/* =====================================================
+   RESULTAT FINAL
+===================================================== */
 
 function showFinalResult(){
 
@@ -3984,7 +4212,7 @@ score >= 5000
 ){
 
 imageSrc =
-'carte-final-5000.jpg?v=23';
+'carte-final-5000.jpg?v=24';
 
 }
 else if(
@@ -3992,13 +4220,13 @@ score >= 4000
 ){
 
 imageSrc =
-'carte-final-4000.jpg?v=23';
+'carte-final-4000.jpg?v=24';
 
 }
 else{
 
 imageSrc =
-'carte-final-echec.jpg?v=23';
+'carte-final-echec.jpg?v=24';
 
 }
 
@@ -4018,6 +4246,10 @@ imageSrc
 }
 
 
+/* =====================================================
+   PETITE CARTE FINAL
+===================================================== */
+
 finalImage.addEventListener(
 'click',
 function(){
@@ -4029,6 +4261,10 @@ summaryEl.classList.toggle(
 }
 );
 
+
+/* =====================================================
+   RECAP
+===================================================== */
 
 function displaySummary(){
 
@@ -4113,6 +4349,10 @@ row
 
 }
 
+
+/* =====================================================
+   RECOMMENCER
+===================================================== */
 
 restartBtn.addEventListener(
 'click',
@@ -4240,6 +4480,10 @@ scrollToLogo();
 );
 
 
+/* =====================================================
+   INITIALISATION
+===================================================== */
+
 loadProgress();
 
 
@@ -4303,6 +4547,10 @@ startBtn.textContent =
 
 }
 
+
+/* =====================================================
+   COMMENCER
+===================================================== */
 
 startBtn.addEventListener(
 'click',
