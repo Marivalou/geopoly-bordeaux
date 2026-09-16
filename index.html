@@ -69,6 +69,7 @@ Selon votre situation, vous pourrez investir dans des échoppes dans la rue de v
 <div class="rules">
 <div class="rule"><span class="rule-icon">🏠</span>Chaque bonne réponse augmente votre patrimoine immobilier.</div>
 <div class="rule"><span class="rule-icon">🏦</span>Cumulez les EV tout au long de votre aventure.</div>
+<div class="rule"><span class="rule-icon">🏠</span> Devenez Géoproprétaire bordelais et acceder au coffre.</div>
 </div></div>
 <div class="actions"><button type="button" class="primary start-button" id="startBtn">COMMENCER LE JEU ➜</button></div>
 <div id="errorBox"></div>
@@ -115,10 +116,10 @@ Selon votre situation, vous pourrez investir dans des échoppes dans la rue de v
 "use strict";
 window.addEventListener('error',function(event){const box=document.getElementById('errorBox');if(box){box.style.display='block';box.textContent='Erreur technique : '+event.message;}});
 const questions=[
-{place:'Jardin Public',intro:`🎲 Case Chance !`,q:`Quel est le montant final de la lab 1 ?`,acceptedAnswers:['500'],points:500,cardImage:'carte-question-1.jpg'},
-{place:'Jardins de la mairie',intro:`🎲 Nouvelle case Chance !\n\nUne deuxième échoppe est à votre portée.`,q:`Quel montant avez-vous collecté lors de la lab 2 ?`,acceptedAnswers:['750'],points:750,cardImage:'carte-question-2.jpg'},
-{place:'Place Camille Jullian',intro:`🎲 Votre patrimoine commence à prendre forme.\n\nCette case Chance peut vous rapporter une troisième échoppe.`,q:`Quel est le montant collecté lors de la lab 3 ?`,acceptedAnswers:['1250'],points:1250,cardImage:'carte-question-3.jpg'},
-{place:"Gare d’Orléans",intro:`🎲 Encore une opportunité d'investissement !\n\nRépondez correctement et ajoutez une quatrième échoppe.`,q:`Quel est le montant collecté lors de la lab 4 ?`,acceptedAnswers:['1500'],points:1500,cardImage:'carte-question-4.jpg'},
+{place:'Carte chance du Jardin Public',intro:`🎲 Je peux vous aider à financer votre première échoppe, si vous avez à votre disposition suffisamment d'EV  §`,q:`Quel est le montant final de la lab 1 ?`,acceptedAnswers:['500'],points:500,cardImage:'carte-question-1.jpg'},
+{place:'Carte chance des Jardins de la mairie',intro:`🎲 Nouvelle case Chance !\n\nUne deuxième échoppe est à votre portée.`,q:`Quel montant avez-vous collecté lors de la lab 2 ?`,acceptedAnswers:['750'],points:750,cardImage:'carte-question-2.jpg'},
+{place:'Carte chance de la Place Camille Jullian',intro:`🎲 Votre patrimoine commence à prendre forme.\n\nCette case Chance peut vous rapporter une troisième échoppe.`,q:`Quel est le montant collecté lors de la lab 3 ?`,acceptedAnswers:['1250'],points:1250,cardImage:'carte-question-3.jpg'},
+{place:"Carte chance de la Gare d’Orléans",intro:`🎲 Encore une opportunité d'investissement !\n\nRépondez correctement et ajoutez une quatrième échoppe.`,q:`Quel est le montant collecté lors de la lab 4 ?`,acceptedAnswers:['1500'],points:1500,cardImage:'carte-question-4.jpg'},
 {place:'Bonus des 4 LAB',auto:true,points:0,cardImage:'carte-question-5.jpg'},
 {place:'QUESTION SUBSIDIAIRE',intro:`🏨 Vous avez réussi les quatre premières questions et remporté votre hôtel particulier.\n\nUne dernière opération immobilière peut encore vous permettre de renforcer votre patrimoine avec un deuxième hôtel particulier.`,q:`Quel est le montant du cumul des points de quatre des portes de la Lab "Aux portes de Bordeaux" (somme de A + C + D + E) ?`,acceptedAnswers:['5021'],points:1000,final:true,cardImage:'carte-question-6.jpg'}
 ];
